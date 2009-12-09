@@ -4,7 +4,6 @@ module RepositoriesHelperPatch
   def self.included(base) # :nodoc:
     base.send(:include, InstanceMethods)
 
-    # Same as typing in the class 
     base.class_eval do
       alias_method_chain :subversion_field_tags, :checkout
       alias_method_chain :repository_field_tags, :checkout
@@ -58,5 +57,5 @@ module RepositoriesHelperPatch
   end
 end
 
-
+RepositoriesHelper.send(:include, RepositoriesHelperPatch)
 
