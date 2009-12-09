@@ -7,7 +7,7 @@ class RepositoryHooks < Redmine::Hook::ViewListener
   # * :repository => Current Repository
   #
   def view_repositories_show_contextual(context={})
-    unless context[:repository].blank? || context[:repository] == "none"
+    unless context[:repository].blank? || context[:repository].checkout_url_type == "none"
       case context[:repository].checkout_url_type
       when 'original'
         url = context[:repository].root_url
