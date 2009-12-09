@@ -16,7 +16,6 @@ class RepositoryHooks < Redmine::Hook::ViewListener
       end
       url ||= "#"
       
-
       context.merge!({:url => url})
       options = {:partial => "redmine_checkout_hooks/view_repositories_show_contextual"}
       
