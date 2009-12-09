@@ -23,7 +23,7 @@ module RepositoriesHelperPatch
               [l(:label_checkout_type_overwritten), 'overwritten']
             ],
             {},
-            :onchange => "if ($A(['none']).include(value)){$('checkout_url').hide();} else {$('checkout_url').show();}"
+            :onchange => "if ($A(['none']).include(value)){$('checkout_url').hide();} else {show_checkout_url();}"
           )
         ) +
         content_tag('p',
@@ -38,6 +38,13 @@ module RepositoriesHelperPatch
       tags = subversion_field_tags_without_checkout(form, repository) || ""
       
       tags +
+      javascript_tag("
+        function show_checkout_url() {
+          var txt = $('repository_checkout_url')
+          if (txt.value.empty()) {txt.value = $('repository_url').value}
+          $('checkout_url').show();
+        }
+      ") +
       content_tag('p',
         form.select(:checkout_url_type, [
             [l(:label_checkout_type_original), 'original'],
