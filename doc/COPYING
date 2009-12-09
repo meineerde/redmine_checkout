@@ -1,7 +1,3 @@
-= Redmine Checkout plugin
-
-This plugin to Redmine adds a link to the actual repository to the GUI.
-
 Copyright (c) 2009 Holger Just
 
 Permission is hereby granted, free of charge, to any person
@@ -24,13 +20,3 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
-
-
-= Installation
-
-1. Copy the software to the vendor/plugins directory. Make sure that the name
-   of the directory is redmine_checkout.
-
-2. Run rake db_migrate RAILS_ENV=production
-
-3. Restart Redmine
