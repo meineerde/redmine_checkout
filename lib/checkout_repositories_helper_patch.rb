@@ -40,8 +40,8 @@ module RepositoriesHelperPatch
       tags +
       javascript_tag("
         function show_checkout_url() {
-          var txt = $('repository_checkout_url')
-          if (txt.value.empty()) {txt.value = $('repository_url').value}
+          var txt = $('repository_checkout_url');
+          if (txt.value.empty()) {txt.value = $('repository_url').value;}
           $('checkout_url').show();
         }
       ") +
