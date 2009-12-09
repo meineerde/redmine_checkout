@@ -1,0 +1,10 @@
+<div class="contextual">
+  <a class="icon icon-changeset" href="<%=h url %>"><%=l :field_checkout_url %></a>
+</div>
+<div style="clear: both">
+
+<% content_for :header_tags do %>
+  <% content_tag "style", "type" => Mime::CSS do -%>
+  .icon-changeset {background-image: url(<%= image_path 'changeset.png' %>);}
+  <%- end %>
+<% end %>

@@ -1,0 +1,7 @@
+de:
+  field_checkout_url_type: "Angezeigte Checkout-URL"
+  field_checkout_url: "Checkout URL"
+  
+  label_checkout_type_none: "Keine URL anzeigen"
+  label_checkout_type_original: "Angegebene URL"
+  label_checkout_type_overwritten: "Benutzerdefinierte URL"

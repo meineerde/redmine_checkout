@@ -1,0 +1,7 @@
+en:
+  field_checkout_url_type: "Display checkout URL"
+  field_checkout_url: "Checkout URL"
+  
+  label_checkout_type_none: "Do not show a URL"
+  label_checkout_type_original: "Original URL"
+  label_checkout_type_overwritten: "Custom URL"
