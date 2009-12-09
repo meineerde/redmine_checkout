@@ -23,7 +23,7 @@ module RepositoriesHelperPatch
               [l(:label_checkout_type_overwritten), 'overwritten']
             ],
             {},
-            :onchange => "if ($A(['none']).include(value)){$('checkout_url').hide();} else {show_checkout_url();}"
+            :onchange => "if ($A(['none']).include(value)){$('checkout_url').hide();} else {$('checkout_url').show();}"
           )
         ) +
         content_tag('p',
@@ -52,7 +52,7 @@ module RepositoriesHelperPatch
             [l(:label_checkout_type_overwritten), 'overwritten']
           ],
           {},
-          :onchange => "if ($A(['original', 'none']).include(value)){$('checkout_url').hide();} else {$('checkout_url').show();}"
+          :onchange => "if ($A(['original', 'none']).include(value)){$('checkout_url').hide();} else {show_checkout_url();}"
         )
       ) +
       content_tag('p',
