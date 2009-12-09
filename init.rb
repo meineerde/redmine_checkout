@@ -1,7 +1,5 @@
 require 'redmine'
 
-require 'dispatcher'
-
 # Patches
 require 'checkout_repositories_helper_patch'
 
