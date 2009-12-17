@@ -14,6 +14,16 @@ class RepositoryHooks < Redmine::Hook::ViewListener
       when 'overwritten'
         url = context[:repository].checkout_url
       end
+      
+      unless url.blank?
+        # A bit hackish but gets the path component of the currently displayed dir/path
+        path = context[:controller].instance_variable_get("@path")
+        
+        # remove trailing slashes
+        url.gsub!(/\/+$/, "")
+        url = "#{url}/#{path}"
+      end
+      
       url ||= "#"
       
       context.merge!({:url => url})
