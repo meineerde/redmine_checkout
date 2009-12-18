@@ -13,13 +13,14 @@ module RepositoriesHelperPatch
     def repository_field_tags_with_checkout(form, repository)    
       tags = repository_field_tags_without_checkout(form, repository) || ""
       tags +
-      javascript_tag("
+      javascript_tag(<<-EOF
         function show_checkout_url() {
           var txt = $('repository_checkout_url');
           if (txt.value.empty()) {txt.value = $('repository_url').value;}
           $('checkout_url').show();
         }
-      ") +
+      EOF
+      ) +
       content_tag('p',
         form.select(:checkout_url_type, [
             [l(:label_checkout_type_original), 'original'],

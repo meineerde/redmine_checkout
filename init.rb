@@ -1,7 +1,10 @@
 require 'redmine'
 
-# Patches
-require 'checkout_repositories_helper_patch'
+require 'dispatcher'
+Dispatcher.to_prepare do
+  # Patches
+  require_dependency 'checkout_repositories_helper_patch'
+end
 
 # Hooks
 require 'checkout_repository_hooks'
