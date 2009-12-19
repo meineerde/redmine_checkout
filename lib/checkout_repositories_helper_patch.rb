@@ -12,6 +12,8 @@ module RepositoriesHelperPatch
   module InstanceMethods
     def repository_field_tags_with_checkout(form, repository)    
       tags = repository_field_tags_without_checkout(form, repository) || ""
+      return tags unless tags.blank?
+      
       js = <<-EOF
       <script type="text/javascript">
         function show_checkout_url() {
