@@ -1,7 +1,12 @@
 en:
   field_checkout_url_type: "Display checkout URL"
   field_checkout_url: "Checkout URL"
+  field_display_login: "Display Login"
   
   label_checkout_type_none: "Do not show a URL"
   label_checkout_type_original: "Original URL"
   label_checkout_type_overwritten: "Custom URL"
+  
+  label_display_login_none: "Do not show login or password"
+  label_display_login_username: "Show login but no no password"
+  label_display_login_password: "Show login and password"

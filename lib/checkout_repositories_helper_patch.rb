@@ -37,6 +37,14 @@ module RepositoriesHelperPatch
         form.text_field(:checkout_url, :size => 60),
         :id => "checkout_url",
         :style => ("display:none" unless ['overwritten'].include? form.object.checkout_url_type)
+      ) + 
+      content_tag('p',
+        form.select(:display_login, [
+            [l(:label_display_login_none), 'none'],
+            [l(:label_display_login_username), 'username'],
+            [l(:label_display_login_password), 'password']
+          ]
+        )
       )
     end
   end

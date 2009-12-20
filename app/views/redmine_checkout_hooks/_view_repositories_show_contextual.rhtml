@@ -1,5 +1,11 @@
 <div class="contextual">
   <a class="icon icon-changeset" href="<%=h url %>"><%=l :field_checkout_url %></a>
+  <% if repository.display_login != "none" && !repository.login.blank? %>
+    | <%=l :field_login %>: <%=h repository.login %>
+    <% if repository.display_login == "password" %>
+      | <%=l :field_password %>: <%=h repository.password %>
+    <% end %>
+  <% end %>
 </div>
 <div style="clear: both">
 
