@@ -7,5 +7,5 @@ label_checkout_type_original: "Original URL"
 label_checkout_type_overwritten: "Custom URL"
 
 label_display_login_none: "Do not show login or password"
-label_display_login_username: "Show login but no no password"
+label_display_login_username: "Show login but no password"
 label_display_login_password: "Show login and password"
