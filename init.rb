@@ -17,5 +17,5 @@ Redmine::Plugin.register :redmine_checkout do
   description 'Adds a link to the actual repository to the GUI.'
   version '0.1'
   
-  requires_redmine :version_or_higher => '0.8'
+  requires_redmine :version_or_higher => '0.9'
 end
