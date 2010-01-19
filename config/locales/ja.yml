@@ -1,7 +1,14 @@
 ja:
   field_checkout_url_type: "チェックアウト URL の表示"
   field_checkout_url: "チェックアウト URL"
+  field_checkout_url_regex: "Regular Expression"
+  field_checkout_url_regex_replacement: "Replacement Text"
+  field_checkout_url_overwrite: "Overwrite default settings for checkout URL"
   field_display_login: "ログインの表示"
+  field_render_link: "Render the checkout URL as a link"
+
+  label_checkout_url_regex: "Regular expression for checkout URL"
+  label_checkout_url: "Display of checkout URL"
 
   label_checkout_type_none: "URL を非表示"
   label_checkout_type_original: "同じ URL"
@@ -10,3 +17,7 @@ ja:
   label_display_login_none: "ログインとパスワードを非表示"
   label_display_login_username: "ログインのみ表示"
   label_display_login_password: "ログインとパスワードを表示"
+
+  help_checkout_url_regex: "If 'Display checkout URL' is custom the displayed URL is generated from the original URL and this regular expression. The replacement text allows back-references."
+  help_checkout_url_regex_example: "<em>Example:</em> <strong>^http://(.*)$</strong>"
+  help_checkout_url_regex_replacement_example: "<em>Example:</em> <strong>https://\1</strong>"

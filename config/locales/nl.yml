@@ -1,22 +1,22 @@
-en:
-  field_checkout_url_type: "Display checkout URL"
+nl:
+  field_checkout_url_type: "Geef checkout URL weer"
   field_checkout_url: "Checkout URL"
   field_checkout_url_regex: "Regular Expression"
   field_checkout_url_regex_replacement: "Replacement Text"
   field_checkout_url_overwrite: "Overwrite default settings for checkout URL"
-  field_display_login: "Display Login"
-  field_render_link: "Render the checkout URL as a link"
+  field_display_login: "Geef Login weer"
+  field_render_link: "Geef de checkout URL weer als een link"
 
   label_checkout_url_regex: "Regular expression for checkout URL"
   label_checkout_url: "Display of checkout URL"
 
-  label_checkout_type_none: "Do not show a URL"
-  label_checkout_type_original: "Original URL"
-  label_checkout_type_overwritten: "Custom URL"
+  label_checkout_type_none: "Geef geen URL weer"
+  label_checkout_type_original: "Originele URL"
+  label_checkout_type_overwritten: "Eigen URL"
 
-  label_display_login_none: "Do not show login or password"
-  label_display_login_username: "Show login but no password"
-  label_display_login_password: "Show login and password"
+  label_display_login_none: "Geef geen login of password weer"
+  label_display_login_username: "Geef login zonder password weer"
+  label_display_login_password: "Geef login en password weer"
 
   help_checkout_url_regex: "If 'Display checkout URL' is custom the displayed URL is generated from the original URL and this regular expression. The replacement text allows back-references."
   help_checkout_url_regex_example: "<em>Example:</em> <strong>^http://(.*)$</strong>"

@@ -1,0 +1,44 @@
+<fieldset>
+  <legend><%= l(:label_checkout_url) %></legend>
+
+  <p>
+    <label><%= l(:field_checkout_url_type) %></label>
+    <%= select_tag 'settings[checkout_url_type]', options_for_select ([
+        [l(:label_checkout_type_original), 'original'],
+        [l(:label_checkout_type_none), 'none'],
+        [l(:label_checkout_type_overwritten), 'overwritten']
+      ], @settings['checkout_url_type'])%>
+  </p>
+  <p>
+    <label><%= l(:field_display_login) %></label>
+    <%=
+      select_tag 'settings[display_login]', options_for_select([
+        [l(:label_display_login_none), 'none'],
+        [l(:label_display_login_username), 'username'],
+        [l(:label_display_login_password), 'password']
+      ], @settings['display_login'])
+    %>
+  </p>
+  <p>
+    <label><%= l(:field_render_link) %></label>
+    <%= select_tag 'settings[render_link]', options_for_select([
+      [l(:general_text_Yes), true],
+      [l(:general_text_No), false]
+    ], @settings['render_link'])%>
+  </p>
+</fieldset>
+
+<fieldset>
+  <legend><%= l(:label_checkout_url_regex) %></legend>
+  <p>
+    <label><%= l(:field_checkout_url_regex) %></label>
+    <%= text_field_tag 'settings[checkout_url_regex]', @settings['checkout_url_regex'], :size => 50 %>
+    <%= l(:help_checkout_url_regex_example) %>
+  </p>
+  <p>
+    <label><%= l(:field_checkout_url_regex_replacement) %></label>
+    <%= text_field_tag 'settings[checkout_url_regex_replacement]', @settings['checkout_url_regex_replacement'], :size => 50 %>
+    <%= l(:help_checkout_url_regex_replacement_example) %>
+    <br /><em><%= l(:help_checkout_url_regex) %></em>
+  </p>
+</fieldset>

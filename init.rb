@@ -4,6 +4,7 @@ require 'dispatcher'
 Dispatcher.to_prepare do
   # Patches
   require_dependency 'checkout_repositories_helper_patch'
+  require_dependency 'checkout_repository_patch'
 end
 
 # Hooks
@@ -18,4 +19,13 @@ Redmine::Plugin.register :redmine_checkout do
   version '0.1'
   
   requires_redmine :version_or_higher => '0.9'
+  
+  settings :default => {
+    'checkout_url_type' => "none",
+    'display_login' => 'username',
+    'render_link' => 1,
+    'checkout_url_regex' => "",
+    'checkout_url_regex_replacement' => "",
+  }, :partial => 'settings/redmine_checkout'
+  
 end
