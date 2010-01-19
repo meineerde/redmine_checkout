@@ -22,8 +22,8 @@
   <p>
     <label><%= l(:field_render_link) %></label>
     <%= select_tag 'settings[render_link]', options_for_select([
-      [l(:general_text_Yes), true],
-      [l(:general_text_No), false]
+      [l(:general_text_Yes), "true"],
+      [l(:general_text_No), "false"]
     ], @settings['render_link'])%>
   </p>
 </fieldset>

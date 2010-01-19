@@ -12,7 +12,7 @@ module RepositoryPatch
       unless self.checkout_url_overwrite
         self.checkout_url_type = (Setting.plugin_redmine_checkout['checkout_url_type'])
         self.display_login = (Setting.plugin_redmine_checkout['display_login'])
-        self.render_link = (Setting.plugin_redmine_checkout['render_link'])
+        self.render_link = (Setting.plugin_redmine_checkout['render_link'] == "true")
         if self.checkout_url_type == "overwritten"
           self.checkout_url = generated_checkout_url
         end
