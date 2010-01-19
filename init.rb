@@ -23,7 +23,7 @@ Redmine::Plugin.register :redmine_checkout do
   settings :default => {
     'checkout_url_type' => "none",
     'display_login' => 'username',
-    'render_link' => 1,
+    'render_link' => false,
     'checkout_url_regex' => "",
     'checkout_url_regex_replacement' => "",
   }, :partial => 'settings/redmine_checkout'
