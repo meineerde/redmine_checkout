@@ -23,12 +23,13 @@ module RepositoryPatch
       regex = Setting.plugin_redmine_checkout['checkout_url_regex']
       replacement = Setting.plugin_redmine_checkout['checkout_url_regex_replacement']
       
-      return "" if (regex.blank? ||  replacement.blank?)
-      regex = Regexp.new(regex)
-      
-      self.root_url.gsub(regex, replacement)
+      if (regex.blank? || replacement.blank?)
+        self.root_url 
+      else
+        self.root_url.gsub(Regexp.new(regex), replacement)
+      end
     rescue RegexpError
-      return ""
+      self.rool_url
     end
   end
 end
