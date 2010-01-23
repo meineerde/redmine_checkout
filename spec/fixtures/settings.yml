@@ -1,0 +1,10 @@
+---
+  blar:
+    name: plugin_redmine_checkout
+    value: |
+      --- !map:HashWithIndifferentAccess 
+      display_login: username
+      render_link: "false"
+      checkout_url_regex_replacement: http://\1
+      checkout_url_type: overwritten
+      checkout_url_regex: ^svn://(.*)$

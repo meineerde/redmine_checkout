@@ -1,0 +1,7 @@
+svn: 
+  project_id: 2
+  url: svn://example.com/test
+  root_url: svn://localhost
+  password: ""
+  login: ""
+  type: Subversion
