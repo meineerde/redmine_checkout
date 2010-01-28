@@ -3,7 +3,7 @@
 
   <p>
     <label><%= l(:field_checkout_url_type) %></label>
-    <%= select_tag 'settings[checkout_url_type]', options_for_select ([
+    <%= select_tag 'settings[checkout_url_type]', options_for_select([
         [l(:label_checkout_type_original), 'original'],
         [l(:label_checkout_type_none), 'none'],
         [l(:label_checkout_type_overwritten), 'overwritten']
