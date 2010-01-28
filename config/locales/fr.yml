@@ -1,0 +1,23 @@
+fr:
+  field_checkout_url_type: "Afficher l'URL du dépôt"
+  field_checkout_url: "URL du dépôt"
+  field_checkout_url_regex: "Expression Régulière"
+  field_checkout_url_regex_replacement: "Texte de substitution"
+  field_checkout_url_overwrite: "Remplacer les paramètres par défaut pour l'URL du dépôt"
+  field_display_login: "Affiche le login"
+  field_render_link: "Affiche l'URL du dépôt comme un lien"
+
+  label_checkout_url_regex: "Expression régulière pour l'URL du dépôt"
+  label_checkout_url: "Affichage de l'URL du dépôt"
+
+  label_checkout_type_none: "Ne pas afficher l'URL"
+  label_checkout_type_original: "URL d'origine"
+  label_checkout_type_overwritten: "URL personnalisée"
+
+  label_display_login_none: "Ne pas afficher le login ni le mot de passe"
+  label_display_login_username: "Afficher le login, pas le mot de passe"
+  label_display_login_password: "Afficher le login et le mot de passe"
+
+  help_checkout_url_regex: "Si une URL personnalisée est utilisée, l'URL affichée sera générée à partir de l'URL d'origine et de cette expression régulière. Le texte de remplacement permet les références arrières."
+  help_checkout_url_regex_example: "<em>Exemple:</em> <strong>^http://(.*)$</strong>"
+  help_checkout_url_regex_replacement_example: "<em>Exemple:</em> <strong>https://\1</strong>"
