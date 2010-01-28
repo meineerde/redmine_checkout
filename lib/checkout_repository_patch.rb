@@ -40,22 +40,23 @@ module RepositoryPatch
         if self.checkout_url_type == "overwritten"
           generated_checkout_url
         else
-          self.root_url
+          self.url || ""
         end
       end
     end
 
     def generated_checkout_url
+      return "" unless self.url
       regex = Setting.plugin_redmine_checkout['checkout_url_regex']
       replacement = Setting.plugin_redmine_checkout['checkout_url_regex_replacement']
       
       if (regex.blank? || replacement.blank?)
-        self.root_url 
+        self.url
       else
-        self.root_url.gsub(Regexp.new(regex), replacement)
+        self.url && self.url.gsub(Regexp.new(regex), replacement)
       end
     rescue RegexpError
-      self.rool_url
+      self.url || ""
     end
   end
 end

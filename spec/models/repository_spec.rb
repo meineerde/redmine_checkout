@@ -22,8 +22,8 @@ describe Repository do
       @repo = repositories :svn
     end
     
-    it "should be generated from root_url" do
-      @repo.root_url = "svn://example.com/svn/testrepo"
+    it "should be generated from url" do
+      @repo.url = "svn://example.com/svn/testrepo"
       @repo.checkout_url_overwrite = false
       
       @repo.checkout_url.should eql "http://example.com/svn/testrepo"
