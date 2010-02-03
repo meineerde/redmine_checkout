@@ -15,6 +15,13 @@ module RepositoriesHelperPatch
       return tags if repository.class.name == "Repository"
       
       tags +
+      javascript_tag (<<-EOF
+      function update_repository_checkout_url() {
+        var txt = $('repository_checkout_url');
+        if (txt.value.empty()) {txt.value = $('repository_url').value;}
+      }
+      EOF
+      ) +
       content_tag('p',
         form.select(:checkout_url_overwrite, [
             [l(:general_text_Yes), true],
@@ -23,6 +30,7 @@ module RepositoriesHelperPatch
           {},
           :onchange => <<-EOF
             if (value == "true"){
+              update_repository_checkout_url();
               $('checkout_url_settings').show();
             } else {
               $('checkout_url_settings').hide();
@@ -36,15 +44,15 @@ module RepositoriesHelperPatch
           form.select(:checkout_url_type, [
               [l(:label_checkout_type_original), 'original'],
               [l(:label_checkout_type_none), 'none'],
-              [l(:label_checkout_type_overwritten), 'overwritten']
+              [l(:label_checkout_type_overwritten), 'overwritten'],
+              [l(:label_checkout_type_generated), 'generated']
             ],
             {},
             :onchange => <<-EOF
-              if ($A(['original', 'none']).include(value)){
+              if ($A(['original', 'none', 'generated']).include(value)){
                 $('checkout_url').hide();
               } else {
-                var txt = $('repository_checkout_url');
-                if (txt.value.empty()) {txt.value = $('repository_url').value;}
+                update_repository_checkout_url();
                 $('checkout_url').show();
               }
             EOF

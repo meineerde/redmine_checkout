@@ -13,6 +13,7 @@ ja:
   label_checkout_type_none: "URL を非表示"
   label_checkout_type_original: "同じ URL"
   label_checkout_type_overwritten: "指定 URL"
+  label_checkout_type_generated: "Generated URL"
 
   label_display_login_none: "ログインとパスワードを非表示"
   label_display_login_username: "ログインのみ表示"

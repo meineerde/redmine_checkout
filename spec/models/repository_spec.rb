@@ -20,17 +20,27 @@ describe Repository do
   describe "checkout_url" do
     before(:each) do
       @repo = repositories :svn
+
+      @repo.url = "svn://example.com/svn/testrepo"
+      @repo.checkout_url = "svn+ssh://example.com/svn/testrepo"
     end
     
     it "should be generated from url" do
-      @repo.url = "svn://example.com/svn/testrepo"
+      @repo.checkout_url_type = "overwritten"
       @repo.checkout_url_overwrite = false
-      
+            
       @repo.checkout_url.should eql "http://example.com/svn/testrepo"
     end
     
     it "should respect overwritten setting" do
-      @repo.checkout_url = "http://example.com/svn/testrepo"
+      @repo.checkout_url_type = "overwritten"
+      @repo.checkout_url_overwrite = true
+
+      @repo.checkout_url.should eql "svn+ssh://example.com/svn/testrepo"
+    end
+    
+    it "should be generated if selected" do
+      @repo.checkout_url_type = "generated"
       @repo.checkout_url_overwrite = true
 
       @repo.checkout_url.should eql "http://example.com/svn/testrepo"

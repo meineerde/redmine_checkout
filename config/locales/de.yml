@@ -13,6 +13,7 @@ de:
   label_checkout_type_none: "Keine URL anzeigen"
   label_checkout_type_original: "Angegebene URL"
   label_checkout_type_overwritten: "Benutzerdefinierte URL"
+  label_checkout_type_generated: "Generierte URL"
 
   label_display_login_none: "Mitgliedsnamen nicht anzeigen"
   label_display_login_username: "Mitgliedsnamen anzeigen, aber kein Kennwort"

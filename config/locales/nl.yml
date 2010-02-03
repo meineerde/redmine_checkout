@@ -13,6 +13,7 @@ nl:
   label_checkout_type_none: "Geef geen URL weer"
   label_checkout_type_original: "Originele URL"
   label_checkout_type_overwritten: "Eigen URL"
+  label_checkout_type_generated: "Generated URL"
 
   label_display_login_none: "Geef geen login of password weer"
   label_display_login_username: "Geef login zonder password weer"

@@ -11,7 +11,7 @@ class RepositoryHooks < Redmine::Hook::ViewListener
       case context[:repository].checkout_url_type
       when 'original'
         url = context[:repository].root_url
-      when 'overwritten'
+      when 'overwritten', 'generated'
         url = context[:repository].checkout_url
       end
       

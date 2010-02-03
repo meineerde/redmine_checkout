@@ -7,7 +7,7 @@ module RepositoryPatch
     base.class_eval do
       unloadable
       
-      validates_inclusion_of :checkout_url_type, :in => %w(none original overwritten), :allow_nil => true
+      validates_inclusion_of :checkout_url_type, :in => %w(none original overwritten generated), :allow_nil => true
       validates_inclusion_of :display_login, :in => %w(none username password), :allow_nil => true
     end
   end
@@ -36,12 +36,17 @@ module RepositoryPatch
     end
     
     def checkout_url
-      self.checkout_url_overwrite && read_attribute("checkout_url") || begin
-        if self.checkout_url_type == "overwritten"
-          generated_checkout_url
+      case checkout_url_type
+      when "none": ""
+      when "original": self.url || ""
+      when "overwritten"
+        if self.checkout_url_overwrite
+          read_attribute("checkout_url")
         else
-          self.url || ""
+          generated_checkout_url
         end
+      when "generated"
+        generated_checkout_url
       end
     end
 

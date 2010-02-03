@@ -13,6 +13,7 @@ fr:
   label_checkout_type_none: "Ne pas afficher l'URL"
   label_checkout_type_original: "URL d'origine"
   label_checkout_type_overwritten: "URL personnalisée"
+  label_checkout_type_generated: "Generated URL"
 
   label_display_login_none: "Ne pas afficher le login ni le mot de passe"
   label_display_login_username: "Afficher le login, pas le mot de passe"
