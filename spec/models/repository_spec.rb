@@ -9,7 +9,7 @@ describe Repository do
     end
 
     it "should properly set default values" do
-      @repo.checkout_url_type.should eql "overwritten"
+      @repo.checkout_url_type.should eql "generated"
       @repo.display_login.should eql "username"
       @repo.render_link.should be_false
       @repo.checkout_url.should eql ""
