@@ -1,11 +1,12 @@
 en:
   field_checkout_url_type: "Display checkout URL"
   field_checkout_url: "Checkout URL"
-  field_checkout_url_regex: "Regular Expression"
-  field_checkout_url_regex_replacement: "Replacement Text"
+  field_checkout_url_regex: "Regular expression"
+  field_checkout_url_regex_replacement: "Replacement text"
   field_checkout_url_overwrite: "Overwrite default settings for checkout URL"
   field_display_login: "Display Login"
   field_render_link: "Render the checkout URL as a link"
+  field_overwrite_default: "Overwrite default"
 
   label_checkout_url_regex: "Regular expression for checkout URL"
   label_checkout_url: "Display of checkout URL"

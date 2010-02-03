@@ -6,6 +6,7 @@ nl:
   field_checkout_url_overwrite: "Overwrite default settings for checkout URL"
   field_display_login: "Geef Login weer"
   field_render_link: "Geef de checkout URL weer als een link"
+  field_overwrite_default: "Overwrite default"
 
   label_checkout_url_regex: "Regular expression for checkout URL"
   label_checkout_url: "Display of checkout URL"

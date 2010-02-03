@@ -5,6 +5,8 @@
       --- !map:HashWithIndifferentAccess 
       display_login: username
       render_link: "false"
-      checkout_url_regex_replacement: http://\1
+      checkout_url_regex_default: ^svn://(.*)$
+      checkout_url_regex_replacement_default: http://\1
+      checkout_url_regex_Subversion: ^svn://(.*)$
+      checkout_url_regex_replacement_Subversion: svn+ssh://\1
       checkout_url_type: generated
-      checkout_url_regex: ^svn://(.*)$

@@ -6,6 +6,7 @@ de:
   field_checkout_url_overwrite: "Überschreibe Standardeinstellung zur Checkout-URL"
   field_display_login: "Mitgliedsnamen anzeigen"
   field_render_link: "Checkout-URL als Link anzeigen"
+  field_overwrite_default: "Standard überschreiben"
 
   label_checkout_url_regex: "Regulärer Ausdruck für Checkout-URL"
   label_checkout_url: "Anzeige der Checkout-URL"

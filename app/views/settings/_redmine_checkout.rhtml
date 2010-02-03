@@ -2,7 +2,7 @@
   <legend><%= l(:label_checkout_url) %></legend>
   
   <p>
-    <label><%= l(:field_checkout_url_type) %></label>
+    <label for="settings_checkout_url_type"><%= l(:field_checkout_url_type) %></label>
     <%= select_tag 'settings[checkout_url_type]', options_for_select([
         [l(:label_checkout_type_original), 'original'],
         [l(:label_checkout_type_none), 'none'],
@@ -10,7 +10,7 @@
       ], @settings['checkout_url_type'])%>
   </p>
   <p>
-    <label><%= l(:field_display_login) %></label>
+    <label for="settings_display_login"><%= l(:field_display_login) %></label>
     <%=
       select_tag 'settings[display_login]', options_for_select([
         [l(:label_display_login_none), 'none'],
@@ -20,25 +20,56 @@
     %>
   </p>
   <p>
-    <label><%= l(:field_render_link) %></label>
-    <%= select_tag 'settings[render_link]', options_for_select([
-      [l(:general_text_Yes), "true"],
-      [l(:general_text_No), "false"]
-    ], @settings['render_link'])%>
+    <label for="settings_render_link"><%= l(:field_render_link) %></label>
+    <%=
+      select_tag 'settings[render_link]', options_for_select([
+        [l(:general_text_Yes), "true"],
+        [l(:general_text_No), "false"]
+      ], @settings['render_link'])
+    %>
   </p>
 </fieldset>
 
 <fieldset>
   <legend><%= l(:label_checkout_url_regex) %></legend>
+
   <p>
-    <label><%= l(:field_checkout_url_regex) %></label>
-    <%= text_field_tag 'settings[checkout_url_regex]', @settings['checkout_url_regex'], :size => 50 %>
-    <%= l(:help_checkout_url_regex_example) %>
+    <label for="scm_type"><%=l :label_scm %></label>
+    <%=
+      select_tag 'scm_type', options_for_select(
+        [[l(:label_default), "default"]] + 
+        REDMINE_SUPPORTED_SCM.inject([]) do |list, scm|
+          list << ["Repository::#{scm}".constantize.scm_name, scm]
+        end
+      ),
+      :onchange => <<-EOF
+        $$('.scm_regex').each(Element.hide);
+        $('regex_' + value).show();
+        new Effect.Highlight('settings_checkout_url_regex_' + value);
+        new Effect.Highlight('settings_checkout_url_regex_replacement_' + value);
+      EOF
+    %>
   </p>
-  <p>
-    <label><%= l(:field_checkout_url_regex_replacement) %></label>
-    <%= text_field_tag 'settings[checkout_url_regex_replacement]', @settings['checkout_url_regex_replacement'], :size => 50 %>
-    <%= l(:help_checkout_url_regex_replacement_example) %>
-    <br /><em><%= l(:help_checkout_url_regex) %></em>
-  </p>
+  
+  <% (["default"] + REDMINE_SUPPORTED_SCM).each do |scm|  %>
+    <div id="regex_<%= scm %>" class="scm_regex" <%= 'style="display:none"' unless scm == "default" %>>
+    <% unless scm == "default" %>
+    <p>
+      <label><%= l(:field_overwrite_default) %></label>
+      <%= check_box_tag "settings[checkout_url_regex_overwrite_#{scm}]", value="1", @settings["checkout_url_regex_overwrite_#{scm}"] %>
+    </p>
+    <% end %>
+    <p>
+      <label><%= l(:field_checkout_url_regex) %></label>
+      <%= text_field_tag "settings[checkout_url_regex_#{scm}]", @settings["checkout_url_regex_#{scm}"], :size => 50 %>
+      <%= l(:help_checkout_url_regex_example) %>
+    </p>
+    <p>
+      <label><%= l(:field_checkout_url_regex_replacement) %></label>
+      <%= text_field_tag "settings[checkout_url_regex_replacement_#{scm}]", @settings["checkout_url_regex_replacement_#{scm}"], :size => 50 %>
+      <%= l(:help_checkout_url_regex_replacement_example) %>
+      <br /><em><%= l(:help_checkout_url_regex) %></em>
+    </p>
+    </div>
+  <% end %>
 </fieldset>

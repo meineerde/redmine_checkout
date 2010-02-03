@@ -20,18 +20,16 @@ Redmine::Plugin.register :redmine_checkout do
   
   requires_redmine :version_or_higher => '0.9'
   
-  settings :default => {
+  settings_defaults = {
     'checkout_url_type' => "none",
     'display_login' => 'username',
-    'render_link' => "false",
-    'checkout_url_regex' => "",
-    'checkout_url_regex_replacement' => "",
-  }, :partial => 'settings/redmine_checkout'
-end
-
-# Update default
-setting = Setting.plugin_redmine_checkout
-if setting['checkout_url_type'] == "overwritten"
-  setting['checkout_url_type'] = "generated"
-  Setting.plugin_redmine_checkout = setting
+    'render_link' => "false"
+  }
+  (["default"] + REDMINE_SUPPORTED_SCM).each do |scm|
+    settings_defaults["checkout_url_regex_#{scm}"] = ""
+    settings_defaults["checkout_url_regex_replacement_#{scm}"] = ""
+    settings_defaults["checkout_url_regex_overwrite_#{scm}"] = false
+  end
+  
+  settings :default => settings_defaults, :partial => 'settings/redmine_checkout'
 end

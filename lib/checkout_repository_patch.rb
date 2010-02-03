@@ -52,8 +52,15 @@ module RepositoryPatch
 
     def generated_checkout_url
       return "" unless self.url
-      regex = Setting.plugin_redmine_checkout['checkout_url_regex']
-      replacement = Setting.plugin_redmine_checkout['checkout_url_regex_replacement']
+      
+      scm = self.scm_name
+      unless REDMINE_SUPPORTED_SCM.include?(scm) &&
+      Setting.plugin_redmine_checkout["checkout_url_regex_overwrite_#{scm}"]
+        scm = "default"
+      end
+      
+      regex = Setting.plugin_redmine_checkout["checkout_url_regex_#{scm}"]
+      replacement = Setting.plugin_redmine_checkout["checkout_url_regex_replacement_#{scm}"]
       
       if (regex.blank? || replacement.blank?)
         self.url

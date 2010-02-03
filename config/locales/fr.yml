@@ -6,6 +6,7 @@ fr:
   field_checkout_url_overwrite: "Remplacer les paramètres par défaut pour l'URL du dépôt"
   field_display_login: "Affiche le login"
   field_render_link: "Affiche l'URL du dépôt comme un lien"
+  field_overwrite_default: "Overwrite default"
 
   label_checkout_url_regex: "Expression régulière pour l'URL du dépôt"
   label_checkout_url: "Affichage de l'URL du dépôt"

@@ -22,7 +22,7 @@ describe Repository do
       @repo = repositories :svn
 
       @repo.url = "svn://example.com/svn/testrepo"
-      @repo.checkout_url = "svn+ssh://example.com/svn/testrepo"
+      @repo.checkout_url = "http://svn.example.com/testrepo"
     end
     
     it "should be generated from url" do
@@ -36,7 +36,7 @@ describe Repository do
       @repo.checkout_url_type = "overwritten"
       @repo.checkout_url_overwrite = true
 
-      @repo.checkout_url.should eql "svn+ssh://example.com/svn/testrepo"
+      @repo.checkout_url.should eql "http://svn.example.com/testrepo"
     end
     
     it "should be generated if selected" do
@@ -44,6 +44,16 @@ describe Repository do
       @repo.checkout_url_overwrite = true
 
       @repo.checkout_url.should eql "http://example.com/svn/testrepo"
+    end
+    
+    it "should respect individual repository type specifications" do
+      Setting.plugin_redmine_checkout["checkout_url_regex_overwrite_Subversion"] = "1"
+      Setting.plugin_redmine_checkout = Setting.plugin_redmine_checkout
+      
+      @repo.checkout_url_type = "generated"
+      @repo.checkout_url_overwrite = true
+
+      @repo.checkout_url.should eql "svn+ssh://example.com/svn/testrepo"
     end
   end
 end
