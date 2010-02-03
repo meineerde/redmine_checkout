@@ -27,5 +27,11 @@ Redmine::Plugin.register :redmine_checkout do
     'checkout_url_regex' => "",
     'checkout_url_regex_replacement' => "",
   }, :partial => 'settings/redmine_checkout'
-  
+end
+
+# Update default
+setting = Setting.plugin_redmine_checkout
+if setting['checkout_url_type'] == "overwritten"
+  setting['checkout_url_type'] = "generated"
+  Setting.plugin_redmine_checkout = setting
 end

@@ -1,12 +1,12 @@
 <fieldset>
   <legend><%= l(:label_checkout_url) %></legend>
-
+  
   <p>
     <label><%= l(:field_checkout_url_type) %></label>
     <%= select_tag 'settings[checkout_url_type]', options_for_select([
         [l(:label_checkout_type_original), 'original'],
         [l(:label_checkout_type_none), 'none'],
-        [l(:label_checkout_type_overwritten), 'overwritten']
+        [l(:label_checkout_type_generated), 'generated']
       ], @settings['checkout_url_type'])%>
   </p>
   <p>
