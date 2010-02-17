@@ -38,7 +38,7 @@
     <%=
       select_tag 'scm_type', options_for_select(
         [[l(:label_default), "default"]] + 
-        REDMINE_SUPPORTED_SCM.inject([]) do |list, scm|
+        CheckoutHelper.supported_scm.inject([]) do |list, scm|
           list << ["Repository::#{scm}".constantize.scm_name, scm]
         end
       ),
@@ -51,7 +51,7 @@
     %>
   </p>
   
-  <% (["default"] + REDMINE_SUPPORTED_SCM).each do |scm|  %>
+  <% (["default"] + CheckoutHelper.supported_scm).each do |scm|  %>
     <div id="regex_<%= scm %>" class="scm_regex" <%= 'style="display:none"' unless scm == "default" %>>
     <% unless scm == "default" %>
     <p>

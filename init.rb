@@ -25,7 +25,7 @@ Redmine::Plugin.register :redmine_checkout do
     'display_login' => 'username',
     'render_link' => "false"
   }
-  (["default"] + REDMINE_SUPPORTED_SCM).each do |scm|
+  (["default"] + CheckoutHelper.supported_scm).each do |scm|
     settings_defaults["checkout_url_regex_#{scm}"] = ""
     settings_defaults["checkout_url_regex_replacement_#{scm}"] = ""
     settings_defaults["checkout_url_regex_overwrite_#{scm}"] = false

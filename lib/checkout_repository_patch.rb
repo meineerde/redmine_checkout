@@ -1,4 +1,5 @@
 require_dependency 'repository'
+require_dependency 'checkout_helper'
 
 module RepositoryPatch
   def self.included(base) # :nodoc:
@@ -54,7 +55,7 @@ module RepositoryPatch
       return "" unless self.url
       
       scm = self.scm_name
-      unless REDMINE_SUPPORTED_SCM.include?(scm) &&
+      unless CheckoutHelper.supported_scm.include?(scm) &&
       Setting.plugin_redmine_checkout["checkout_url_regex_overwrite_#{scm}"]
         scm = "default"
       end
