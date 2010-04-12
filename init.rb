@@ -32,4 +32,31 @@ Redmine::Plugin.register :redmine_checkout do
   end
   
   settings :default => settings_defaults, :partial => 'settings/redmine_checkout'
+  
+  Redmine::WikiFormatting::Macros.register do
+    desc "Creates a link to the configured repository."
+
+    macro :repository do |obj, args|
+      # instance_variables.each do |v|
+      #   p v
+      #   p instance_variable_get(v)
+      #   puts "------------------"
+      # end
+      
+      p obj
+
+      url = nil
+      if @project && @project.repository
+        case @project.repository.checkout_url_type
+        when 'original'
+          url = @project.repository.root_url
+        when 'overwritten', 'generated'
+          url = @project.repository.checkout_url
+        end
+        
+        title = @project.repository.render_link ? l(:field_checkout_url) : url
+      end
+      "<a href=\"#{h(url)}\">#{h(title)}</a>" if url
+    end
+  end
 end
