@@ -37,14 +37,6 @@ Redmine::Plugin.register :redmine_checkout do
     desc "Creates a link to the configured repository."
 
     macro :repository do |obj, args|
-      # instance_variables.each do |v|
-      #   p v
-      #   p instance_variable_get(v)
-      #   puts "------------------"
-      # end
-      
-      p obj
-
       url = nil
       if @project && @project.repository
         case @project.repository.checkout_url_type
