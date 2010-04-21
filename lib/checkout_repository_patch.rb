@@ -3,13 +3,15 @@ require_dependency 'checkout_helper'
 
 module RepositoryPatch
   def self.included(base) # :nodoc:
+    base.extend(ClassMethods)
     base.send(:include, InstanceMethods)
-    
+
     base.class_eval do
       unloadable
       
       validates_inclusion_of :checkout_url_type, :in => %w(none original overwritten generated), :allow_nil => true
       validates_inclusion_of :display_login, :in => %w(none username password), :allow_nil => true
+      validates_inclusion_of :render_type, :in => %w(url cmd link), :allow_nil => true
     end
   end
   
@@ -23,19 +25,24 @@ module RepositoryPatch
         Setting.plugin_redmine_checkout['checkout_url_type']
       end
     end
-
+    
     def display_login
       self.checkout_url_overwrite && read_attribute("display_login") || begin
         Setting.plugin_redmine_checkout['display_login']
       end
     end
     
-    def render_link
-      self.checkout_url_overwrite && read_attribute("render_link") || begin
-        Setting.plugin_redmine_checkout['render_link'] == "true"
+    def render_type
+      self.checkout_url_overwrite && read_attribute("render_type") || begin
+        Setting.plugin_redmine_checkout['render_type']
       end
     end
     
+    def checkout_cmd
+      setting = Setting.plugin_redmine_checkout["checkout_cmd_#{self.scm_name}"]
+      setting.blank? ? self.class.default_checkout_cmd : setting
+    end
+
     def checkout_url
       case checkout_url_type
       when "none": ""
@@ -72,6 +79,35 @@ module RepositoryPatch
       self.url || ""
     end
   end
+
+  module ClassMethods
+    def default_checkout_cmd
+      # default implementation
+      ""
+    end
+  end
 end
 
 Repository.send(:include, RepositoryPatch)
+
+checkout_strings = {
+  "Bazaar" => "bzr checkout",
+  "Cvs" => "cvs checkout",
+  "Darcs" => "darcs get",
+  "Git" => "git clone",
+  "Mercurial" => "hg clone",
+  "Subversion" => "svn checkout"
+}
+
+checkout_strings.each_pair do |scm, cmd|
+  require_dependency "repository/#{scm.underscore}"
+  cls = Repository.const_get(scm)
+
+  class_mod = Module.new
+  meth = "def default_checkout_cmd
+            '#{cmd}'
+          end"
+  class_mod.module_eval(meth)
+  
+  cls.extend(class_mod)
+end

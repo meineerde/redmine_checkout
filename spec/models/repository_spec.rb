@@ -11,7 +11,7 @@ describe Repository do
     it "should properly set default values" do
       @repo.checkout_url_type.should eql "generated"
       @repo.display_login.should eql "username"
-      @repo.render_link.should be_false
+      @repo.render_type.should eql 'url'
       @repo.checkout_url.should eql ""
       @repo.checkout_url_overwrite.should be_false
     end

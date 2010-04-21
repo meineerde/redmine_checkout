@@ -1,8 +1,10 @@
 <div class="contextual">
-  <% if repository.render_link%>
-    <a class="icon icon-changeset" href="<%=h url %>"><%=l :field_checkout_url %></a>
+  <% case repository.render_type when 'link' %>
+    <a class="icon icon-changeset" href="<%=URI.escape url %>"><%=l :field_checkout_url %></a>
+  <% when 'cmd' %>
+    <span class="icon icon-changeset"><%=h repository.checkout_cmd %> <a href="<%=URI.escape url %>"><%=h url %></a></span>
   <% else %>
-    <a class="icon icon-changeset" href="<%=h url %>"><%=h url %></a>
+    <a class="icon icon-changeset" href="<%=URI.escape url %>"><%=h url %></a>
   <% end %>
   <% if repository.display_login != "none" && !repository.login.blank? %>
     | <%=l :field_login %>: <%=h repository.login %>

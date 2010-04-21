@@ -59,9 +59,10 @@ module RepositoriesHelperPatch
           :style => ("display:none" unless ['overwritten'].include? form.object.checkout_url_type)
         ) + 
         content_tag('p',
-          form.select(:render_link, [
-              [l(:general_text_Yes), true],
-              [l(:general_text_No), false]
+          form.select(:render_type, [
+              [l(:label_render_type_link), "link"],
+              [l(:label_render_type_cmd), "cmd"],
+              [l(:label_render_type_url), "url"]
             ]
           )
         ) +

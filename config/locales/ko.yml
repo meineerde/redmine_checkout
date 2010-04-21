@@ -6,10 +6,11 @@ ko:
   field_checkout_url_regex_replacement: "대체 문자열"
   field_checkout_url_overwrite: "체크 아웃 URL의 기본 설정을 덮어씁니다."
   field_display_login: "로그인 표시"
-  field_render_link: "체크 아웃 URL을 링크로 표시"
+  field_render_type: "Render the checkout URL as"
   field_overwrite_default: "기본 설정 덮어씀"
+  field_checkout_cmd: "Checkout command"
 
-  label_checkout_url_regex: "체크 아웃 URL에 대한 정규식"
+  label_checkout_scm_specific: "SCM specific preferences"
   label_checkout_url: "체크 아웃 URL의 표시"
 
   label_checkout_type_none: "URL을 보여주지 않습니다."
@@ -21,6 +22,11 @@ ko:
   label_display_login_username: "로그인은 보여주지만 비밀번호는 보여주지 않습니다."
   label_display_login_password: "로그인과 비밀번호를 보여줍니다."
 
+  label_render_type_link: "Link"
+  label_render_type_cmd: "Checkout command"
+  label_render_type_url: "URL"
+
   help_checkout_url_regex: "'체크 아웃 URL 표시'가 원래 URL과 이 정규식으로 생성된 사용자 정의 URL 표시면 대체 문자열이 역 참조를 허용합니다."
   help_checkout_url_regex_example: "<em>예:</em> <strong>^http://(.*)$</strong>"
   help_checkout_url_regex_replacement_example: "<em>예:</em> <strong>https://\1</strong>"
+  help_checkout_cmd: "Overwrites the default value ({{checkout_cmd}})"

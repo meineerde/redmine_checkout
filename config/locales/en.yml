@@ -5,10 +5,11 @@ en:
   field_checkout_url_regex_replacement: "Replacement text"
   field_checkout_url_overwrite: "Overwrite default settings for checkout URL"
   field_display_login: "Display Login"
-  field_render_link: "Render the checkout URL as a link"
+  field_render_type: "Render the checkout URL as"
   field_overwrite_default: "Overwrite default"
+  field_checkout_cmd: "Checkout command"
 
-  label_checkout_url_regex: "Regular expression for checkout URL"
+  label_checkout_scm_specific: "SCM specific preferences"
   label_checkout_url: "Display of checkout URL"
 
   label_checkout_type_none: "Do not show a URL"
@@ -20,6 +21,11 @@ en:
   label_display_login_username: "Show login but no password"
   label_display_login_password: "Show login and password"
 
-  help_checkout_url_regex: "If 'Display checkout URL' is custom the displayed URL is generated from the original URL and this regular expression. The replacement text allows back-references."
+  label_render_type_link: "Link"
+  label_render_type_cmd: "Checkout command"
+  label_render_type_url: "URL"
+
+  help_checkout_url_regex: "If 'Display checkout URL' is custom, the displayed URL is generated from the original URL and this regular expression. The replacement text supports back-references."
   help_checkout_url_regex_example: "<em>Example:</em> <strong>^http://(.*)$</strong>"
   help_checkout_url_regex_replacement_example: "<em>Example:</em> <strong>https://\1</strong>"
+  help_checkout_cmd: "Overwrites the default value ({{checkout_cmd}})"

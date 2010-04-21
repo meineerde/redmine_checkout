@@ -23,12 +23,15 @@ Redmine::Plugin.register :redmine_checkout do
   settings_defaults = {
     'checkout_url_type' => "none",
     'display_login' => 'username',
-    'render_link' => "false"
+    'render_type' => 'url'
   }
   (["default"] + CheckoutHelper.supported_scm).each do |scm|
     settings_defaults["checkout_url_regex_#{scm}"] = ""
     settings_defaults["checkout_url_regex_replacement_#{scm}"] = ""
-    settings_defaults["checkout_url_regex_overwrite_#{scm}"] = false
+    unless scm == 'default'
+      settings_defaults["checkout_url_regex_overwrite_#{scm}"] = false
+      settings_defaults["checkout_cmd_#{scm}"] = ""
+    end
   end
   
   settings :default => settings_defaults, :partial => 'settings/redmine_checkout'
@@ -46,9 +49,21 @@ Redmine::Plugin.register :redmine_checkout do
           url = @project.repository.checkout_url
         end
         
-        title = @project.repository.render_link ? l(:field_checkout_url) : url
+        title = case @project.repository.render_type
+        when 'link'
+          l(:field_checkout_url)
+        when 'cmd', 'url'
+          url
+        end
       end
-      "<a href=\"#{h(url)}\">#{h(title)}</a>" if url
+      "<a href=\"#{URI.escape(url)}\">#{h(title)}</a>" if url
     end
   end
+end
+
+# migrate old (pre 0.4) settings
+render_link = Setting.plugin_redmine_checkout.delete 'render_link'
+unless  render_link.nil?
+  Setting.plugin_redmine_checkout['render_type'] = (render_link == 'true' ? 'link' : 'url')
+  Setting.plugin_redmine_checkout = Setting.plugin_redmine_checkout
 end

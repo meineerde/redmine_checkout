@@ -20,18 +20,19 @@
     %>
   </p>
   <p>
-    <label for="settings_render_link"><%= l(:field_render_link) %></label>
+    <label for="settings_render_type"><%= l(:field_render_type) %></label>
     <%=
-      select_tag 'settings[render_link]', options_for_select([
-        [l(:general_text_Yes), "true"],
-        [l(:general_text_No), "false"]
-      ], @settings['render_link'])
+      select_tag 'settings[render_type]', options_for_select([
+        [l(:label_render_type_link), "link"],
+        [l(:label_render_type_cmd), "cmd"],
+        [l(:label_render_type_url), "url"]
+      ], @settings['render_type'])
     %>
   </p>
 </fieldset>
 
 <fieldset>
-  <legend><%= l(:label_checkout_url_regex) %></legend>
+  <legend><%= l(:label_checkout_scm_specific) %></legend>
 
   <p>
     <label for="scm_type"><%=l :label_scm %></label>
@@ -45,6 +46,7 @@
       :onchange => <<-EOF
         $$('.scm_regex').each(Element.hide);
         $('regex_' + value).show();
+        new Effect.Highlight('settings_checkout_cmd_' + value);
         new Effect.Highlight('settings_checkout_url_regex_' + value);
         new Effect.Highlight('settings_checkout_url_regex_replacement_' + value);
       EOF
@@ -57,6 +59,11 @@
     <p>
       <label><%= l(:field_overwrite_default) %></label>
       <%= check_box_tag "settings[checkout_url_regex_overwrite_#{scm}]", value="1", @settings["checkout_url_regex_overwrite_#{scm}"] %>
+    </p>
+    <p>
+      <label><%= l(:field_checkout_cmd) %></label>
+      <%= text_field_tag "settings[checkout_cmd_#{scm}]", @settings["checkout_cmd_#{scm}"], :size => 50 %>
+      <%= l(:help_checkout_cmd, :checkout_cmd => Repository.const_get(scm).default_checkout_cmd ) %>
     </p>
     <% end %>
     <p>
