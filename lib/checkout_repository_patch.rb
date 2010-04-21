@@ -20,22 +20,12 @@ module RepositoryPatch
       self.checkout_url_overwrite ||= false
     end
     
-    def checkout_url_type
-      self.checkout_url_overwrite && read_attribute("checkout_url_type") || begin
-        Setting.plugin_redmine_checkout['checkout_url_type']
-      end
-    end
-    
-    def display_login
-      self.checkout_url_overwrite && read_attribute("display_login") || begin
-        Setting.plugin_redmine_checkout['display_login']
-      end
-    end
-    
-    def render_type
-      self.checkout_url_overwrite && read_attribute("render_type") || begin
-        Setting.plugin_redmine_checkout['render_type']
-      end
+    %w(checkout_url_type display_login render_type).each do |method|
+      module_eval( "def #{method}
+                      self.checkout_url_overwrite && read_attribute('#{method}') || begin
+                        Setting.plugin_redmine_checkout['#{method}']
+                      end
+                    end")
     end
     
     def checkout_cmd
