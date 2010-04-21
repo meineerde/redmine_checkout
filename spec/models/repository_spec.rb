@@ -56,4 +56,19 @@ describe Repository do
       @repo.checkout_url.should eql "svn+ssh://example.com/svn/testrepo"
     end
   end
+
+  describe "checkout_cmd" do
+    before(:each) do
+      @repo = repositories :svn
+    end
+    
+    it "should provide sensible defaults" do
+      @repo.checkout_cmd.should eql "svn checkout"
+    end
+    
+    it "should respect overwritten setting" do
+      Setting.plugin_redmine_checkout["checkout_cmd_Subversion"] = "git clone"
+      @repo.checkout_cmd.should eql "git clone"
+    end
+  end
 end
