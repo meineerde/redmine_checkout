@@ -4,6 +4,6 @@ class AddDisplayLogin < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :repository, :display_login
+    remove_column :repositories, :display_login
   end
 end
