@@ -60,10 +60,3 @@ Redmine::Plugin.register :redmine_checkout do
     end
   end
 end
-
-# migrate old (pre 0.4) settings
-render_link = Setting.plugin_redmine_checkout.delete 'render_link'
-unless  render_link.nil?
-  Setting.plugin_redmine_checkout['render_type'] = (render_link == 'true' ? 'link' : 'url')
-  Setting.plugin_redmine_checkout = Setting.plugin_redmine_checkout
-end
