@@ -1,0 +1,31 @@
+ro:
+  field_checkout_url_type: "Modul de afisare pentru accesarea SCM-ului"
+  field_checkout_url: "URL-ul pentru checkout"
+  field_checkout_url_regex: "Expresie regulata (regexp)"
+  field_checkout_url_regex_replacement: "Text inlocuitor (regexp)"
+  field_checkout_url_overwrite: "Utilizeza alte setari decat cele default pentru URL-ul de checkout"
+  field_display_login: "Arata datele pentru autentificare"
+  field_render_type: "Afiseaza URL-ul de checkout ca"
+  field_overwrite_default: "Suprascrie valorile default"
+  field_checkout_cmd: "Comanda de checkout"
+
+  label_checkout_scm_specific: "Preferinte SCM"
+  label_checkout_url: "Afisarea URL-ului de checkout"
+
+  label_checkout_type_none: "Nu afisa URL-ul"
+  label_checkout_type_original: "URL-ul original"
+  label_checkout_type_overwritten: "URL custom"
+  label_checkout_type_generated: "URL-ul generat"
+
+  label_display_login_none: "Nu afisa username sau parola"
+  label_display_login_username: "Afiseaza username-ul, dar nu si parola"
+  label_display_login_password: "Afiseaza atat username-ul, cat si parola"
+
+  label_render_type_link: "Link"
+  label_render_type_cmd: "Comanda de checkout"
+  label_render_type_url: "URL"
+
+  help_checkout_url_regex: "Daca 'Modul de afisare pentru accesarea SCM-ului' este trecut pe custom, URL-ul afisat este generat din URL-ul original si aceasta expresie regulata. Textul inlocuit suporta referinte (\1)"
+  help_checkout_url_regex_example: "<em>Examplu:</em> <strong>^http://(.*)$</strong>"
+  help_checkout_url_regex_replacement_example: "<em>Examplu:</em> <strong>https://\1</strong>"
+  help_checkout_cmd: "Suprascrie valoarea default ({{checkout_cmd}})"

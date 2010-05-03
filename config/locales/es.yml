@@ -1,14 +1,15 @@
-es:
+en:
   field_checkout_url_type: "Mostrar URL de checkout"
   field_checkout_url: "URL de checkout"
   field_checkout_url_regex: "Expresion regular"
-  field_checkout_url_regex_replacement: "Texto para remplazar"
+  field_checkout_url_regex_replacement: "Texto de remplazo"
   field_checkout_url_overwrite: "Sobrescribir las opciones por defecto para la URL de checkout"
   field_display_login: "Mostrar usuario"
-  field_render_link: "Renderizar la URL de checkout como un enlace"
+  field_render_type: "Renderizar la URL de checkout como un enlace"
   field_overwrite_default: "Sobrescribir por defecto"
+  field_checkout_cmd: "Comando de checkout"
 
-  label_checkout_url_regex: "Expresion regular para la URL de checkout"
+  label_checkout_scm_specific: "Preferencias especificas de SCM"
   label_checkout_url: "Mostrar la URL de checkout"
 
   label_checkout_type_none: "No mostrar la URL"
@@ -20,6 +21,11 @@ es:
   label_display_login_username: "Mostrar usuario pero no contraseña"
   label_display_login_password: "Mostrar usuario y contraseña"
 
+  label_render_type_link: "Enlace"
+  label_render_type_cmd: "Comando de checkout"
+  label_render_type_url: "URL"
+
   help_checkout_url_regex: "Si 'Mostrar URL de checkout' esta personalizada la URL mostrada se genera a partir de la URL original y esta expresion regular. El texto de remplazo permite referencias de lo anterior."
   help_checkout_url_regex_example: "<em>Ejemplo:</em> <strong>^http://(.*)$</strong>"
   help_checkout_url_regex_replacement_example: "<em>Ejemplo:</em> <strong>https://\1</strong>"
+  help_checkout_cmd: "Sobrescribir el valor por defecto ({{checkout_cmd}})"
