@@ -39,19 +39,19 @@ module RepositoryPatch
         end")
       module_eval(
         "def #{method}
-          checkout_url_overwrite.to_s == 'true' && checkout_settings['#{method}'] || begin
+          checkout_url_overwrite && checkout_settings['#{method}'] || begin
             Setting.plugin_redmine_checkout['#{method}']
           end
         end") if add_reader
     end
 
     def checkout_url_overwrite
-      checkout_settings['checkout_url_overwrite'] || false
+      checkout_settings['checkout_url_overwrite'].to_s == 'true'
     end
 
     
     def checkout_cmd
-      checkout_url_overwrite.to_s == 'true' && checkout_settings['checkout_cmd'] || begin
+      checkout_url_overwrite && checkout_settings['checkout_cmd'] || begin
         setting = Setting.plugin_redmine_checkout["checkout_cmd_#{self.scm_name}"]
         setting.blank? ? self.default_checkout_cmd : setting
       end
@@ -62,7 +62,7 @@ module RepositoryPatch
       when "none": ""
       when "original": self.url || ""
       when "overwritten"
-        if self.checkout_url_overwrite.to_s == 'true'
+        if self.checkout_url_overwrite
           checkout_settings["checkout_url"]
         else
           generated_checkout_url
