@@ -39,7 +39,7 @@ module RepositoryPatch
         end")
       module_eval(
         "def #{method}
-          checkout_url_overwrite && checkout_settings['#{method}'] || begin
+          checkout_url_overwrite.to_s == 'true' && checkout_settings['#{method}'] || begin
             Setting.plugin_redmine_checkout['#{method}']
           end
         end") if add_reader

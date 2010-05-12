@@ -17,8 +17,8 @@ module RepositoriesHelperPatch
       tags +
       content_tag('p',
         form.select(:checkout_url_overwrite, [
-            [l(:general_text_Yes), true],
-            [l(:general_text_No), false]
+            [l(:general_text_Yes), "true"],
+            [l(:general_text_No), "false"]
           ],
           {},
           :onchange => <<-EOF
