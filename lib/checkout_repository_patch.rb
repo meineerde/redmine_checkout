@@ -3,7 +3,6 @@ require_dependency 'checkout_helper'
 
 module RepositoryPatch
   def self.included(base) # :nodoc:
-    base.extend(ClassMethods)
     base.send(:include, InstanceMethods)
 
     base.class_eval do
@@ -12,36 +11,59 @@ module RepositoryPatch
       validates_inclusion_of :checkout_url_type, :in => %w(none original overwritten generated), :allow_nil => true
       validates_inclusion_of :display_login, :in => %w(none username password), :allow_nil => true
       validates_inclusion_of :render_type, :in => %w(url cmd link), :allow_nil => true
+      
+      serialize :checkout_settings, Hash
     end
   end
   
   module InstanceMethods
     def after_initialize
-      self.checkout_url_overwrite ||= false
-    end
-    
-    %w(checkout_url_type display_login render_type).each do |method|
-      module_eval( "def #{method}
-                      self.checkout_url_overwrite && read_attribute('#{method}') || begin
-                        Setting.plugin_redmine_checkout['#{method}']
-                      end
-                    end")
-    end
-    
-    
-    
-    def checkout_cmd
-      setting = Setting.plugin_redmine_checkout["checkout_cmd_#{self.scm_name}"]
-      setting.blank? ? self.default_checkout_cmd : setting
+      self.checkout_settings ||= {}
     end
 
+    # if the value is false, only a writer is generated
+    # if value is true, then a reader is also generated
+    checkout_setting_list = {
+      :checkout_url_overwrite => false,
+      :checkout_url_type => true,
+      :checkout_url => false,
+      :display_login => true,
+      :render_type => true,
+      :checkout_cmd => false
+    }
+    
+    checkout_setting_list.each do |method, add_reader|
+      module_eval(
+        "def #{method}=(value)
+          checkout_settings['#{method}'] = value
+        end")
+      module_eval(
+        "def #{method}
+          checkout_url_overwrite && checkout_settings['#{method}'] || begin
+            Setting.plugin_redmine_checkout['#{method}']
+          end
+        end") if add_reader
+    end
+
+    def checkout_url_overwrite
+      checkout_settings['checkout_url_overwrite'] || false
+    end
+
+    
+    def checkout_cmd
+      checkout_url_overwrite && checkout_settings['checkout_cmd'] || begin
+        setting = Setting.plugin_redmine_checkout["checkout_cmd_#{self.scm_name}"]
+        setting.blank? ? self.default_checkout_cmd : setting
+      end
+    end
+    
     def checkout_url
       case checkout_url_type
       when "none": ""
       when "original": self.url || ""
       when "overwritten"
         if self.checkout_url_overwrite
-          read_attribute("checkout_url")
+          checkout_settings["checkout_url"]
         else
           generated_checkout_url
         end
@@ -70,9 +92,12 @@ module RepositoryPatch
     rescue RegexpError
       self.url || ""
     end
-  end
-
-  module ClassMethods
+    
+    def allow_subtree_checkout
+      # default implementation
+      false
+    end
+    
     def default_checkout_cmd
       # default implementation
       ""
@@ -91,29 +116,38 @@ checkout_strings = {
   "Subversion" => "svn checkout"
 }
 
-allow_subtree_checkout = ["Subversion", "Cvs"]
+subtree_checkout_repos = ["Subversion", "Cvs"]
 
 checkout_strings.each_pair do |scm, cmd|
   require_dependency "repository/#{scm.underscore}"
   cls = Repository.const_get(scm)
-
+  
+  default_checkout_cmd = ""
+  unless cls.methods.include?('default_checkout_cmd')
+    default_checkout_cmd = "def default_checkout_cmd; '#{cmd}' end"
+  end
+  
+  allow_subtree_checkout = ""
+  unless cls.methods.include?('allow_subtree_checkout')
+    allow_subtree_checkout = "
+      def allow_subtree_checkout
+        #{subtree_checkout_repos.include?(scm)}
+      end"
+  end
+  
   class_mod = Module.new
   class_mod.module_eval("
     def self.included(base)
-      base.send(:include, InstanceMethods)
+      base.send(:include, ChildInstanceMethods)
       
       base.class_eval do
         unloadable
       end
     end
     
-    module InstanceMethods
-      def default_checkout_cmd
-        '#{cmd}'
-      end
-      def allow_subtree_checkout
-        #{allow_subtree_checkout.include? scm}
-      end
+    module ChildInstanceMethods
+      #{default_checkout_cmd}
+      #{allow_subtree_checkout}
     end"
   )
   
