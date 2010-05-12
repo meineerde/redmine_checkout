@@ -28,9 +28,11 @@ module RepositoryPatch
                     end")
     end
     
+    
+    
     def checkout_cmd
       setting = Setting.plugin_redmine_checkout["checkout_cmd_#{self.scm_name}"]
-      setting.blank? ? self.class.default_checkout_cmd : setting
+      setting.blank? ? self.default_checkout_cmd : setting
     end
 
     def checkout_url
@@ -89,15 +91,31 @@ checkout_strings = {
   "Subversion" => "svn checkout"
 }
 
+allow_subtree_checkout = ["Subversion", "Cvs"]
+
 checkout_strings.each_pair do |scm, cmd|
   require_dependency "repository/#{scm.underscore}"
   cls = Repository.const_get(scm)
 
   class_mod = Module.new
-  meth = "def default_checkout_cmd
-            '#{cmd}'
-          end"
-  class_mod.module_eval(meth)
+  class_mod.module_eval("
+    def self.included(base)
+      base.send(:include, InstanceMethods)
+      
+      base.class_eval do
+        unloadable
+      end
+    end
+    
+    module InstanceMethods
+      def default_checkout_cmd
+        '#{cmd}'
+      end
+      def allow_subtree_checkout
+        #{allow_subtree_checkout.include? scm}
+      end
+    end"
+  )
   
-  cls.extend(class_mod)
+  cls.send(:include, class_mod)
 end
