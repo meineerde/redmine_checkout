@@ -1,4 +1,4 @@
-<div class="contextual">
+<div class="contextual checkout">
   <% case repository.render_type when 'link' %>
     <a class="icon icon-changeset" href="<%=URI.escape url %>"><%=l :field_checkout_url %></a>
   <% when 'cmd' %>
@@ -13,7 +13,7 @@
     <% end %>
   <% end %>
 </div>
-<div style="clear: both">
+<div style="clear: both" />
 
 <% content_for :header_tags do %>
   <% content_tag "style", "type" => Mime::CSS do -%>

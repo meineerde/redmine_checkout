@@ -63,7 +63,7 @@
     <p>
       <label><%= l(:field_checkout_cmd) %></label>
       <%= text_field_tag "settings[checkout_cmd_#{scm}]", @settings["checkout_cmd_#{scm}"], :size => 50 %>
-      <%= l(:help_checkout_cmd, :checkout_cmd => Repository.const_get(scm).default_checkout_cmd ) %>
+      <%= l(:help_checkout_cmd, :checkout_cmd => Repository.const_get(scm).new.default_checkout_cmd ) %>
     </p>
     <% end %>
     <p>

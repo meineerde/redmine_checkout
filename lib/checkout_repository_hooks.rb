@@ -15,7 +15,7 @@ class RepositoryHooks < Redmine::Hook::ViewListener
         url = context[:repository].checkout_url
       end
       
-      unless url.blank?
+      if url.present? && context[:repository].allow_subtree_checkout
         # A bit hackish but gets the path component of the currently displayed dir/path
         path = context[:controller].instance_variable_get("@path")
         
