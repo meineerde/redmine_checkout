@@ -5,7 +5,7 @@ class AddOverwriteOption < ActiveRecord::Migration
     # existing repositories are set to overwrite the default settings
     # This is to keep continuity of settings.
     Repository.reset_column_information
-    Repository.all.each{|r| r.update_attribute(:checkout_url_overwrite, true)}
+    Repository.update_all({:checkout_url_overwrite, true})
   end
   
   def self.down
