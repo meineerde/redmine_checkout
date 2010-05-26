@@ -16,7 +16,7 @@ Redmine::Plugin.register :redmine_checkout do
   author 'Holger Just'
   author_url 'http://meine-er.de'
   description 'Adds a link to the actual repository to the GUI.'
-  version '0.4'
+  version '0.4.1'
   
   requires_redmine :version_or_higher => '0.9'
   
