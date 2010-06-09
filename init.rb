@@ -3,15 +3,15 @@ require 'redmine'
 require 'dispatcher'
 Dispatcher.to_prepare do
   # Patches
-  require_dependency 'checkout_repositories_helper_patch'
-  require_dependency 'checkout_repository_patch'
+  require_dependency 'checkout/repositories_helper_patch'
+  require_dependency 'checkout/repository_patch'
   
   require_dependency 'checkout/settings_helper_patch'
   require_dependency 'checkout/setting_patch'
 end
 
 # Hooks
-require 'checkout_repository_hooks'
+require 'checkout/repository_hooks'
 
 Redmine::Plugin.register :redmine_checkout do
   name 'Redmine Checkout plugin'
