@@ -66,7 +66,9 @@ module Checkout
       end
 
       def checkout_display_login
-        self.scm_name == "Subversion" && checkout_settings['checkout_display_login']
+        checkout_overwrite? &&
+          self.scm_name == "Subversion" && checkout_settings['checkout_display_login'] || 
+          Setting.checkout_display_login
       end
     
       def checkout_display_login?
