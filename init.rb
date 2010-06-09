@@ -26,7 +26,7 @@ Redmine::Plugin.register :redmine_checkout do
   settings_defaults = {
     'display_login' => nil,
     
-    'display_checkout_info' => 1,
+    'display_checkout_info' => "1",
     'description_default' => <<-EOF
 The data contained in this repository can be downloaded to your computer using one of several clients.
 Please see the documentation of your version control software client for more information.
@@ -55,7 +55,7 @@ EOF
         "0" => {:protocol => scm,
                 :regex => "",
                 :regex_replacement => "",
-                :access => 'read+write',
+                :access => 'permission',
                 :append_path => (klazz.allow_subtree_checkout? ? 1 : 0),
                 :is_default => 1
                }
