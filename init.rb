@@ -36,7 +36,7 @@ EOF
   }
   
   # this is needed for setting the defaults
-  require 'checkout_repository_patch'
+  require 'checkout/repository_patch'
   
   (["default"] + CheckoutHelper.supported_scm).each do |scm|
     settings_defaults["checkout_url_regex_#{scm}"] = ""
