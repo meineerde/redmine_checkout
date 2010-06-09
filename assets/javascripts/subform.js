@@ -14,17 +14,20 @@ var Subform = Class.create({
   add: function() {
     var e = $(this.parentElement);
     Element.insert(e, { bottom: this.parsedHTML()});
+    Effect.toggle(e.childElements().last(), 'slide', {duration:0.2});
     recalculate_even_odd(e);
   },
   
   add_after: function(e) {
     Element.insert(e, { after: this.parsedHTML()});
+    Effect.toggle(e.next(), 'slide', {duration:0.2});
     recalculate_even_odd($(this.parentElement));
   },
   
   add_on_top: function() {
     var e = $(this.parentElement);
     Element.insert(e, { top: this.parsedHTML()});
+    Effect.toggle(e.childElements().first(), 'slide', {duration:0.2});
     recalculate_even_odd(e);
   }
 });

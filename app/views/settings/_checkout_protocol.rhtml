@@ -2,7 +2,7 @@
   index ||= "--INDEX--"
   classes ||= ""
 %>
-<tr class="<%= classes %>">
+<tr class="<%= classes %>" <%= 'style="display:none"' if index == '--INDEX--' %>>
   <td><%= text_field_tag "settings[checkout_protocols_#{scm}][#{index}][protocol]", protocol[.protocol], :size => 10 %></td>
   <td><%= text_field_tag "settings[checkout_protocols_#{scm}][#{index}][regex]", protocol.regex], :size => 30 %></td>
   <td><%= text_field_tag "settings[checkout_protocols_#{scm}][#{index}][regex_replacement]", protocol.regex_replacement], :size => 30 %></td>
