@@ -3,101 +3,116 @@ require_dependency 'checkout_helper'
 
 module RepositoryPatch
   def self.included(base) # :nodoc:
-    base.extend(ClassMethods)
     base.send(:include, InstanceMethods)
 
     base.class_eval do
       unloadable
       
-      validates_inclusion_of :checkout_url_type, :in => %w(none original overwritten generated), :allow_nil => true
-      validates_inclusion_of :display_login, :in => %w(none username password), :allow_nil => true
-      validates_inclusion_of :render_type, :in => %w(url cmd link), :allow_nil => true
+      serialize :checkout_settings, Hash
     end
   end
   
   module InstanceMethods
     def after_initialize
-      self.checkout_url_overwrite ||= false
+      self.checkout_settings ||= {}
     end
     
-    %w(checkout_url_type display_login render_type).each do |method|
-      module_eval( "def #{method}
-                      self.checkout_url_overwrite && read_attribute('#{method}') || begin
-                        Setting.plugin_redmine_checkout['#{method}']
-                      end
-                    end")
-    end
-    
-    def checkout_cmd
-      setting = Setting.plugin_redmine_checkout["checkout_cmd_#{self.scm_name}"]
-      setting.blank? ? self.class.default_checkout_cmd : setting
-    end
-
-    def checkout_url
-      case checkout_url_type
-      when "none": ""
-      when "original": self.url || ""
-      when "overwritten"
-        if self.checkout_url_overwrite
-          read_attribute("checkout_url")
-        else
-          generated_checkout_url
-        end
-      when "generated"
-        generated_checkout_url
-      end
-    end
-
-    def generated_checkout_url
-      return "" unless self.url
-      
+    def checkout_scm
       scm = self.scm_name
       unless CheckoutHelper.supported_scm.include?(scm) &&
-      Setting.plugin_redmine_checkout["checkout_url_regex_overwrite_#{scm}"]
+      Setting.send("checkout_overwrite_description_#{scm}?")
         scm = "default"
       end
-      
-      regex = Setting.plugin_redmine_checkout["checkout_url_regex_#{scm}"]
-      replacement = Setting.plugin_redmine_checkout["checkout_url_regex_replacement_#{scm}"]
-      
-      if (regex.blank? || replacement.blank?)
-        self.url
-      else
-        self.url && self.url.gsub(Regexp.new(regex), replacement)
-      end
-    rescue RegexpError
-      self.url || ""
+      scm
     end
-  end
+    
+    def checkout_overwrite=(value)
+      checkout_settings['checkout_overwrite'] = value
+    end
+    
+    def checkout_overwrite
+      checkout_settings['checkout_overwrite']
+    end
 
-  module ClassMethods
-    def default_checkout_cmd
+    def checkout_overwrite?
+      checkout_overwrite.to_i > 0
+    end
+    
+    def checkout_description=(value)
+      checkout_settings['checkout_description'] = value
+    end
+    
+    def checkout_description
+      checkout_overwrite? && checkout_settings['checkout_description'] ||
+      Setting.send("checkout_description_#{checkout_scm}")
+    end
+    
+    def checkout_protocols
+      @checkout_protocols ||= begin
+        protocols = 
+          checkout_overwrite? && checkout_settings['checkout_protocols'] || begin
+            Setting.send("checkout_protocols_#{self.scm_name}")
+          end
+        
+        protocols.sort{|(ak,av),(bk,bv)|ak<=>bk}.collect do |k,p|
+          Checkout::Protocol.new p.merge({:repository => self})
+        end
+      end
+    end
+    
+    def checkout_protocols=(value)
+      checkout_settings['checkout_protocols'] = value
+    end
+
+    def checkout_display_login
+      self.scm_name == "Subversion" && checkout_settings['checkout_display_login']
+    end
+    
+    def checkout_display_login?
+      checkout_display_login.to_i > 0
+    end
+    
+    def checkout_display_login=(value)
+      value = nil unless self.scm_name == "Subversion"
+      checkout_settings['checkout_display_login'] = value
+    end
+    
+    def self.allow_subtree_checkout?
       # default implementation
-      ""
+      false
+    end
+    
+    def allow_subtree_checkout?
+      self.class.allow_subtree_checkout?
     end
   end
 end
 
 Repository.send(:include, RepositoryPatch)
 
-checkout_strings = {
-  "Bazaar" => "bzr checkout",
-  "Cvs" => "cvs checkout",
-  "Darcs" => "darcs get",
-  "Git" => "git clone",
-  "Mercurial" => "hg clone",
-  "Subversion" => "svn checkout"
-}
-
-checkout_strings.each_pair do |scm, cmd|
+subtree_checkout_repos = ["Subversion", "Cvs"]
+CheckoutHelper.supported_scm.each do |scm|
   require_dependency "repository/#{scm.underscore}"
   cls = Repository.const_get(scm)
-
-  class_mod = Module.new
-  meth = "def default_checkout_cmd
-            '#{cmd}'
-          end"
-  class_mod.module_eval(meth)
   
-  cls.extend(class_mod)
+  unless cls.singleton_methods.include?('allow_subtree_checkout?')
+    class_mod = Module.new
+    class_mod.module_eval(<<-EOF
+      def self.included(base)
+        base.extend ChildClassMethods
+
+        base.class_eval do
+          unloadable
+        end
+      end
+
+      module ChildClassMethods
+        def allow_subtree_checkout?
+          #{subtree_checkout_repos.include?(scm)}
+        end
+      end
+    EOF
+    )
+    cls.send(:include, class_mod)
+  end
 end

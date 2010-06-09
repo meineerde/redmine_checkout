@@ -7,28 +7,27 @@ class RepositoryHooks < Redmine::Hook::ViewListener
   # * :repository => Current Repository
   #
   def view_repositories_show_contextual(context={})
-    unless context[:repository].blank? || context[:repository].checkout_url_type == "none"
-      case context[:repository].checkout_url_type
-      when 'original'
-        url = context[:repository].root_url
-      when 'overwritten', 'generated'
-        url = context[:repository].checkout_url
+    unless context[:repository].blank? || !Setting.checkout_display_checkout_info
+      protocols = context[:repository].checkout_protocols.select do |p|
+        p.access_rw == 'read-only' ||
+        p.access_rw == 'read+write' && User.current.allowed_to?(:commit_access, context[:repository].project)
       end
       
-      unless url.blank?
-        # A bit hackish but gets the path component of the currently displayed dir/path
-        path = context[:controller].instance_variable_get("@path")
-        
-        # remove trailing slashes
-        url.gsub!(/\/+$/, "")
-        url = "#{url}/#{path}"
+      path = context[:controller].instance_variable_get("@path")
+      if path && context[:controller].instance_variable_get("@entry")
+        # a single file is showing, so we return only the directory
+        path = File.dirname(path)
       end
       
-      url ||= "#"
+      default_protocol = protocols.find(&:default?) || protocols.first
       
-      context.merge!({:url => url})
+      context.merge!({
+        :checkout_protocols => protocols,
+        :default_checkout_protocol => default_protocol,
+        :checkout_path => path
+      })
+      
       options = {:partial => "redmine_checkout_hooks/view_repositories_show_contextual"}
-      
       context[:controller].send(:render_to_string, {:locals => context}.merge(options))
     end
   end

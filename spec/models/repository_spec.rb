@@ -71,4 +71,17 @@ describe Repository do
       @repo.checkout_cmd.should eql "git clone"
     end
   end
+  
+  describe "subtree checkout" do
+    before(:each) do
+      @svn = repositories :svn
+      @git = Repository::Git.new
+    end
+    it "should allow subtree checkout on subversion" do
+      @svn.allow_subtree_checkout.should eql true
+    end
+    it "should not allow subtree checkout on gít" do
+      @git.allow_subtree_checkout.should eql false
+    end
+  end
 end

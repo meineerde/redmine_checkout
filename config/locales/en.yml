@@ -1,10 +1,24 @@
 en:
-  field_checkout_url_type: "Display checkout URL"
-  field_checkout_url: "Checkout URL"
-  field_checkout_url_regex: "Regular expression"
-  field_checkout_url_regex_replacement: "Replacement text"
-  field_checkout_url_overwrite: "Overwrite default settings for checkout URL"
-  field_display_login: "Display Login"
+  setting_checkout_display_checkout_info: "Display checkout URL"
+  setting_checkout_fixed_url: "Checkout URL"
+  setting_checkout_url_regex: "Regular expression"
+  setting_checkout_url_regex_replacement: "Replacement text"
+  setting_checkout_display_login: "Display Login"
+  
+  setting_checkout_overwrite_description: "Overwrite default description"
+  
+  button_add_protocol: "Add Protocol"
+  
+
+  field_checkout_overwrite: "Overwrite default settings for checkout info"
+
+  label_access_type: 'This URL has <span id="checkout_access">{{type}}</span> access.'
+  label_access_read_only: 'Read-Only'
+  label_access_read_write: "Read+Write"
+  label_access_permission: "Depending on user's permissions"
+  label_append_path: "Append path"
+  
+  
   field_render_type: "Render the checkout URL as"
   field_overwrite_default: "Overwrite default"
   field_checkout_cmd: "Checkout command"
@@ -29,3 +43,5 @@ en:
   help_checkout_url_regex_example: "<em>Example:</em> <strong>^http://(.*)$</strong>"
   help_checkout_url_regex_replacement_example: "<em>Example:</em> <strong>https://\1</strong>"
   help_checkout_cmd: "Overwrites the default value ({{checkout_cmd}})"
+  
+  label_checkout: "Checkout"
