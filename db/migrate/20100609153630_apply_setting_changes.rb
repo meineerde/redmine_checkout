@@ -20,7 +20,7 @@ class ConsolidateRepositoryOptions < ActiveRecord::Migration
           :protocol => r.scm_name,
           :regex => "",
           :regex_replacement => "",
-          :fixed_url => (r.checkout_settings['checkout_url_type'] == 'original' ? (r.url || "") : self.checkout_setings["checkout_url"]),
+          :fixed_url => (r.checkout_settings['checkout_url_type'] == 'original' ? (r.url || "") : r.checkout_setings["checkout_url"]),
           :access => 'permission',
           :append_path => (allow_subtree_checkout ? '1' : '0'),
           :is_default => '1'}
