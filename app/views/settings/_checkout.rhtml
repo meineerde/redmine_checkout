@@ -20,8 +20,8 @@ document.observe("dom:loaded", function() {
 <div class="box tabular settings">
 <p><%= setting_check_box :checkout_display_checkout_info %></p>
 
-<p><%= setting_text_area :checkout_description_default, :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :field_description %></p>
-<%= wikitoolbar_for 'settings_checkout_description_default' %>
+<p><%= setting_text_area :checkout_description_Abstract, :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :field_description %></p>
+<%= wikitoolbar_for 'settings_checkout_description_Abstract' %>
 
 <% CheckoutHelper.supported_scm.select{|scm| Setting.enabled_scm.include?(scm)}.each do |scm| -%>
 <fieldset class="collapsible collapsed">

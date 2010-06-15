@@ -4,6 +4,7 @@ require_dependency 'checkout_helper'
 module Checkout
   module RepositoryPatch
     def self.included(base) # :nodoc:
+      base.extend(ClassMethods)
       base.send(:include, InstanceMethods)
 
       base.class_eval do
@@ -12,19 +13,17 @@ module Checkout
         serialize :checkout_settings, Hash
       end
     end
-  
+    
+    module ClassMethods
+      def allow_subtree_checkout?
+        # default implementation
+        false
+      end
+    end
+    
     module InstanceMethods
       def after_initialize
         self.checkout_settings ||= {}
-      end
-    
-      def checkout_scm
-        scm = self.scm_name
-        unless CheckoutHelper.supported_scm.include?(scm) &&
-        Setting.send("checkout_overwrite_description_#{scm}?")
-          scm = "default"
-        end
-        scm
       end
     
       def checkout_overwrite=(value)
@@ -36,7 +35,7 @@ module Checkout
       end
 
       def checkout_overwrite?
-        checkout_overwrite.to_i > 0
+        self.scm_name != 'Abstract' && checkout_overwrite.to_i > 0
       end
     
       def checkout_description=(value)
@@ -44,17 +43,25 @@ module Checkout
       end
     
       def checkout_description
-        checkout_overwrite? && checkout_settings['checkout_description'] ||
-        Setting.send("checkout_description_#{checkout_scm}")
+        if checkout_overwrite?
+          checkout_settings['checkout_description']
+        else
+          Setting.send("checkout_description_#{scm_name}")
+        end
       end
     
       def checkout_protocols
         @checkout_protocols ||= begin
-          protocols = 
-            checkout_overwrite? && checkout_settings['checkout_protocols'] || begin
-              Setting.send("checkout_protocols_#{self.scm_name}")
+          unless self.scm_name == 'Abstract'
+            if checkout_overwrite?
+              protocols = checkout_settings['checkout_protocols']
+            else
+              protocols = Setting.send("checkout_protocols_#{scm_name}")
             end
-        
+          else
+            protocols = []
+          end
+
           protocols.sort{|(ak,av),(bk,bv)|ak<=>bk}.collect do |k,p|
             Checkout::Protocol.new p.merge({:repository => self})
           end
@@ -66,9 +73,11 @@ module Checkout
       end
 
       def checkout_display_login
-        checkout_overwrite? &&
-          self.scm_name == "Subversion" && checkout_settings['checkout_display_login'] || 
+        if checkout_overwrite? && self.scm_name == "Subversion"
+          checkout_settings['checkout_display_login']
+        else
           Setting.checkout_display_login
+        end
       end
     
       def checkout_display_login?
@@ -76,15 +85,10 @@ module Checkout
       end
     
       def checkout_display_login=(value)
-        value = nil unless self.scm_name == "Subversion"
+        value = nil unless self.checkout_scm == "Subversion"
         checkout_settings['checkout_display_login'] = value
       end
-    
-      def self.allow_subtree_checkout?
-        # default implementation
-        false
-      end
-    
+      
       def allow_subtree_checkout?
         self.class.allow_subtree_checkout?
       end
@@ -95,28 +99,26 @@ end
 Repository.send(:include, Checkout::RepositoryPatch)
 
 subtree_checkout_repos = ["Subversion", "Cvs"]
-CheckoutHelper.supported_scm.each do |scm|
+CheckoutHelper.supported_scm.select{|r| subtree_checkout_repos.include? r}.each do |scm|
   require_dependency "repository/#{scm.underscore}"
   cls = Repository.const_get(scm)
   
-  unless cls.singleton_methods.include?('allow_subtree_checkout?')
-    class_mod = Module.new
-    class_mod.module_eval(<<-EOF
-      def self.included(base)
-        base.extend ChildClassMethods
+  class_mod = Module.new
+  class_mod.module_eval(<<-EOF
+    def self.included(base)
+      base.extend ChildClassMethods
 
-        base.class_eval do
-          unloadable
-        end
+      base.class_eval do
+        unloadable
       end
+    end
 
-      module ChildClassMethods
-        def allow_subtree_checkout?
-          #{subtree_checkout_repos.include?(scm)}
-        end
+    module ChildClassMethods
+      def allow_subtree_checkout?
+        true
       end
-    EOF
-    )
-    cls.send(:include, class_mod)
-  end
+    end
+  EOF
+  )
+  cls.send(:include, class_mod)
 end

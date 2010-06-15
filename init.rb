@@ -27,7 +27,7 @@ Redmine::Plugin.register :redmine_checkout do
     'display_login' => nil,
     
     'display_checkout_info' => "1",
-    'description_default' => <<-EOF
+    'description_Abstract' => <<-EOF
 The data contained in this repository can be downloaded to your computer using one of several clients.
 Please see the documentation of your version control software client for more information.
 
@@ -38,29 +38,25 @@ EOF
   # this is needed for setting the defaults
   require 'checkout/repository_patch'
   
-  (["default"] + CheckoutHelper.supported_scm).each do |scm|
-    settings_defaults["checkout_url_regex_#{scm}"] = ""
-    settings_defaults["checkout_url_regex_replacement_#{scm}"] = ""
-    unless scm == 'default'
-      klazz = "Repository::#{scm}".constantize
-      
-      settings_defaults["description_#{scm}"] = ""
-      settings_defaults["overwrite_description_#{scm}"] = 0
-      
-      settings_defaults["protocols_#{scm}"] = {
-        # access can be one of
-        #   read+write => this protocol always allows read/write access
-        #   read-only => this protocol always allows read access only
-        #   permission => Access depends on redmine permissions
-        "0" => {:protocol => scm,
-                :regex => "",
-                :regex_replacement => "",
-                :access => 'permission',
-                :append_path => (klazz.allow_subtree_checkout? ? 1 : 0),
-                :is_default => 1
-               }
-      }
-    end
+  CheckoutHelper.supported_scm.each do |scm|
+    klazz = "Repository::#{scm}".constantize
+    
+    settings_defaults["description_#{scm}"] = ""
+    settings_defaults["overwrite_description_#{scm}"] = 0
+    
+    settings_defaults["protocols_#{scm}"] = {
+      # access can be one of
+      #   read+write => this protocol always allows read/write access
+      #   read-only => this protocol always allows read access only
+      #   permission => Access depends on redmine permissions
+      "0" => {:protocol => scm,
+              :regex => "",
+              :regex_replacement => "",
+              :access => 'permission',
+              :append_path => (klazz.allow_subtree_checkout? ? 1 : 0),
+              :is_default => 1
+             }
+    }
   end
   
   settings :default => settings_defaults, :partial => 'settings/redmine_checkout'

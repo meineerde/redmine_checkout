@@ -54,9 +54,9 @@ module Checkout
     def url(path = "")
       return "" unless repository
       
-      url = fixed_url
-      if repository.allow_subtree_checkout? && self.append_path?
-        url = "#{url.sub(/\/+$/, "")}/#{path}"
+      url = fixed_url.sub(/\/+$/, "")
+      if repository.allow_subtree_checkout? && self.append_path? && path.present?
+        url = "#{url}/#{path}"
       end
       
       begin

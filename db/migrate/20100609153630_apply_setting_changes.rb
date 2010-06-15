@@ -47,7 +47,7 @@ Please select the desired protocol below to get the URL.",
       'display_login' => Setting.plugin_redmine_checkout['display_login'],
 
       'display_checkout_info' => (Setting.plugin_redmine_checkout['checkout_url_type'] == 'none' ? '0' : '1'),
-      'description_default' => <<-EOF
+      'description_Abstract' => <<-EOF
 The data contained in this repository can be downloaded to your computer using one of several clients.
 Please see the documentation of your version control software client for more information.
 
@@ -55,36 +55,34 @@ Please select the desired protocol below to get the URL.
 EOF
     }
 
-    (["default"] + CheckoutHelper.supported_scm).each do |scm|
+    CheckoutHelper.supported_scm.each do |scm|
       case Setting.plugin_redmine_checkout['checkout_url_type']
       when 'generated', 'none':
         regex = Setting.plugin_redmine_checkout["checkout_url_regex_#{scm}"]
         replacement = Setting.plugin_redmine_checkout["checkout_url_regex_replacement_#{scm}"]
       when 'original':
-        regex = ""
-        replacement = ""
+        regex = ''
+        replacement = ''
       end
       
       settings["checkout_url_regex_#{scm}"] = regex
       settings["checkout_url_regex_replacement_#{scm}"] = replacement
-      unless scm == 'default'
-        settings["description_#{scm}"] = ""
-        settings["overwrite_description_#{scm}"] = "0"
+      settings["description_#{scm}"] = ''
+      settings["overwrite_description_#{scm}"] = '0'
 
-        settings["protocols_#{scm}"] = {
-          # access can be one of
-          #   read+write => this protocol always allows read/write access
-          #   read-only => this protocol always allows read access only
-          #   permission => Access depends on redmine permissions
-          "0" => {:protocol => scm,
-                  :regex => "",
-                  :regex_replacement => "",
-                  :access => 'permission',
-                  :append_path => (['Cvs', 'Subversion'].include? scm),
-                  :is_default => 1
-                 }
-        }
-      end
+      settings["protocols_#{scm}"] = {
+        # access can be one of
+        #   read+write => this protocol always allows read/write access
+        #   read-only => this protocol always allows read access only
+        #   permission => Access depends on redmine permissions
+        "0" => {:protocol => scm,
+                :regex => "",
+                :regex_replacement => '',
+                :access => 'permission',
+                :append_path => (['Cvs', 'Subversion'].include?(scm) ? '1' : '0'),
+                :is_default => '1'
+               }
+      }
     end
     Setting.plugin_redmine_checkout = settings
   end
