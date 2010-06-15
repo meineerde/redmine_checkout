@@ -1,12 +1,87 @@
 ---
-  blar:
+  settings:
     name: plugin_redmine_checkout
     value: |
-      --- !map:HashWithIndifferentAccess 
+      --- 
+      display_checkout_info: "1"
+      description_Abstract: |
+        The data contained in this repository can be downloaded to your computer using one of several clients.
+        Please see the documentation of your version control software client for more information.
+
+        Please select the desired protocol below to get the URL.
+
+      overwrite_description_Bazaar: "0"
+      description_Bazaar: ""
+      protocols_Bazaar: 
+        "0": 
+          :regex: ""
+          :regex_replacement: ""
+          :read_write: readwrite
+          :is_default: 1
+          :protocol: Bazaar
+      overwrite_description_Cvs: "0"
+      description_Cvs: ""
+      protocols_Cvs: 
+        "0": 
+          :regex: ""
+          :regex_replacement: ""
+          :read_write: readwrite
+          :is_default: 1
+          :protocol: Cvs
+      overwrite_description_Darcs: "0"
+      description_Darcs: ""
+      protocols_Darcs: 
+        "0": 
+          :regex: ""
+          :regex_replacement: ""
+          :read_write: readwrite
+          :is_default: 1
+          :protocol: Darcs
+      overwrite_description_Filesystem: "0"
+      description_Filesystem: ""
+      protocols_Filesystem: !map:HashWithIndifferentAccess 
+        "0": !map:HashWithIndifferentAccess 
+          regex: ""
+          is_default: "1"
+          protocol: Filesystem
+          access: read+write
+          regex_replacement: ""
+      overwrite_description_Git: "0"
+      description_Git: ""
+      protocols_Git: !map:HashWithIndifferentAccess 
+        "0": !map:HashWithIndifferentAccess 
+          regex: ""
+          is_default: "1"
+          protocol: Git
+          access: read+write
+          regex_replacement: ""
+      overwrite_description_Mercurial: "0"
+      description_Mercurial: ""
+      protocols_Mercurial: !map:HashWithIndifferentAccess 
+        "0": !map:HashWithIndifferentAccess 
+          regex: ""
+          is_default: "1"
+          protocol: Mercurial
+          access: read+write
+          regex_replacement: ""
       display_login: username
-      render_type: "url"
-      checkout_url_regex_default: ^svn://(.*)$
-      checkout_url_regex_replacement_default: http://\1
-      checkout_url_regex_Subversion: ^svn://(.*)$
-      checkout_url_regex_replacement_Subversion: svn+ssh://\1
-      checkout_url_type: generated
+      overwrite_description_Subversion: "0"
+      description_Subversion: ""
+      protocols_Subversion: !map:HashWithIndifferentAccess 
+        "0": !map:HashWithIndifferentAccess 
+          regex: foo
+          append_path: "1"
+          is_default: "1"
+          protocol: Subversion
+          access: permission
+          regex_replacement: bar
+        "1": !map:HashWithIndifferentAccess 
+          regex: ^.*?([^/]+)/?$
+          protocol: SVN+SSH
+          access: read-only
+          regex_replacement: svn+ssh://\1@svn.foo.bar/svn
+        "2": !map:HashWithIndifferentAccess 
+          regex: ""
+          protocol: Root
+          access: read+write
+          regex_replacement: ""

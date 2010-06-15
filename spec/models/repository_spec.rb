@@ -9,79 +9,28 @@ describe Repository do
     end
 
     it "should properly set default values" do
-      @repo.checkout_url_type.should eql "generated"
-      @repo.display_login.should eql "username"
-      @repo.render_type.should eql 'url'
-      @repo.checkout_url.should eql ""
-      @repo.checkout_url_overwrite.should be_false
-    end
-  end
-  
-  describe "checkout_url" do
-    before(:each) do
-      @repo = repositories :svn
-
-      @repo.url = "svn://example.com/svn/testrepo"
-      @repo.checkout_url = "http://svn.example.com/testrepo"
-    end
-    
-    it "should be generated from url" do
-      @repo.checkout_url_type = "overwritten"
-      @repo.checkout_url_overwrite = false
-            
-      @repo.checkout_url.should eql "http://example.com/svn/testrepo"
-    end
-    
-    it "should respect overwritten setting" do
-      @repo.checkout_url_type = "overwritten"
-      @repo.checkout_url_overwrite = true
-
-      @repo.checkout_url.should eql "http://svn.example.com/testrepo"
-    end
-    
-    it "should be generated if selected" do
-      @repo.checkout_url_type = "generated"
-      @repo.checkout_url_overwrite = true
-
-      @repo.checkout_url.should eql "http://example.com/svn/testrepo"
-    end
-    
-    it "should respect individual repository type specifications" do
-      Setting.plugin_redmine_checkout["checkout_url_regex_overwrite_Subversion"] = "1"
-      Setting.plugin_redmine_checkout = Setting.plugin_redmine_checkout
-      
-      @repo.checkout_url_type = "generated"
-      @repo.checkout_url_overwrite = true
-
-      @repo.checkout_url.should eql "svn+ssh://example.com/svn/testrepo"
-    end
-  end
-
-  describe "checkout_cmd" do
-    before(:each) do
-      @repo = repositories :svn
-    end
-    
-    it "should provide sensible defaults" do
-      @repo.checkout_cmd.should eql "svn checkout"
-    end
-    
-    it "should respect overwritten setting" do
-      Setting.plugin_redmine_checkout["checkout_cmd_Subversion"] = "git clone"
-      @repo.checkout_cmd.should eql "git clone"
+      @repo.checkout_overwrite?.should be_false
+      @repo.checkout_description.should match /Please select the desired protocol below to get the URL/
+      @repo.checkout_display_login?.should be_false # no subversion repo
+      @repo.allow_subtree_checkout?.should be_false
+      @repo.checkout_protocols.should eql []
     end
   end
   
   describe "subtree checkout" do
     before(:each) do
-      @svn = repositories :svn
+      @svn = Repository::Subversion.new
       @git = Repository::Git.new
     end
-    it "should allow subtree checkout on subversion" do
-      @svn.allow_subtree_checkout.should eql true
+    it "should be allowed on subversion" do
+      @svn.allow_subtree_checkout?.should eql true
     end
-    it "should not allow subtree checkout on gít" do
-      @git.allow_subtree_checkout.should eql false
+    it "should only be possible if checked" do
+      
+    end
+    
+    it "should be forbidden on gít" do
+      @git.allow_subtree_checkout?.should eql false
     end
   end
 end
