@@ -37,6 +37,8 @@ module Checkout
           repository.url.gsub(Regexp.new(regex), regex_replacement)
         end
       end
+    rescue RegexpError
+      repository.url || ""
     end
     
     def access_rw
@@ -59,16 +61,16 @@ module Checkout
         url = "#{url}/#{path}"
       end
       
-      begin
-        uri = URI.parse url
-        (uri.user = repository.login) if repository.login
-        (uri.password = repository.password) if (repository.checkout_display_login == 'password' && repository.login && repository.password)
-        url = uri.to_s
-      rescue URI::InvalidURIError
-      end if repository.checkout_display_login?
+      if repository.checkout_display_login?
+        begin
+          uri = URI.parse url
+          (uri.user = repository.login) if repository.login
+          (uri.password = repository.password) if (repository.checkout_display_login == 'password' && repository.login && repository.password)
+          url = uri.to_s
+        rescue URI::InvalidURIError
+        end
+      end
       url
-    rescue RegexpError
-      repository.url || ""
     end
   end
 end
