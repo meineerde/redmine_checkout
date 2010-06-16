@@ -1,6 +1,8 @@
 <%
   index ||= "--INDEX--"
   classes ||= ""
+  
+  protocol = Checkout::Protocol.new(protocol) unless protocol.is_a? Checkout::Protocol
 %>
 <tr class="<%= classes %>" <%= 'style="display:none"' if index == '--INDEX--' %>>
   <td><%= text_field_tag "repository[checkout_protocols][#{index}][protocol]", protocol.protocol, :size => 10 %></td>
