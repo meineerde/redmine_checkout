@@ -15,16 +15,8 @@ describe Checkout::Protocol do
   it "should use the default protocols" do
     protocols = @repo.checkout_protocols
     protocols[0].protocol.should eql "Subversion"
-    protocols[0].url.should eql "http://example.com/svn/testrepo"
-    protocols[0].access.should eql "permission"
-
     protocols[1].protocol.should eql "SVN+SSH"
-    protocols[1].url.should eql "svn+ssh://testrepo@svn.foo.bar/svn"
-    protocols[1].access.should eql "read-only"
-
     protocols[2].protocol.should eql "Root"
-    protocols[2].url.should eql "http://example.com/svn/testrepo"
-    protocols[2].access.should eql "read+write"
   end
   
   it "should use regexes for generated URL" do
