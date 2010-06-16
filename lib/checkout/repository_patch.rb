@@ -46,13 +46,17 @@ module Checkout
         if checkout_overwrite?
           checkout_settings['checkout_description']
         else
-          Setting.send("checkout_description_#{scm_name}")
+          if CheckoutHelper.supported_scm.include?(scm_name) && Setting.send("checkout_overwrite_description_#{scm_name}?")
+            Setting.send("checkout_description_#{scm_name}")
+          else
+            Setting.send("checkout_description_Abstract")
+          end
         end
       end
     
       def checkout_protocols
         @checkout_protocols ||= begin
-          unless self.scm_name == 'Abstract'
+          if CheckoutHelper.supported_scm.include? scm_name
             if checkout_overwrite?
               protocols = checkout_settings['checkout_protocols']
             else
