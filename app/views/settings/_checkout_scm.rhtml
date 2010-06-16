@@ -9,12 +9,19 @@
     <%= wikitoolbar_for "settings_checkout_description_#{scm}" %>
   </div>
   
-  <%=  render :partial => "settings/checkout/#{scm.underscore}" %>
+  <% if scm == 'Subversion' %>
+  <p><%= setting_select :checkout_display_login,[
+            [l(:label_display_login_username), 'username'],
+            [l(:label_display_login_password), 'password']
+          ],
+          :blank => :label_display_login_none %></p>
+  <% end %>
   
   <% javascript_tag do %>
-    var subform = new Subform('<%= escape_javascript(render(:partial => "checkout_protocol", :locals => {:protocol => Checkout::Protocol.new({:append_path => "Repository::#{scm}".constantize.allow_subtree_checkout?}), :scm => scm})) %>',<%= Setting.send("checkout_protocols_#{scm}").length %>,'settings_checkout_protocols_<%= scm %>');
+    var subform = new Subform('<%= escape_javascript(render(:partial => "checkout_protocol", :locals => {:protocol => Checkout::Protocol.new({:append_path => "Repository::#{scm}".constantize.allow_subtree_checkout? ? '1' : '0'}), :scm => scm})) %>',<%= Setting.send("checkout_protocols_#{scm}").length %>,'settings_checkout_protocols_<%= scm %>');
     protocolForms.set('<%= scm %>', subform);
   <% end %>
+  <p><label><%=l :label_protocol_plural %></label><%=l :help_checkout_url_regex %></p>
   <table class="list">
     <thead><tr>
       <th><%= l(:setting_protocol)%></th>
