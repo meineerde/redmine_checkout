@@ -9,6 +9,9 @@ class ConsolidateRepositoryOptions < ActiveRecord::Migration
   end
   
   def self.up
+    
+    ## First migrate the individual repositories
+    
     Repository.all.each do |r|
       allow_subtree_checkout = ['Cvs', 'Subversion'].include? r.scm_name
       
@@ -39,9 +42,7 @@ Please select the desired protocol below to get the URL.",
       r.save!
     end
     
-    
-    
-    
+    ## Then the global settings
     
     settings = {
       'display_login' => Setting.plugin_redmine_checkout['display_login'],
