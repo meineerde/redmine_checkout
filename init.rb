@@ -26,7 +26,7 @@ Redmine::Plugin.register :redmine_checkout do
   settings_defaults = {
     'display_login' => nil,
     
-    'display_checkout_info' => "1",
+    'display_checkout_info' =>  '1',
     'description_Abstract' => <<-EOF
 The data contained in this repository can be downloaded to your computer using one of several clients.
 Please see the documentation of your version control software client for more information.
@@ -41,8 +41,8 @@ EOF
   CheckoutHelper.supported_scm.each do |scm|
     klazz = "Repository::#{scm}".constantize
     
-    settings_defaults["description_#{scm}"] = ""
-    settings_defaults["overwrite_description_#{scm}"] = 0
+    settings_defaults["description_#{scm}"] = ''
+    settings_defaults["overwrite_description_#{scm}"] = '0'
     
     settings_defaults["protocols_#{scm}"] = {
       # access can be one of
@@ -50,11 +50,11 @@ EOF
       #   read-only => this protocol always allows read access only
       #   permission => Access depends on redmine permissions
       "0" => {:protocol => scm,
-              :regex => "",
-              :regex_replacement => "",
+              :regex => '',
+              :regex_replacement => '',
               :access => 'permission',
-              :append_path => (klazz.allow_subtree_checkout? ? 1 : 0),
-              :is_default => 1
+              :append_path => (klazz.allow_subtree_checkout? ? '1' : '0'),
+              :is_default => '1'
              }
     }
   end
