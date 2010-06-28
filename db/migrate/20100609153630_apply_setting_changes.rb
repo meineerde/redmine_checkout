@@ -37,7 +37,7 @@ Please see the documentation of your version control software client for more in
 
 Please select the desired protocol below to get the URL.",
         "checkout_display_login" => (r.checkout_settings['display_login'] == "none" ? '' : r.checkout_settings['display_login']),
-        "checkout_overwrite" => (r.checkout_settings['checkout_url_overwrite'] == 'true' ? '1': '0'),
+        "checkout_overwrite" => (r.checkout_settings['checkout_url_overwrite'] == 'true') ? '1': '0',
       }
       r.save!
     end
