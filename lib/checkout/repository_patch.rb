@@ -31,7 +31,7 @@ module Checkout
       end
     
       def checkout_overwrite
-        checkout_settings['checkout_overwrite']
+        (checkout_settings['checkout_overwrite'].to_i > 0) ? '1' : '0'
       end
 
       def checkout_overwrite?
@@ -78,10 +78,11 @@ module Checkout
 
       def checkout_display_login
         if checkout_overwrite? && self.scm_name == "Subversion"
-          checkout_settings['checkout_display_login']
+          result = checkout_settings['checkout_display_login']
         else
-          Setting.checkout_display_login
+          result = Setting.checkout_display_login
         end
+        (result.to_i > 0) ? '1' : '0'
       end
     
       def checkout_display_login?
