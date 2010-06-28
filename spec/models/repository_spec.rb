@@ -29,8 +29,21 @@ describe Repository do
       
     end
     
-    it "should be forbidden on gít" do
+    it "should be forbidden on git" do
       @git.allow_subtree_checkout?.should eql false
+    end
+  end
+  
+  describe "extensions" do
+    before(:each) do
+      @repo = repositories :svn
+    end
+    
+    it "should provide protocols" do
+      protocols = @repo.checkout_protocols
+      protocols[0].protocol.should eql "Subversion"
+      protocols[1].protocol.should eql "SVN+SSH"
+      protocols[2].protocol.should eql "Root"
     end
   end
 end

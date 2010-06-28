@@ -4,19 +4,12 @@ describe Checkout::Protocol do
   fixtures :settings, :repositories, :projects, :enabled_modules
   
   before(:each) do
-    u = User.new
-    u.admin = true
-    User.current = u
+    @admin = User.new
+    @admin.admin = true
+    @user = User.new
+    
     @repo = repositories :svn
-
     @repo.url = "http://example.com/svn/testrepo"
-  end
-  
-  it "should use the default protocols" do
-    protocols = @repo.checkout_protocols
-    protocols[0].protocol.should eql "Subversion"
-    protocols[1].protocol.should eql "SVN+SSH"
-    protocols[2].protocol.should eql "Root"
   end
   
   it "should use regexes for generated URL" do
@@ -27,6 +20,9 @@ describe Checkout::Protocol do
   it "should resolve access properties" do
     protocol = @repo.checkout_protocols.find{|r| r.protocol == "Subversion"}
     protocol.access.should eql "permission"
-    protocol.access_rw.should eql "read+write"
+    protocol.access_rw(@admin).should eql "read+write"
+    
+    User.current = @user
+    protocol.access_rw(@user).should eql "read-only"
   end
 end

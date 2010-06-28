@@ -4,6 +4,7 @@ describe Setting do
   fixtures :settings
   
   before(:each) do
+    Setting.default_language = 'en'
   end
   
   it "should recognize checkout methods" do
