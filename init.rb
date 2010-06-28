@@ -62,26 +62,34 @@ EOF
   settings :default => settings_defaults, :partial => 'settings/redmine_checkout'
   
   Redmine::WikiFormatting::Macros.register do
-    desc "Creates a link to the configured repository."
+    desc <<-EOF
+Creates a checkout link to the actual repository. Example:
+
+  use the default checkout protocol !{{repository}}
+  or use a specific protocol !{{repository(SVN)}}
+  or use the checkout protocol of a specific specific project: !{{repository(projectname:SVN)}}"
+EOF
 
     macro :repository do |obj, args|
-      url = nil
-      if @project && @project.repository
-        case @project.repository.checkout_url_type
-        when 'original'
-          url = @project.repository.root_url
-        when 'overwritten', 'generated'
-          url = @project.repository.checkout_url
-        end
+      proto = args.first
+      if proto.to_s =~ %r{^([^\:]+)\:(.*)$}
+        project_identifier, proto = $1, $2
+        project = Project.find_by_identifier(project_identifier) || Project.find_by_name(project_identifier)
+      else
+        project = @project
+      end
+      
+      if project && project.repository
+        protocols = project.repository.checkout_protocols.select{|p| p.access_rw(User.current)}
         
-        title = case @project.repository.render_type
-        when 'link'
-          l(:field_checkout_url)
-        when 'cmd', 'url'
-          url
+        if proto.present?
+          proto_obj = protocols.find{|p| p.protocol.downcase == proto.downcase}
+        else
+          proto_obj = protocols.find(&:default?) || protocols.first
         end
       end
-      "<a href=\"#{URI.escape(url)}\">#{h(title)}</a>" if url
+      raise "Checkout protocol #{proto} not found" unless proto_obj
+      "<a href=\"#{URI.escape(proto_obj.url)}\">#{l(:label_protocol_checkout, :protocol => proto_obj.protocol)}</a>" 
     end
   end
 end
