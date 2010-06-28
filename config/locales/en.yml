@@ -1,5 +1,6 @@
 en:
   label_checkout: "Checkout"
+  label_protocol_checkout: "{{protocol}} checkout"
 
   setting_checkout_display_checkout_info: "Display checkout URL"
   setting_checkout_fixed_url: "Checkout URL"

@@ -1,5 +1,6 @@
 fr:
   label_checkout: "Dépôt"
+  label_protocol_checkout: "{{protocol}} checkout"
 
   setting_checkout_display_checkout_info: "Afficher l'URL du dépôt"
   setting_checkout_fixed_url: "URL du dépôt"
