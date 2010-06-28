@@ -1,9 +1,3 @@
-<% javascript_tag do %>
-document.observe("dom:loaded", function() {
-  $('checkout_settings').hide();
-});
-<% end unless form.object.checkout_overwrite? %>
-
 <p><%= form.select(:checkout_overwrite, [
     [l(:general_text_Yes), "1"],
     [l(:general_text_No), "0"]
@@ -14,7 +8,7 @@ document.observe("dom:loaded", function() {
   EOF
   )%></p>
 
-<div id="checkout_settings"><fieldset>
+<div id="checkout_settings" <%= 'style="display:none;"' unless form.object.checkout_overwrite? %>><fieldset>
   <legend><%=l :label_checkout %></legend>
   
   <p><%= form.text_area :checkout_description, :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :field_description %></p>
