@@ -1,21 +1,23 @@
 <div class="repository-info">
   <%= textilizable repository.checkout_description %>
+  <% if protocols.present? %>
   <hr />
   <div id="checkout_box">
     <ul id="checkout_protocols">
-    <% checkout_protocols.each do |p| -%>
+    <% protocols.each do |p| -%>
       <li>
-        <a <%= 'class="selected"' if p == default_checkout_protocol %> id="checkout_protocol_<%= p.protocol.to_s.underscore %>" data-permission="<%= p.access_rw %>" href="<%= URI.escape p.url(checkout_path) %>"><%=h p.protocol %></a>
+        <a <%= 'class="selected"' if p == default_protocol %> id="checkout_protocol_<%= p.protocol.to_s.underscore %>" data-permission="<%= p.access_rw(User.current) %>" href="<%= URI.escape p.url(checkout_path) %>"><%=h p.protocol %></a>
       </li>
     <% end -%>
     </ul>
-    <%= text_field_tag :checkout_url, URI.escape(default_checkout_protocol.url(checkout_path)) if default_checkout_protocol %>
-    <% if default_checkout_protocol %><p><%=l :label_access_type, :type => l(default_checkout_protocol.access_label) %></p><% end %>
+    <%= text_field_tag :checkout_url, URI.escape(default_protocol.url(checkout_path)) %>
+    <% if default_protocol %><p><%=l :label_access_type, :type => l(default_protocol.access_label(User.current)) %></p><% end %>
   
     <% javascript_tag do %>
-      checkout_access = $H({<%= checkout_protocols.inject([]){|r,p| r << "checkout_protocol_#{p.protocol.to_s.underscore}: '#{l(p.access_label)}'"}.join(', ') %>});
+      checkout_access = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ') %>});
     <% end %>
   </div>
+  <% end%>
 </div>
 <div style="clear: left"></div>
 
