@@ -41,16 +41,32 @@ module Checkout
       repository.url || ""
     end
     
-    def access_rw
-      if @access == 'permission'
-        User.current.allowed_to?(:commit_access, repository.project) ? 'read+write' : 'read-only'
+    def access_rw(user)
+      # reduces the three available access levels 'read+write', 'read-only' and 'permission'
+      # to 'read+write' and 'read-only' and nil (not allowed)
+
+      @access_rw ||= {}
+      return @access_rw[user] if @access_rw.key? user
+      @access_rw[user] = case access
+      when 'permission'
+        case
+        when user.allowed_to?(:commit_access, repository.project) && user.allowed_to?(:browse_repository, repository.project)
+          'read+write'
+        when user.allowed_to?(:browse_repository, repository.project)
+          'read-only'
+        else
+          nil
+        end
       else
         @access
       end
     end
     
-    def access_label
-      access == 'read+write' ? :label_access_read_write : :label_access_read_only
+    def access_label(user)
+      case access_rw(user)
+        when 'read+write': :label_access_read_write
+        when 'read-only': :label_access_read_only
+      end
     end
   
     def url(path = "")
