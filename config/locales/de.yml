@@ -5,7 +5,7 @@ de:
   setting_checkout_display_checkout_info: "Checkout-URL anzeigen"
   setting_checkout_fixed_url: "Checkout-URL"
   setting_checkout_url_regex: "Regulärer Ausdruck"
-  setting_checkout_url_regex_replacement: "Replacement text"
+  setting_checkout_url_regex_replacement: "Ersatztext"
   setting_checkout_display_login: "Mitgliedsnamen anzeigen"
 
   setting_checkout_overwrite_description: "Standard-Beschreibung überschreiben"
@@ -29,3 +29,6 @@ de:
     Die URLs in Protokollen werden aus der originalen URL erzeugt, auf die der
     reguläre Ausdruck und der Ersatztext angewendet werden. Der Ersatztext
     erlaubt Rückwärtsreferenzen zu geklammerten Audrücken mit der \1 Notation.
+  help_repository_checkout_protocols: |
+    Lassen Sie das Checkout-URL-Feld leer um die URL des Projektarchivs zu verwenden.
+    

@@ -29,3 +29,5 @@ ko:
     The URLs in protocols are generated from applying the regular expression
     and the replacement text to the original URL. The replacement text
     supports back-references to braced expressions using the \1 notation.
+  help_repository_checkout_protocols: |
+    Leave the Checkout URL field empty to use the defined repository URL.
