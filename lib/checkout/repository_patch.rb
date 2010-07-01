@@ -90,7 +90,7 @@ module Checkout
       end
     
       def checkout_display_login=(value)
-        value = nil unless self.checkout_scm == "Subversion"
+        value = nil unless self.scm_name == "Subversion"
         checkout_settings['checkout_display_login'] = value
       end
       
