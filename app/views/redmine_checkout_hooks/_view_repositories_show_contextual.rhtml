@@ -11,10 +11,14 @@
     <% end -%>
     </ul>
     <%= text_field_tag :checkout_url, URI.escape(default_protocol.url(checkout_path)) %>
+    <div id="clipboard_container" style="display: none;">
+       <div id="clipboard_button"><%= image_tag 'paste.png', :plugin => 'redmine_checkout' %></div>
+    </div>
     <% if default_protocol %><p><%=l :label_access_type, :type => l(default_protocol.access_label(User.current)) %></p><% end %>
   
     <% javascript_tag do %>
       checkout_access = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ') %>});
+      ZeroClipboard.setMoviePath( '<%= image_path('ZeroClipboard.swf', :plugin => 'redmine_checkout') %>' );
     <% end %>
   </div>
   <% end%>
@@ -24,4 +28,5 @@
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag 'checkout', :plugin => 'redmine_checkout' %>
   <%= javascript_include_tag 'checkout', :plugin => 'redmine_checkout' %>
+  <%= javascript_include_tag 'ZeroClipboard', :plugin => 'redmine_checkout' %>
 <% end %>
