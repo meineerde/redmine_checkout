@@ -1,4 +1,11 @@
 module Checkout
+  class <<self
+    def awesome?
+      # Yes, this plugin is awesome!
+      true
+    end
+  end
+  
   class Protocol
     attr_accessor :protocol, :regex, :regex_replacement, :access, :repository
     attr_writer :default, :fixed_url, :append_path
