@@ -23,6 +23,8 @@ document.observe("dom:loaded", function() {
 <p><%= setting_text_area :checkout_description_Abstract, :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :field_description %></p>
 <%= wikitoolbar_for 'settings_checkout_description_Abstract' %>
 
+<p><%= setting_check_box :checkout_use_zero_clipboard %></p>
+
 <% CheckoutHelper.supported_scm.select{|scm| Setting.enabled_scm.include?(scm)}.each do |scm| -%>
 <fieldset class="collapsible collapsed">
   <legend onclick="toggleFieldset(this);"><%= "Repository::#{scm}".constantize.scm_name %></legend>

@@ -7,6 +7,7 @@ fr:
   setting_checkout_url_regex_replacement: "Texte de substitution"
   setting_checkout_display_login: "Affiche le login"
   setting_checkout_command: "Checkout command"
+  setting_checkout_use_zero_clipboard: "Display clipboard helper"
 
   setting_checkout_overwrite_description: "Overwrite default description"
   field_checkout_overwrite: "Overwrite default settings for checkout protocols"

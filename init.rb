@@ -25,6 +25,7 @@ Redmine::Plugin.register :redmine_checkout do
   
   settings_defaults = {
     'display_login' => nil,
+    'use_zero_clipboard' => '1',
     
     'display_checkout_info' =>  '1',
     'description_Abstract' => <<-EOF

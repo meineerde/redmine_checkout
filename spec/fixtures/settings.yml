@@ -9,9 +9,12 @@
         Please see the documentation of your version control software client for more information.
 
         Please select the desired protocol below to get the URL.
+      display_command_Bazaar: '1'
+      use_zero_clipboard: "1"
 
       overwrite_description_Bazaar: "0"
       description_Bazaar: ""
+      display_command_Bazaar: '1'
       protocols_Bazaar: 
         "0": !map:HashWithIndifferentAccess 
           command: "bzr checkout"
@@ -23,6 +26,7 @@
           protocol: Bazaar
       overwrite_description_Cvs: "0"
       description_Cvs: ""
+      display_command_Cvs: '1'
       protocols_Cvs: 
         "0": !map:HashWithIndifferentAccess 
           command: "cvs checkout"
@@ -34,6 +38,7 @@
           protocol: Cvs
       overwrite_description_Darcs: "0"
       description_Darcs: ""
+      display_command_Darcs: '1'
       protocols_Darcs: 
         "0": !map:HashWithIndifferentAccess 
           command: "darcs get"
@@ -45,6 +50,7 @@
           protocol: Darcs
       overwrite_description_Filesystem: "0"
       description_Filesystem: ""
+      display_command_Filesystem: '1'
       protocols_Filesystem: !map:HashWithIndifferentAccess 
         "0": !map:HashWithIndifferentAccess 
           command: ""
@@ -56,6 +62,7 @@
           regex_replacement: ""
       overwrite_description_Git: "0"
       description_Git: ""
+      display_command_Git: '1'
       protocols_Git: !map:HashWithIndifferentAccess 
         "0": !map:HashWithIndifferentAccess 
           command: "git clone"
@@ -67,6 +74,7 @@
           regex_replacement: ""
       overwrite_description_Mercurial: "0"
       description_Mercurial: ""
+      display_command_Mercurial: '1'
       protocols_Mercurial: !map:HashWithIndifferentAccess 
         "0": !map:HashWithIndifferentAccess 
           command: "hg clone"
@@ -79,6 +87,7 @@
       display_login: username
       overwrite_description_Subversion: "0"
       description_Subversion: ""
+      display_command_Subversion: '1'
       protocols_Subversion: !map:HashWithIndifferentAccess 
         "0": !map:HashWithIndifferentAccess 
           command: "svn checkout"

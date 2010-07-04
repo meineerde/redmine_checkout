@@ -30,5 +30,19 @@ describe RepositoriesController do
     response.should render_template('show')
     
     response.should have_tag('div.repository-info', /Please select the desired protocol below to get the URL/)
-  end  
+  end
+  
+  it 'should respect the use zero clipboard option' do
+    Setting.checkout_use_zero_clipboard = '1'
+    get_repo
+    response.should be_success
+    response.should render_template('show')
+    response.should have_tag('script[src*=?]', 'ZeroClipboard')
+
+    Setting.checkout_use_zero_clipboard = '0'
+    get_repo
+    response.should be_success
+    response.should render_template('show')
+    response.should_not have_tag('script[src*=]', 'ZeroClipboard')
+  end
 end
