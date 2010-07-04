@@ -19,6 +19,11 @@ module Checkout
         # default implementation
         false
       end
+      
+      def checkout_default_command
+        # default implementation
+        ""
+      end
     end
     
     module InstanceMethods
@@ -94,8 +99,28 @@ module Checkout
         checkout_settings['checkout_display_login'] = value
       end
       
+      def checkout_display_command?
+        checkout_display_command.to_i > 0
+      end
+      
+      def checkout_display_command=(value)
+        checkout_settings['checkout_display_command'] = value
+      end
+      
+      def checkout_display_command
+        if checkout_overwrite?
+          checkout_settings['checkout_display_command']
+        else
+          Setting.send("checkout_display_command_#{scm_name}")
+        end
+      end
+      
       def allow_subtree_checkout?
         self.class.allow_subtree_checkout?
+      end
+      
+      def checkout_default_command
+        self.class.checkout_default_command
       end
     end
   end
@@ -104,9 +129,36 @@ end
 Repository.send(:include, Checkout::RepositoryPatch)
 
 subtree_checkout_repos = ["Subversion", "Cvs"]
-CheckoutHelper.supported_scm.select{|r| subtree_checkout_repos.include? r}.each do |scm|
+commands = {
+  'Bazaar' => 'bzr checkout',
+  'Cvs' => 'cvs checkout',
+  'Darcs' => 'darcs get',
+  'Git' => 'git clone',
+  'Mercurial' => 'hg clone',
+  'Subversion' => 'svn checkout'
+}
+
+CheckoutHelper.supported_scm.each do |scm|
   require_dependency "repository/#{scm.underscore}"
   cls = Repository.const_get(scm)
+  
+  allow_subtree_checkout = ""
+  if subtree_checkout_repos.include? scm
+    allow_subtree_checkout = <<-EOS
+     def allow_subtree_checkout?
+        true
+      end
+    EOS
+  end
+  
+  checkout_command = ""
+  if commands[scm]
+    checkout_command = <<-EOS
+      def checkout_default_command
+        '#{commands[scm]}'
+      end
+    EOS
+  end
   
   class_mod = Module.new
   class_mod.module_eval(<<-EOF
@@ -119,9 +171,8 @@ CheckoutHelper.supported_scm.select{|r| subtree_checkout_repos.include? r}.each 
     end
 
     module ChildClassMethods
-      def allow_subtree_checkout?
-        true
-      end
+      #{allow_subtree_checkout}
+      #{checkout_command}
     end
   EOF
   )

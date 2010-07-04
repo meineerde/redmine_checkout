@@ -6,6 +6,7 @@
 %>
 <tr class="<%= classes %>" <%= 'style="display:none"' if index == '--INDEX--' %>>
   <td><%= text_field_tag "repository[checkout_protocols][#{index}][protocol]", protocol.protocol, :size => 10 %></td>
+  <td><%= text_field_tag "repository[checkout_protocols][#{index}][command]", protocol.command, :size => 15 %></td>
   <td><%= text_field_tag "repository[checkout_protocols][#{index}][fixed_url]", protocol.fixed_url, :size => 60 %></td>
   <td><%= select_tag "repository[checkout_protocols][#{index}][access]", options_for_select([
     [l(:label_access_read_write), 'read+write'],

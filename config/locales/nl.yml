@@ -1,15 +1,16 @@
 nl:
   label_checkout: "Checkout"
-  label_protocol_checkout: "{{protocol}} checkout"
 
-  setting_checkout_display_checkout_info: "Display checkout URL"
+  setting_checkout_display_checkout_info: "Display checkout information"
   setting_checkout_fixed_url: "Checkout URL"
   setting_checkout_url_regex: "Regular expression"
   setting_checkout_url_regex_replacement: "Replacement text"
   setting_checkout_display_login: "Geef Login weer"
-
+  setting_checkout_command: "Checkout command"
+  
   setting_checkout_overwrite_description: "Overwrite default description"
   field_checkout_overwrite: "Overwrite default settings for checkout protocols"
+  field_checkout_display_command: "Display checkout command"
 
   label_protocol_plural: "Protocols"
   button_add_protocol: "Add Protocol"

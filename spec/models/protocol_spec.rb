@@ -25,4 +25,12 @@ describe Checkout::Protocol do
     User.current = @user
     protocol.access_rw(@user).should eql "read-only"
   end
+  
+  it "should display the checkout command" do
+    subversion = @repo.checkout_protocols.find{|r| r.protocol == "Subversion"}
+    svn_ssh = @repo.checkout_protocols.find{|r| r.protocol == "SVN+SSH"}
+
+    subversion.command.should eql "svn checkout"
+    svn_ssh.command.should eql "svn co"
+  end
 end

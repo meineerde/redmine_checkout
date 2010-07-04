@@ -1,15 +1,16 @@
 ro:
   label_checkout: "Checkout"
-  label_protocol_checkout: "{{protocol}} checkout"
 
-  setting_checkout_display_checkout_info: "Display checkout URL"
+  setting_checkout_display_checkout_info: "Display checkout information"
   setting_checkout_fixed_url: "URL-ul pentru checkout"
   setting_checkout_url_regex: "Expresie regulata (regexp)"
   setting_checkout_url_regex_replacement: "Text inlocuitor (regexp)"
   setting_checkout_display_login: "Arata datele pentru autentificare"
+  setting_checkout_command: "Comanda de checkout"
 
   setting_checkout_overwrite_description: "Overwrite default description"
   field_checkout_overwrite: "Overwrite default settings for checkout protocols"
+  field_checkout_display_command: "Display checkout command"
 
   label_protocol_plural: "Protocols"
   button_add_protocol: "Add Protocol"

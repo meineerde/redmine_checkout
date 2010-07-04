@@ -1,15 +1,16 @@
 fr:
   label_checkout: "Dépôt"
-  label_protocol_checkout: "{{protocol}} checkout"
 
-  setting_checkout_display_checkout_info: "Afficher l'URL du dépôt"
+  setting_checkout_display_checkout_info: "Display checkout information"
   setting_checkout_fixed_url: "URL du dépôt"
   setting_checkout_url_regex: "Expression Régulière"
   setting_checkout_url_regex_replacement: "Texte de substitution"
   setting_checkout_display_login: "Affiche le login"
+  setting_checkout_command: "Checkout command"
 
   setting_checkout_overwrite_description: "Overwrite default description"
   field_checkout_overwrite: "Overwrite default settings for checkout protocols"
+  field_checkout_display_command: "Affiche l'URL du dépôt"
 
   label_protocol_plural: "Protocoles"
   button_add_protocol: "Créer un protocole"

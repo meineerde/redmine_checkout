@@ -1,15 +1,16 @@
 de:
   label_checkout: "Checkout"
-  label_protocol_checkout: "{{protocol}} Checkout"
 
-  setting_checkout_display_checkout_info: "Checkout-URL anzeigen"
+  setting_checkout_display_checkout_info: "Checkout-Informationen anzeigen"
   setting_checkout_fixed_url: "Checkout-URL"
   setting_checkout_url_regex: "Regulärer Ausdruck"
   setting_checkout_url_regex_replacement: "Ersatztext"
   setting_checkout_display_login: "Mitgliedsnamen anzeigen"
+  setting_checkout_command: "Checkout-Befehl"
 
   setting_checkout_overwrite_description: "Standard-Beschreibung überschreiben"
   field_checkout_overwrite: "Überschreibe Standardeinstellung für Checkout-Protokolle"
+  field_checkout_display_command: "Checkout-Befehl anzeigen"
 
   label_protocol_plural: "Protokolle"
   button_add_protocol: "Protokoll hinzufügen"

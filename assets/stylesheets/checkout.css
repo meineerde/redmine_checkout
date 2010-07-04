@@ -100,10 +100,11 @@
   border-color: #bbb;
 }
 
-input#checkout_url {
+#checkout_url {
   border: 1px solid #bbb;
   border-width: 1px 1px 1px 0;
-  color: #666;
+  background-color: #fff;
+  color: #000;
   font-size: 11px;
   height: 16px;
   padding: 3px 5px 2px;

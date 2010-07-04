@@ -43,6 +43,7 @@ EOF
     
     settings_defaults["description_#{scm}"] = ''
     settings_defaults["overwrite_description_#{scm}"] = '0'
+    settings_defaults["display_command_#{scm}"] = '0'
     
     settings_defaults["protocols_#{scm}"] = {
       # access can be one of
@@ -50,6 +51,7 @@ EOF
       #   read-only => this protocol always allows read access only
       #   permission => Access depends on redmine permissions
       "0" => {:protocol => scm,
+              :command => klazz.checkout_default_command,
               :regex => '',
               :regex_replacement => '',
               :access => 'permission',
@@ -89,7 +91,9 @@ EOF
         end
       end
       raise "Checkout protocol #{proto} not found" unless proto_obj
-      "<a href=\"#{URI.escape(proto_obj.url)}\">#{l(:label_protocol_checkout, :protocol => proto_obj.protocol)}</a>" 
+      
+      cmd = (project.repository.checkout_display_command? && proto_obj.command.present?) ? proto_obj.command.strip + " " : ""
+      cmd + link_to(proto_obj.url, proto_obj.url)
     end
   end
 end

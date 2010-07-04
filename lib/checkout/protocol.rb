@@ -8,11 +8,12 @@ module Checkout
   
   class Protocol
     attr_accessor :protocol, :regex, :regex_replacement, :access, :repository
-    attr_writer :default, :fixed_url, :append_path
+    attr_writer :default, :command, :fixed_url, :append_path
     
     
     def initialize(args={})
       @protocol = args.delete :protocol
+      @command = args.delete :command # optional, if not set the default from the repo is used
       
       # either a fixed url
       @fixed_url = args.delete :fixed_url
@@ -28,24 +29,24 @@ module Checkout
       @repository = args.delete :repository
     end
     
+    def full_command(path = "")
+      cmd = ""
+      if repository.checkout_display_command?
+        cmd = self.command.present? ? self.command.strip + " " : ""
+      end
+      cmd + URI.escape(self.url(path))
+    end
+    
     def default?
       @default.to_i > 0
     end
     
-    def append_path?
-      @append_path.to_i > 0
+    def command
+      @command || self.repository.checkout_default_command
     end
     
-    def fixed_url
-      @fixed_url.present? ? @fixed_url : begin
-        if (regex.blank? || regex_replacement.blank?)
-          repository.url
-        else
-          repository.url.gsub(Regexp.new(regex), regex_replacement)
-        end
-      end
-    rescue RegexpError
-      repository.url || ""
+    def append_path?
+      @append_path.to_i > 0
     end
     
     def access_rw(user)
@@ -76,6 +77,18 @@ module Checkout
       end
     end
   
+    def fixed_url
+      @fixed_url.present? ? @fixed_url : begin
+        if (regex.blank? || regex_replacement.blank?)
+          repository.url
+        else
+          repository.url.gsub(Regexp.new(regex), regex_replacement)
+        end
+      end
+    rescue RegexpError
+      repository.url || ""
+    end
+
     def url(path = "")
       return "" unless repository
       

@@ -1,15 +1,16 @@
 ko:
   label_checkout: "Checkout"
-  label_protocol_checkout: "{{protocol}} checkout"
 
-  setting_checkout_display_checkout_info: "Display checkout URL"
+  setting_checkout_display_checkout_info: "Display checkout information"
   setting_checkout_fixed_url: "체크 아웃 URL"
   setting_checkout_url_regex: "정규식"
   setting_checkout_url_regex_replacement: "대체 문자열"
   setting_checkout_display_login: "로그인 표시"
-
+  setting_checkout_command: "Checkout command"
+  
   setting_checkout_overwrite_description: "Overwrite default description"
   field_checkout_overwrite: "Overwrite default settings for checkout protocols"
+  field_checkout_display_command: "Display checkout command"
 
   label_protocol_plural: "Protocols"
   button_add_protocol: "Add Protocol"
