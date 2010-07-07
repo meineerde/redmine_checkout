@@ -55,7 +55,7 @@ EOF
               :command => klazz.checkout_default_command,
               :regex => '',
               :regex_replacement => '',
-              :fixed_url => ''
+              :fixed_url => '',
               :access => 'permission',
               :append_path => (klazz.allow_subtree_checkout? ? '1' : '0'),
               :is_default => '1'
