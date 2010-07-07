@@ -42,7 +42,7 @@ module Checkout
     end
     
     def command
-      @command || self.repository.checkout_default_command
+      @command || self.repository && self.repository.checkout_default_command || ""
     end
     
     def append_path?
