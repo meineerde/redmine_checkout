@@ -24,10 +24,15 @@ module Checkout
           def self.checkout_#{name}=(value)
             setting = Setting.plugin_redmine_checkout
             setting['#{name}'] = value
-            Setting.plugin_redmine_checkout = setting
           end
           END_SRC
           class_eval src, __FILE__, __LINE__
+        end
+        
+        def self.checkout_save=(value)
+          # set any value here to save the settings
+          setting = Setting.plugin_redmine_checkout
+          Setting.plugin_redmine_checkout = setting
         end
         
         class <<self
