@@ -36,7 +36,7 @@ class ApplySettingChanges < ActiveRecord::Migration
           :command => Setting.plugin_redmine_checkout["checkout_cmd_#{r.scm_name}"] || default_commands[r.scm_name],
           :regex => "",
           :regex_replacement => "",
-          :fixed_url => (r.checkout_settings['checkout_url_type'] == 'original' ? (r.url || "") : r.checkout_setings["checkout_url"]),
+          :fixed_url => (r.checkout_settings['checkout_url_type'] == 'original' ? (r.url || "") : r.checkout_settings["checkout_url"]),
           :access => 'permission',
           :append_path => (allow_subtree_checkout ? '1' : '0'),
           :is_default => '1'}
