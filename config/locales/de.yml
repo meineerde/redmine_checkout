@@ -33,4 +33,5 @@ de:
     erlaubt Rückwärtsreferenzen zu geklammerten Audrücken mit der \1 Notation.
   help_repository_checkout_protocols: |
     Lassen Sie das Checkout-URL-Feld leer um die URL des Projektarchivs zu verwenden.
-    
+  help_moved_settings: "Die Konfigurationsseite wurde nach {{link}} verschoben."
+  label_settings_location: "Administration -> Konfiguration -> Checkout"

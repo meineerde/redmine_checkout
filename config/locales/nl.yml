@@ -33,3 +33,5 @@ nl:
     supports back-references to braced expressions using the \1 notation.
   help_repository_checkout_protocols: |
     Leave the Checkout URL field empty to use the defined repository URL.
+  help_moved_settings: "The settings page has been moved to {{link}}."
+  label_settings_location: "Administration -> Settings -> Checkout"
