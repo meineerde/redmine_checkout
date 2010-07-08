@@ -16,7 +16,7 @@ de:
   label_protocol_plural: "Protokolle"
   button_add_protocol: "Protokoll hinzufügen"
 
-  label_access_type: 'Diese URL erlabut Zugriff zum <span id="checkout_access">{{type}}</span>.'
+  label_access_type: 'Diese URL erlaubt Zugriff zum <span id="checkout_access">{{type}}</span>.'
   label_access_read_only: 'Nur-Lesen'
   label_access_read_write: "Lesen+Schreiben"
   label_access_permission: "Abhängig von Benutzer-Rechten"
