@@ -36,7 +36,7 @@ describe Repository do
   
   describe "extensions" do
     before(:each) do
-      @repo = repositories :svn
+      @repo = Repository::Subversion.new
     end
     
     it "should provide protocols" do
