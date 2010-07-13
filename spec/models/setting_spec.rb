@@ -9,5 +9,6 @@ describe Setting do
   
   it "should recognize checkout methods" do
     Setting.checkout_display_checkout_info.should eql Setting.plugin_redmine_checkout['display_checkout_info']
+    Setting.checkout_display_checkout_info.should eql Setting.plugin_redmine_checkout[:display_checkout_info]
   end
 end
