@@ -43,7 +43,7 @@ class ApplySettingChanges < ActiveRecord::Migration
         })
       end
       
-      r.checkout_settings = HashWithIndifferentAccess.new({
+      r.checkout_settings = Hash.new({
         'checkout_protocols' => protocol,
         'checkout_description' => "The data contained in this repository can be downloaded to your computer using one of several clients.
 Please see the documentation of your version control software client for more information.
