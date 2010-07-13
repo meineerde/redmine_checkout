@@ -3,6 +3,8 @@ require 'redmine'
 require 'dispatcher'
 Dispatcher.to_prepare do
   # Patches
+  require_dependency 'checkout/settings_controller_patch'
+  
   require_dependency 'checkout/repositories_helper_patch'
   require_dependency 'checkout/repository_patch'
   
@@ -23,7 +25,7 @@ Redmine::Plugin.register :redmine_checkout do
   
   requires_redmine :version_or_higher => '0.9'
   
-  settings_defaults = {
+  settings_defaults = HashWithIndifferentAccess.new({
     'display_login' => nil,
     'use_zero_clipboard' => '1',
     
@@ -34,7 +36,7 @@ Please see the documentation of your version control software client for more in
 
 Please select the desired protocol below to get the URL.
 EOF
-  }
+  })
   
   # this is needed for setting the defaults
   require 'checkout/repository_patch'
@@ -46,12 +48,13 @@ EOF
     settings_defaults["overwrite_description_#{scm}"] = '0'
     settings_defaults["display_command_#{scm}"] = '0'
     
-    settings_defaults["protocols_#{scm}"] = {
+    settings_defaults["protocols_#{scm}"] = HashWithIndifferentAccess.new({
       # access can be one of
       #   read+write => this protocol always allows read/write access
       #   read-only => this protocol always allows read access only
       #   permission => Access depends on redmine permissions
-      "0" => {:protocol => scm,
+      "0" => HashWithIndifferentAccess.new({
+              :protocol => scm,
               :command => klazz.checkout_default_command,
               :regex => '',
               :regex_replacement => '',
@@ -59,8 +62,8 @@ EOF
               :access => 'permission',
               :append_path => (klazz.allow_subtree_checkout? ? '1' : '0'),
               :is_default => '1'
-             }
-    }
+             })
+    })
   end
   
   settings :default => settings_defaults, :partial => 'settings/redmine_checkout'
