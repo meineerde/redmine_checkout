@@ -12,6 +12,8 @@ module Checkout
     
     
     def initialize(args={})
+      args = args.dup
+      
       @protocol = args.delete :protocol
       @command = args.delete :command # optional, if not set the default from the repo is used
       
