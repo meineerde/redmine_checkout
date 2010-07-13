@@ -8,8 +8,9 @@
 }
 
 #checkout_box {
+  border-top: 1px solid #ccc;
   height: 23px;
-  margin: 10px 0 0;
+  padding: 10px 0 0;
 }
 
 #checkout_protocols {
@@ -109,7 +110,7 @@
   height: 16px;
   padding: 3px 5px 2px;
   width: 400px;
-  font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+  font-family: Monaco,"DejaVu Sans Mono","Bitstream Vera Sans Mono","Courier New",monospace;
   margin: 0;
   float: left;
 }
