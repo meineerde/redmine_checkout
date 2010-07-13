@@ -97,7 +97,7 @@
   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cccccc', endColorstr='#aaaaaa'); /* IE 8 */
   
   color: #000;
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
   border-color: #bbb;
 }
 
