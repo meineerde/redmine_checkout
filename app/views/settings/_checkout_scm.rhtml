@@ -25,6 +25,7 @@
     protocolForms.set('<%= scm %>', subform);
   <% end %>
   <p><label><%=l :label_protocol_plural %></label><%=l :help_checkout_protocols %></p>
+  <%= hidden_field_tag "settings[checkout_protocols_#{scm}][]" %>
   <table class="list">
     <thead><tr>
       <th><%= l(:setting_protocol)%></th>

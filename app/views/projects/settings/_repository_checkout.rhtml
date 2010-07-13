@@ -33,6 +33,7 @@
     );
   <% end %>
   <p><label><%=l :label_protocol_plural %></label><%=l :help_repository_checkout_protocols %></p>
+  <%= hidden_field_tag "repository[checkout_protocols]" %>
   <table class="list">
     <thead><tr>
       <th><%= l(:setting_protocol)%></th>
