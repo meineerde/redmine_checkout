@@ -12,32 +12,34 @@ module Checkout
         # Then setting values can be read using: Setting.some_setting_name
         # or set using Setting.some_setting_name = "some value"
         Redmine::Plugin.find(:redmine_checkout).settings[:default].keys.each do |name|
+          if name.start_with?('protocols_')
+            default = "[]"
+          else
+            default = <<-END_SRC
+              begin
+                default = Setting.available_settings['plugin_redmine_checkout']['default']['#{name}']
+                # perform a deep copy of the default
+                Marshal::load(Marshal::dump(default))
+              end
+            END_SRC
+          end
+          
           src = <<-END_SRC
-          def self.checkout_#{name}
-            self.plugin_redmine_checkout['#{name}'] || begin
-              default = Setting.available_settings['plugin_redmine_checkout']['default']['#{name}']
-              # perform a deep copy of the default
-              Marshal::load(Marshal::dump(default))
+            def self.checkout_#{name}
+              self.plugin_redmine_checkout[:#{name}] || #{default}
             end
-          end
 
-          def self.checkout_#{name}?
-            self.plugin_redmine_checkout['#{name}'].to_i > 0
-          end
+            def self.checkout_#{name}?
+              self.plugin_redmine_checkout[:#{name}].to_i > 0
+            end
 
-          def self.checkout_#{name}=(value)
-            setting = Setting.plugin_redmine_checkout
-            setting['#{name}'] = value
-            Setting.plugin_redmine_checkout == setting
-          end
+            def self.checkout_#{name}=(value)
+              setting = Setting.plugin_redmine_checkout
+              setting[:#{name}] = value
+              Setting.plugin_redmine_checkout = setting
+            end
           END_SRC
           class_eval src, __FILE__, __LINE__
-        end
-        
-        def self.checkout_save=(value)
-          # set any value here to save the settings
-          setting = Setting.plugin_redmine_checkout
-          Setting.plugin_redmine_checkout = setting
         end
         
         class <<self
