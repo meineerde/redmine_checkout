@@ -18,7 +18,6 @@ document.observe("dom:loaded", function() {
 
 
 <div class="box tabular settings">
-<%= hidden_field_tag 'settings[checkout_save]', '1'  %>
 <p><%= setting_check_box :checkout_display_checkout_info %></p>
 
 <p><%= setting_text_area :checkout_description_Abstract, :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :field_description %></p>
