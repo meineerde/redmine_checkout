@@ -14,7 +14,11 @@ module Checkout
         Redmine::Plugin.find(:redmine_checkout).settings[:default].keys.each do |name|
           src = <<-END_SRC
           def self.checkout_#{name}
-            self.plugin_redmine_checkout['#{name}']
+            self.plugin_redmine_checkout['#{name}'] || begin
+              default = Setting.available_settings['plugin_redmine_checkout']['default']['#{name}']
+              # perform a deep copy of the default
+              Marshal::load(Marshal::dump(default))
+            end
           end
 
           def self.checkout_#{name}?
@@ -24,6 +28,7 @@ module Checkout
           def self.checkout_#{name}=(value)
             setting = Setting.plugin_redmine_checkout
             setting['#{name}'] = value
+            Setting.plugin_redmine_checkout == setting
           end
           END_SRC
           class_eval src, __FILE__, __LINE__
