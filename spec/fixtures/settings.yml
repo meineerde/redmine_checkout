@@ -2,7 +2,7 @@
   settings:
     name: plugin_redmine_checkout
     value: |
-      --- 
+      --- !map:HashWithIndifferentAccess 
       display_checkout_info: "1"
       description_Abstract: |
         The data contained in this repository can be downloaded to your computer using one of several clients.
