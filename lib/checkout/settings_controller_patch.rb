@@ -16,11 +16,15 @@ module Checkout
       def edit_with_checkout
         if request.post? && params['tab'] == 'checkout'
           if params[:settings] && params[:settings].is_a?(Hash)
-            settings = (params[:settings] || {}).dup.symbolize_keys
-            settings.each do |name, value|
-              # remove blank values in array settings
-              value.delete_if {|v| v.blank? } if value.is_a?(Array)
+            settings = Hash.new
+            (params[:settings] || {}).each do |name, value|
+              if name = name.to_s.slice(/checkout_(.+)/, 1)
+                # remove blank values in array settings
+                value.delete_if {|v| v.blank? } if value.is_a?(Array)
+                settings[name.to_sym] = value
+              end
             end
+                        
             Setting.plugin_redmine_checkout = settings
             params[:settings] = {}
           end
