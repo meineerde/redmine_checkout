@@ -6,10 +6,9 @@ module Checkout
     def self.included(base) # :nodoc:
       base.extend(ClassMethods)
       base.send(:include, InstanceMethods)
-
+      
       base.class_eval do
         unloadable
-      
         serialize :checkout_settings, Hash
       end
     end
@@ -167,6 +166,7 @@ CheckoutHelper.supported_scm.each do |scm|
 
       base.class_eval do
         unloadable
+        serialize :checkout_settings, Hash
       end
     end
 
