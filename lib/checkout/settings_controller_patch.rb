@@ -16,7 +16,7 @@ module Checkout
       def edit_with_checkout
         if request.post? && params['tab'] == 'checkout'
           if params[:settings] && params[:settings].is_a?(Hash)
-            settings = Hash.new
+            settings = HashWithIndifferentAccess.new
             (params[:settings] || {}).each do |name, value|
               if name = name.to_s.slice(/checkout_(.+)/, 1)
                 # remove blank values in array settings
