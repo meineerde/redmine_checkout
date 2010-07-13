@@ -45,6 +45,9 @@ module Checkout
         class <<self
           alias_method :store_without_checkout, :[]=
           alias_method :[]=, :store_with_checkout
+          
+          alias_method :retrieve_without_checkout, :[]
+          alias_method :[], :retrieve_with_checkout
         end
       end
     end
@@ -55,6 +58,14 @@ module Checkout
           self.send("#{name}=", value)
         else
           store_without_checkout(name, value)
+        end
+      end
+      
+      def retrieve_with_checkout(name)
+        if name.to_s.starts_with? "checkout_"
+          self.send("#{name}")
+        else
+          retrieve_without_checkout(name)
         end
       end
     end
