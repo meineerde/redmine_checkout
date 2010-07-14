@@ -1,5 +1,7 @@
 <div class="repository-info">
-  <%= textilizable repository.checkout_description %>
+  <% if repository.checkout_description.present? %>
+  <div class="wiki"><%= textilizable repository.checkout_description %></div>
+  <% end %>
   <% if protocols.present? %>
   <div id="checkout_box">
     <ul id="checkout_protocols">
