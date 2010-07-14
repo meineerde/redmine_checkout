@@ -7,7 +7,7 @@ module Checkout
     # * :repository => Current Repository
     #
     def view_repositories_show_contextual(context={})
-      if context[:repository].present? && Setting.checkout_display_checkout_info
+      if context[:repository].present? && Setting.checkout_display_checkout_info?
         protocols = context[:repository].checkout_protocols.select do |p|
           p.access_rw(User.current)
         end
