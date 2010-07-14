@@ -9,11 +9,12 @@
 
 .repository-info .wiki {
   border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 
 #checkout_box {
   height: 23px;
-  padding: 10px 0 0;
+  padding: 0;
 }
 
 #checkout_protocols {
