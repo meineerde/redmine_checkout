@@ -11,7 +11,7 @@
       </li>
     <% end -%>
     </ul>
-    <%= text_field_tag :checkout_url, h(default_protocol.full_command(checkout_path)) %>
+    <%= text_field_tag :checkout_url, h(default_protocol.full_command(checkout_path)), :readonly => true %>
     <%- if Setting.checkout_use_zero_clipboard? %>
     <div id="clipboard_container" style="display: none;">
        <div id="clipboard_button"><%= image_tag 'paste.png', :plugin => 'redmine_checkout' %></div>
