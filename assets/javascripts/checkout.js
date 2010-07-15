@@ -16,8 +16,7 @@ document.observe("dom:loaded", function() {
   });
   /* select the text field contents if activated */
   Event.observe('checkout_url', 'click', function(event) {
-   this.focus();
-   this.select();
+   this.activate();
   });
 
   if (typeof('ZeroClipboard') != 'undefined') {
