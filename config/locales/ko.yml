@@ -27,6 +27,8 @@ ko:
   label_display_login_username: "로그인은 보여주지만 비밀번호는 보여주지 않습니다."
   label_display_login_password: "로그인과 비밀번호를 보여줍니다."
 
+  label_copy_to_clipboard: "Copy to clipboard"
+
   help_checkout_protocols: |
     The URLs in protocols are generated from applying the regular expression
     and the replacement text to the original URL. The replacement text

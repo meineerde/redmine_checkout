@@ -27,6 +27,8 @@ fr:
   label_display_login_username: "Afficher le login, pas le mot de passe"
   label_display_login_password: "Afficher le login et le mot de passe"
 
+  label_copy_to_clipboard: "Copy to clipboard"
+
   help_checkout_protocols: |
     The URLs in protocols are generated from applying the regular expression
     and the replacement text to the original URL. The replacement text

@@ -27,6 +27,8 @@ ja:
   label_display_login_username: "ログインのみ表示"
   label_display_login_password: "ログインとパスワードを表示"
 
+  label_copy_to_clipboard: "Copy to clipboard"
+
   help_checkout_protocols: |
     The URLs in protocols are generated from applying the regular expression
     and the replacement text to the original URL. The replacement text

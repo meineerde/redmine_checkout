@@ -27,6 +27,8 @@ de:
   label_display_login_username: "Mitgliedsnamen anzeigen, aber kein Kennwort"
   label_display_login_password: "Mitgliedsnamen und Kennwort anzeigen"
 
+  label_copy_to_clipboard: "In die Zwischenablage kopieren"
+
   help_checkout_protocols: |
     Die URLs in Protokollen werden aus der originalen URL erzeugt, auf die der
     reguläre Ausdruck und der Ersatztext angewendet werden. Der Ersatztext
