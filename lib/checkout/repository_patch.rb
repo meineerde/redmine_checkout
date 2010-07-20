@@ -62,9 +62,9 @@ module Checkout
         @checkout_protocols ||= begin
           if CheckoutHelper.supported_scm.include? scm_name
             if checkout_overwrite?
-              protocols = checkout_settings['checkout_protocols']
+              protocols = checkout_settings['checkout_protocols'] || []
             else
-              protocols = Setting.send("checkout_protocols_#{scm_name}")
+              protocols = Setting.send("checkout_protocols_#{scm_name}") || []
             end
           else
             protocols = []
@@ -77,6 +77,10 @@ module Checkout
       end
     
       def checkout_protocols=(value)
+        # delete invalid hash ids. This is needed to force setting the
+        # protocols list from views.
+        value.delete_if {|id, protocol| id.to_i < 0 }
+        
         checkout_settings['checkout_protocols'] = value
       end
 
