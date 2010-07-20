@@ -8,17 +8,16 @@ table.checkout_protocol_table td.protocol_append_path, table.checkout_protocol_t
 .repository-info {
   background-color: #eee;
   border: 1px solid #E4E4E4;
-  padding: 0 10px 10px;
+  padding: 0 10px;
   margin: 4px 0 10px;
 }
 
 .bottomline {
   border-bottom: 1px solid #ccc;
-  margin-bottom: 10px;
 }
 
 #checkout_box {
-  padding: 0;
+  padding: 10px 0;
 }
 
 #checkout_protocols {
