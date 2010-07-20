@@ -1,5 +1,5 @@
 <div>
-  <p><%= setting_check_box "checkout_overwrite_description_#{scm}", :label => :setting_checkout_overwrite_description, :onchange => <<-EOF
+  <p><%= setting_check_box "checkout_overwrite_description_#{scm}", :label => :setting_checkout_overwrite_description, :onclick => <<-EOF
     Effect.toggle($('settings_checkout_description_#{scm}').up("div").up("div"), 'slide', {duration:0.2});
   EOF
   %></p>
