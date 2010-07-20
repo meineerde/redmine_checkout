@@ -20,8 +20,8 @@
     <% if default_protocol %><p><%=l :label_access_type, :type => l(default_protocol.access_label(User.current)) %></p><% end %>
   
     <% javascript_tag do %>
-      checkout_access   = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ') %>});
-      checkout_commands = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{escape_javascript(p.full_command(checkout_path))}'"}.join(', ') %>});
+      var checkout_access   = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ') %>});
+      var checkout_commands = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{escape_javascript(p.full_command(checkout_path))}'"}.join(', ') %>});
       <%- if Setting.checkout_use_zero_clipboard? %>ZeroClipboard.setMoviePath( '<%= image_path('ZeroClipboard.swf', :plugin => 'redmine_checkout') %>' );<% end %>
     <% end %>
   </div>
