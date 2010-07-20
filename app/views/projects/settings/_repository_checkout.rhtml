@@ -29,22 +29,22 @@
     protocolForm = new Subform(
       '<%= escape_javascript(render(:partial => "projects/settings/repository_checkout_protocol", :locals => {:protocol => Checkout::Protocol.new({:protocol => form.object.scm_name, :append_path => form.object.allow_subtree_checkout? ? 1: 0, :repository => form.object})})) %>',
       <%= Setting.send("checkout_protocols_#{scm}").length %>,
-      'checkout_protocols'
+      'checkout_protocol_table'
     );
   <% end %>
   <p><label><%=l :label_protocol_plural %></label><%=l :help_repository_checkout_protocols %></p>
   <%= hidden_field_tag 'repository[checkout_protocols][-1][protocol]', 'empty' %>
-  <table class="list">
+  <table class="list checkout_protocol_table">
     <thead><tr>
-      <th><%= l(:setting_protocol)%></th>
-      <th><%= l(:setting_checkout_command)%></th>
-      <th><%= l(:setting_checkout_fixed_url) %></th>
-      <th><%= l(:label_permissions) %></th>
-      <th><%= l(:label_append_path) %></th>
-      <th><%= l(:label_default) %></th>
-      <th></th>
+      <th class="protocol_protocol"   ><%= l(:setting_protocol)%></th>
+      <th class="protocol_command"    ><%= l(:setting_checkout_command)%></th>
+      <th class="protocol_fixed_url"  ><%= l(:setting_checkout_fixed_url) %></th>
+      <th class="protocol_access"     ><%= l(:label_permissions) %></th>
+      <th class="protocol_append_path"><%= l(:label_append_path) %></th>
+      <th class="protocol_is_default" ><%= l(:label_default) %></th>
+      <th class="protocol_delete"     ></th>
     </tr></thead>
-    <tbody id="checkout_protocols">
+    <tbody id="checkout_protocol_table">
       <% form.object.checkout_protocols.each_with_index do |protocol, index| %>
         <%= render :partial => 'projects/settings/repository_checkout_protocol', :locals => {:protocol => protocol, :index => index, :classes => cycle('odd', 'even')} %>
       <% end %>

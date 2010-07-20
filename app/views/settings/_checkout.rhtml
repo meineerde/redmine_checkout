@@ -39,4 +39,5 @@ document.observe("dom:loaded", function() {
 
 <% content_for :header_tags do %>
   <%= javascript_include_tag 'subform', :plugin => 'redmine_checkout' %>
+  <%= stylesheet_link_tag 'checkout', :plugin => 'redmine_checkout' %>
 <% end %>
