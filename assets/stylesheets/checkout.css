@@ -70,11 +70,11 @@ table.checkout_protocol_table td.protocol_append_path, table.checkout_protocol_t
   font-size: 11px;
   font-weight: bold;
   line-height: 21px;
-  height: 21px;
   margin: 0;
   padding: 0 10px 0 11px;
   text-decoration: none;
   text-shadow: 1px 1px 0 #fff;
+  position: relative; /* to please IE */
 }
 
 #checkout_protocols li a:hover,
