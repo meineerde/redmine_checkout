@@ -1,0 +1,43 @@
+<% form_tag({:action => 'edit', :tab => 'checkout'}) do %>
+
+<% javascript_tag do %>
+protocolForms = $H();
+
+document.observe("dom:loaded", function() {
+  $('tab-content-checkout').select('fieldset.collapsed').each(function(e){
+    e.down('div').hide();
+  });
+  <%
+    CheckoutHelper.supported_scm.select{|scm| Setting.enabled_scm.include?(scm)}.each do |scm| 
+      next if Setting.send("checkout_overwrite_description_#{scm}?")
+  -%>
+  $('settings_checkout_description_<%= scm %>').up('div').up('div').hide();
+  <%- end %>
+});
+<% end %>
+
+
+<div class="box tabular settings">
+<p><%= setting_check_box :checkout_display_checkout_info %></p>
+
+<p><%= setting_text_area :checkout_description_Abstract, :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :field_description %></p>
+<%= wikitoolbar_for 'settings_checkout_description_Abstract' %>
+
+<p><%= setting_check_box :checkout_use_zero_clipboard %></p>
+
+<% CheckoutHelper.supported_scm.select{|scm| Setting.enabled_scm.include?(scm)}.each do |scm| -%>
+<fieldset class="collapsible collapsed">
+  <legend onclick="toggleFieldset(this);"><%= "Repository::#{scm}".constantize.scm_name %></legend>
+  <div><%= render :partial => 'checkout_scm', :locals => {:scm => scm} %></div>
+</fieldset>
+<%- end %>
+
+</div>
+
+<%= submit_tag l(:button_save) %>
+<%- end %>
+
+<% content_for :header_tags do %>
+  <%= javascript_include_tag 'subform', :plugin => 'redmine_checkout' %>
+  <%= stylesheet_link_tag 'checkout', :plugin => 'redmine_checkout' %>
+<% end %>

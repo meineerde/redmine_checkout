@@ -5,6 +5,10 @@ URL:: http://dev.holgerjust.de/projects/redmine-checkout
 
 This plugin to Redmine adds a link to the actual repository to the GUI.
 
+This plugin includes ZeroClipboard[http://code.google.com/p/zeroclipboard/]
+by Joseph Huckaby. This software is licensed under the
+{GNU Lesser General Public License}[http://www.gnu.org/licenses/lgpl.html].
+
 Copyright (c) 2009, 2010 Holger Just
 
 Permission is hereby granted, free of charge, to any person

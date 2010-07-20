@@ -1,0 +1,19 @@
+<%
+  index ||= "--INDEX--"
+  classes ||= ""
+  
+  protocol = Checkout::Protocol.new(protocol) unless protocol.is_a? Checkout::Protocol
+%>
+<tr id="<%= "checkout_protocols_#{scm}_#{index}" %>" class="<%= classes %>" <%= 'style="display:none"' if index == '--INDEX--' %>>
+  <td class="protocol_protocol"         ><%= text_field_tag "settings[checkout_protocols_#{scm}][#{index}][protocol]", protocol.protocol, :size => 10 %></td>
+  <td class="protocol_command"          ><%= text_field_tag "settings[checkout_protocols_#{scm}][#{index}][command]", protocol.command, :size => 15 %></td>
+  <td class="protocol_regex"            ><%= text_field_tag "settings[checkout_protocols_#{scm}][#{index}][regex]", protocol.regex, :size => 30 %></td>
+  <td class="protocol_regex_replacement"><%= text_field_tag "settings[checkout_protocols_#{scm}][#{index}][regex_replacement]", protocol.regex_replacement, :size => 30 %></td>
+  <td class="protocol_access"           ><%= select_tag "settings[checkout_protocols_#{scm}][#{index}][access]", options_for_select([
+    [l(:label_access_read_write), 'read+write'],
+    [l(:label_access_read_only), 'read-only'],
+    [l(:label_access_permission), 'permission']], protocol.access) %></td>
+  <td class="protocol_append_path"><%= check_box_tag "settings[checkout_protocols_#{scm}][#{index}][append_path]", 1, protocol.append_path? %></td>
+  <td class="protocol_is_default"><%= check_box_tag "settings[checkout_protocols_#{scm}][#{index}][is_default]", 1, protocol.default? %></td>
+  <td class="protocol_delete"><%= image_to_function 'delete.png', "var e=$('checkout_protocols_#{scm}_#{index}');var parent=e.up(\"tbody\");e.remove();recalculate_even_odd(parent);return false" %></td>
+</tr>

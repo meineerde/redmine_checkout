@@ -1,22 +1,36 @@
-<div class="contextual checkout">
-  <% case repository.render_type when 'link' %>
-    <a class="icon icon-changeset" href="<%=URI.escape url %>"><%=l :field_checkout_url %></a>
-  <% when 'cmd' %>
-    <span class="icon icon-changeset"><%=h repository.checkout_cmd %> <a href="<%=URI.escape url %>"><%=h url %></a></span>
-  <% else %>
-    <a class="icon icon-changeset" href="<%=URI.escape url %>"><%=h url %></a>
+<div class="repository-info">
+  <% if repository.checkout_description.present? %>
+  <div class="wiki<%= ' bottomline' if protocols.present? %>"><%= textilizable repository.checkout_description %></div>
   <% end %>
-  <% if repository.display_login != "none" && !repository.login.blank? %>
-    | <%=l :field_login %>: <%=h repository.login %>
-    <% if repository.display_login == "password" %>
-      | <%=l :field_password %>: <%=h repository.password %>
+  <% if protocols.present? %>
+  <div id="checkout_box">
+    <ul id="checkout_protocols">
+    <% protocols.each do |p| -%>
+      <li>
+        <a <%= 'class="selected"' if p == default_protocol %> id="checkout_protocol_<%= p.protocol.to_s.underscore %>" data-permission="<%= p.access_rw(User.current) %>" href="<%= URI.escape p.url(checkout_path) %>"><%=h p.protocol %></a>
+      </li>
+    <% end -%>
+    </ul>
+    <%= text_field_tag :checkout_url, h(default_protocol.full_command(checkout_path)), :readonly => true %>
+    <%- if Setting.checkout_use_zero_clipboard? %>
+    <div id="clipboard_container" title="<%= l(:label_copy_to_clipboard) %>" style="display: none;">
+       <div id="clipboard_button"><%= image_tag 'paste.png', :plugin => 'redmine_checkout' %></div>
+    </div>
+    <% end -%>
+    <% if default_protocol %><p><%=l :label_access_type, :type => l(default_protocol.access_label(User.current)) %></p><% end %>
+  
+    <% javascript_tag do %>
+      var checkout_access   = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ') %>});
+      var checkout_commands = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{escape_javascript(p.full_command(checkout_path))}'"}.join(', ') %>});
+      <%- if Setting.checkout_use_zero_clipboard? %>ZeroClipboard.setMoviePath( '<%= image_path('ZeroClipboard.swf', :plugin => 'redmine_checkout') %>' );<% end %>
     <% end %>
-  <% end %>
+  </div>
+  <% end%>
 </div>
-<div style="clear: both"></div>
+<div style="clear: left"></div>
 
 <% content_for :header_tags do %>
-  <% content_tag "style", "type" => Mime::CSS do -%>
-  .icon-changeset {background-image: url(<%= image_path 'changeset.png' %>);}
-  <%- end %>
+  <%= stylesheet_link_tag 'checkout', :plugin => 'redmine_checkout' %>
+  <%= javascript_include_tag 'checkout', :plugin => 'redmine_checkout' %>
+  <%= (javascript_include_tag 'ZeroClipboard', :plugin => 'redmine_checkout') if Setting.checkout_use_zero_clipboard? %>
 <% end %>

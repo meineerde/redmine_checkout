@@ -1,31 +1,39 @@
 de:
-  field_checkout_url_type: "Angezeigte Checkout-URL"
-  field_checkout_url: "Checkout URL"
-  field_checkout_url_regex: "Regulärer Ausdruck"
-  field_checkout_url_regex_replacement: "Ersatztext"
-  field_checkout_url_overwrite: "Überschreibe Standardeinstellung zur Checkout-URL"
-  field_display_login: "Mitgliedsnamen anzeigen"
-  field_render_type: "Checkout-URL anzeigen als"
-  field_overwrite_default: "Standard überschreiben"
-  field_checkout_cmd: "Checkout-Befehl"
+  label_checkout: "Checkout"
 
-  label_checkout_scm_specific: "Versionskontrollsystem-spezifische Einstellungen"
-  label_checkout_url: "Anzeige der Checkout-URL"
+  setting_checkout_display_checkout_info: "Checkout-Informationen anzeigen"
+  setting_checkout_fixed_url: "Checkout-URL"
+  setting_checkout_url_regex: "Regulärer Ausdruck"
+  setting_checkout_url_regex_replacement: "Ersatztext"
+  setting_checkout_display_login: "Mitgliedsnamen anzeigen"
+  setting_checkout_command: "Checkout-Befehl"
+  setting_checkout_use_zero_clipboard: "Zwischenablagen-Helfer anzeigen"
 
-  label_checkout_type_none: "Keine URL anzeigen"
-  label_checkout_type_original: "Angegebene URL"
-  label_checkout_type_overwritten: "Benutzerdefinierte URL"
-  label_checkout_type_generated: "Generierte URL"
+  setting_checkout_overwrite_description: "Standard-Beschreibung überschreiben"
+  field_checkout_overwrite: "Überschreibe Standardeinstellung für Checkout-Protokolle"
+  field_checkout_display_command: "Checkout-Befehl anzeigen"
+
+  label_protocol_plural: "Protokolle"
+  button_add_protocol: "Protokoll hinzufügen"
+
+  label_access_type: 'Diese URL erlaubt Zugriff zum <span id="checkout_access">{{type}}</span>.'
+  label_access_read_only: 'Nur-Lesen'
+  label_access_read_write: "Lesen+Schreiben"
+  label_access_permission: "Abhängig von Benutzer-Rechten"
+
+  label_append_path: "Pfad anhängen"
 
   label_display_login_none: "Mitgliedsnamen nicht anzeigen"
   label_display_login_username: "Mitgliedsnamen anzeigen, aber kein Kennwort"
   label_display_login_password: "Mitgliedsnamen und Kennwort anzeigen"
 
-  label_render_type_link: "Link"
-  label_render_type_cmd: "Checkout-Befehl"
-  label_render_type_url: "URL"
+  label_copy_to_clipboard: "In die Zwischenablage kopieren"
 
-  help_checkout_url_regex: "Wenn die Checkout-URL benutzerdefiniert ist, wird die angezeigte URL aus der originalen URL mit diesem regulären Ausdruck generiert. Der Ersatztext erlaubt Rückwärtsreferenzen."
-  help_checkout_url_regex_example: "<em>Beispiel:</em> <strong>^http://(.*)$</strong>"
-  help_checkout_url_regex_replacement_example: "<em>Beispiel:</em> <strong>https://\1</strong>"
-  help_checkout_cmd: "Überschreibt den Standardwert ({{checkout_cmd}})"
+  help_checkout_protocols: |
+    Die URLs in Protokollen werden aus der originalen URL erzeugt, auf die der
+    reguläre Ausdruck und der Ersatztext angewendet werden. Der Ersatztext
+    erlaubt Rückwärtsreferenzen zu geklammerten Audrücken mit der \1 Notation.
+  help_repository_checkout_protocols: |
+    Lassen Sie das Checkout-URL-Feld leer um die URL des Projektarchivs zu verwenden.
+  help_moved_settings: "Die Konfigurationsseite wurde nach {{link}} verschoben."
+  label_settings_location: "Administration -> Konfiguration -> Checkout"

@@ -1,12 +1,115 @@
 ---
-  blar:
+  settings:
     name: plugin_redmine_checkout
     value: |
       --- !map:HashWithIndifferentAccess 
+      display_checkout_info: "1"
+      description_Abstract: |
+        The data contained in this repository can be downloaded to your computer using one of several clients.
+        Please see the documentation of your version control software client for more information.
+
+        Please select the desired protocol below to get the URL.
+      display_command_Bazaar: '1'
+      use_zero_clipboard: "1"
+
+      overwrite_description_Bazaar: "0"
+      description_Bazaar: ""
+      display_command_Bazaar: '1'
+      protocols_Bazaar: 
+        "0": !map:HashWithIndifferentAccess 
+          command: "bzr checkout"
+          regex: ""
+          regex_replacement: ""
+          read_write: readwrite
+          append_path: "0"
+          is_default: "1"
+          protocol: Bazaar
+      overwrite_description_Cvs: "0"
+      description_Cvs: ""
+      display_command_Cvs: '1'
+      protocols_Cvs: 
+        "0": !map:HashWithIndifferentAccess 
+          command: "cvs checkout"
+          regex: ""
+          regex_replacement: ""
+          read_write: readwrite
+          append_path: "0"
+          is_default: "1"
+          protocol: Cvs
+      overwrite_description_Darcs: "0"
+      description_Darcs: ""
+      display_command_Darcs: '1'
+      protocols_Darcs: 
+        "0": !map:HashWithIndifferentAccess 
+          command: "darcs get"
+          regex: ""
+          regex_replacement: ""
+          read_write: readwrite
+          append_path: "0"
+          is_default: "1"
+          protocol: Darcs
+      overwrite_description_Filesystem: "0"
+      description_Filesystem: ""
+      display_command_Filesystem: '1'
+      protocols_Filesystem: !map:HashWithIndifferentAccess 
+        "0": !map:HashWithIndifferentAccess 
+          command: ""
+          regex: ""
+          append_path: "0"
+          is_default: "1"
+          protocol: Filesystem
+          access: read+write
+          regex_replacement: ""
+      overwrite_description_Git: "0"
+      description_Git: ""
+      display_command_Git: '1'
+      protocols_Git: !map:HashWithIndifferentAccess 
+        "0": !map:HashWithIndifferentAccess 
+          command: "git clone"
+          regex: ""
+          append_path: "0"
+          is_default: "1"
+          protocol: Git
+          access: read+write
+          regex_replacement: ""
+      overwrite_description_Mercurial: "0"
+      description_Mercurial: ""
+      display_command_Mercurial: '1'
+      protocols_Mercurial: !map:HashWithIndifferentAccess 
+        "0": !map:HashWithIndifferentAccess 
+          command: "hg clone"
+          regex: ""
+          append_path: "0"
+          is_default: "1"
+          protocol: Mercurial
+          access: read+write
+          regex_replacement: ""
       display_login: username
-      render_type: "url"
-      checkout_url_regex_default: ^svn://(.*)$
-      checkout_url_regex_replacement_default: http://\1
-      checkout_url_regex_Subversion: ^svn://(.*)$
-      checkout_url_regex_replacement_Subversion: svn+ssh://\1
-      checkout_url_type: generated
+      overwrite_description_Subversion: "0"
+      description_Subversion: ""
+      display_command_Subversion: '1'
+      protocols_Subversion: !map:HashWithIndifferentAccess 
+        "0": !map:HashWithIndifferentAccess 
+          command: "svn checkout"
+          regex: foo
+          append_path: "1"
+          is_default: "1"
+          protocol: Subversion
+          access: permission
+          regex_replacement: bar
+        "1": !map:HashWithIndifferentAccess 
+          command: "svn co"
+          regex: "^.*?([^/]+)/?$"
+          append_path: "1"
+          is_default: "0"
+          protocol: SVN+SSH
+          access: read-only
+          regex_replacement: svn+ssh://\1@svn.foo.bar/svn
+        "2": !map:HashWithIndifferentAccess 
+          command: "svn checkout"
+          append_path: "0"
+          is_default: "0"
+          regex: ""
+          protocol: Root
+          access: read+write
+          regex_replacement: ""

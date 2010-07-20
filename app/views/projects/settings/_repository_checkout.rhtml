@@ -1,0 +1,54 @@
+<p><%= form.select(:checkout_overwrite, [
+    [l(:general_text_Yes), "1"],
+    [l(:general_text_No), "0"]
+  ],
+  {},
+  :onchange => <<-EOF
+    Effect.toggle($('checkout_settings'), 'slide', {duration:0.2});
+  EOF
+  )%></p>
+
+<div id="checkout_settings" <%= 'style="display:none;"' unless form.object.checkout_overwrite? %>><fieldset>
+  <legend><%=l :label_checkout %></legend>
+  
+  <p><%= form.text_area :checkout_description, :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :field_description %></p>
+  <%= wikitoolbar_for 'repository_checkout_description' %>
+  
+  <% if form.object.scm_name == 'Subversion' %>
+  <p><%= form.select :checkout_display_login,[
+            [l(:label_display_login_none), ''],
+            [l(:label_display_login_username), 'username'],
+            [l(:label_display_login_password), 'password']
+          ],
+          :label => :setting_checkout_display_login %></p>
+  <% end %>
+  
+  <p><%= form.check_box :checkout_display_command %></p>
+  
+  <% javascript_tag do %>
+    protocolForm = new Subform(
+      '<%= escape_javascript(render(:partial => "projects/settings/repository_checkout_protocol", :locals => {:protocol => Checkout::Protocol.new({:protocol => form.object.scm_name, :append_path => form.object.allow_subtree_checkout? ? 1: 0, :repository => form.object})})) %>',
+      <%= form.object.checkout_protocols.length %>,
+      'checkout_protocol_table'
+    );
+  <% end %>
+  <p><label><%=l :label_protocol_plural %></label><%=l :help_repository_checkout_protocols %></p>
+  <%= hidden_field_tag 'repository[checkout_protocols][-1][protocol]', 'empty' %>
+  <table class="list checkout_protocol_table">
+    <thead><tr>
+      <th class="protocol_protocol"   ><%= l(:setting_protocol)%></th>
+      <th class="protocol_command"    ><%= l(:setting_checkout_command)%></th>
+      <th class="protocol_fixed_url"  ><%= l(:setting_checkout_fixed_url) %></th>
+      <th class="protocol_access"     ><%= l(:label_permissions) %></th>
+      <th class="protocol_append_path"><%= l(:label_append_path) %></th>
+      <th class="protocol_is_default" ><%= l(:label_default) %></th>
+      <th class="protocol_delete"     ></th>
+    </tr></thead>
+    <tbody id="checkout_protocol_table">
+      <% form.object.checkout_protocols.each_with_index do |protocol, index| %>
+        <%= render :partial => 'projects/settings/repository_checkout_protocol', :locals => {:protocol => protocol, :index => index, :classes => cycle('odd', 'even')} %>
+      <% end %>
+    </tbody>
+  </table>
+  <div style="text-align: right"><%= link_to_function l(:button_add_protocol), "protocolForm.add()", {:class => "icon icon-add"} %></div>
+</fieldset></div>

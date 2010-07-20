@@ -1,7 +1,9 @@
+---
 svn: 
-  project_id: 2
-  url: svn://example.com/test
-  root_url: svn://localhost
+  project_id: 1
+  url: file:///<%= RAILS_ROOT.gsub(%r{config\/\.\.}, '') %>/tmp/test/subversion_repository
+  id: 1
+  root_url: file:///<%= RAILS_ROOT.gsub(%r{config\/\.\.}, '') %>/tmp/test/subversion_repository
   password: ""
   login: ""
   type: Subversion
