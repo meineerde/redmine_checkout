@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Redmine Checkout Plugin - it.yml - Home of Code</title>
+<meta name="description" content="Redmine" />
+<meta name="keywords" content="issue,bug,tracker" />
+<link href="/themes/holgerjust/stylesheets/application.css" media="all" rel="stylesheet" type="text/css" />
+<script src="/javascripts/prototype.js?1272283874" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1272283874" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1272283874" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1272283874" type="text/javascript"></script>
+<script src="/javascripts/application.js?1277038037" type="text/javascript"></script>
+<link href="/stylesheets/jstoolbar.css?1272283874" media="screen" rel="stylesheet" type="text/css" />
+<!--[if IE]>
+    <style type="text/css">
+      * html body{ width: expression( document.documentElement.clientWidth < 900 ? '900px' : '100%' ); }
+      body {behavior: url(/stylesheets/csshover.htc?1272283874);}
+    </style>
+<![endif]-->
+<link href="/themes/holgerjust/images/favicon.ico" rel="shortcut icon" /> <link href="/opensearch" rel="search" title="Home of Code" type="application/opensearchdescription+xml" />
+
+<link href="/projects/redmine-checkout/opensearch" rel="search" title="Home of Code - Redmine Checkout Plugin" type="application/opensearchdescription+xml" />
+
+
+<!-- page specific tags -->
+    <link href="/stylesheets/scm.css?1272283874" media="screen" rel="stylesheet" type="text/css" /></head>
+<body>
+<div id="wrapper">
+<div id="wrapper2">
+<div id="top-menu">
+    <div id="account">
+        <ul><li><a href="/login" class="login">Sign in</a></li>
+<li><a href="/account/register" class="register">Register</a></li></ul>    </div>
+    
+    <ul><li><a href="/" class="home">Home</a></li>
+<li><a href="/projects" class="projects">Projects</a></li>
+<li><a href="http://www.redmine.org/guide" class="help">Help</a></li></ul></div>
+      
+<div id="header">
+    <div id="quick-search">
+        <form action="/search/index/redmine-checkout" method="get">
+        
+        <a href="/search/index/redmine-checkout" accesskey="4">Search</a>:
+        <input accesskey="f" class="small" id="q" name="q" size="20" type="text" />
+        </form>
+        <select onchange="if (this.value != '') { window.location = this.value; }"><option value=''>Jump to a project...</option><option value="" disabled="disabled">---</option><option value="/projects/phoenix?jump=attachments">Compilerbau mit Phoenix</option><option value="/projects/haproxy?jump=attachments">Haproxy</option><option value="/projects/meta2008?jump=attachments">Metaprogramming</option><option value="/projects/misc?jump=attachments">Misc</option><option value="/projects/redmine?jump=attachments">Redmine</option><option value="/projects/redmine-misc?jump=attachments">&nbsp;&nbsp;&#187; Miscellaneous Redmine Stuff</option><option selected="selected" value="/projects/redmine-checkout?jump=attachments">&nbsp;&nbsp;&#187; Redmine Checkout Plugin</option><option value="/projects/redmine-favicon?jump=attachments">&nbsp;&nbsp;&#187; Redmine Favicon</option><option value="/projects/redmine-milestones?jump=attachments">&nbsp;&nbsp;&#187; Redmine Milestones Plugin</option><option value="/projects/redmine-dynamic-wiki?jump=attachments">&nbsp;&nbsp;&#187; Redmine Dynamic Wiki</option><option value="/projects/redmine-opensearch?jump=attachments">&nbsp;&nbsp;&#187; Redmine Opensearch</option><option value="/projects/python-traits?jump=attachments">Traits for Python 3.0</option></select>
+    </div>
+    
+    <h1><a href="/projects/redmine?jump=attachments" class="root">Redmine</a> &#187; Redmine Checkout Plugin</h1>
+    
+    
+    <div id="main-menu">
+        <ul><li><a href="/projects/redmine-checkout" class="overview">Overview</a></li>
+<li><a href="/projects/redmine-checkout/activity" class="activity">Activity</a></li>
+<li><a href="/projects/redmine-checkout/roadmap" class="roadmap">Roadmap</a></li>
+<li><a href="/projects/redmine-checkout/issues" class="issues">Issues</a></li>
+<li><a href="/projects/redmine-checkout/news" class="news">News</a></li>
+<li><a href="/projects/redmine-checkout/wiki" class="wiki">Wiki</a></li>
+<li><a href="/projects/redmine-checkout/files" class="files">Files</a></li>
+<li><a href="/projects/redmine-checkout/repository" class="repository">Repository</a></li></ul>
+    </div>
+    
+</div>
+
+<div class="nosidebar" id="main">
+    <div id="sidebar">        
+        
+        
+    </div>
+    
+    <div id="content">
+				
+        <h2>it.yml</h2>
+
+<div class="attachments">
+<p>
+   <span class="author">Vincenzo Farruggia, 2010-07-27 11:42</span></p>
+<p><a href="/attachments/download/50/it.yml">Download</a>   <span class="size">(1.9 KB)</span></p>
+
+</div>
+&nbsp;
+<div class="autoscroll">
+<table class="filecontent syntaxhl">
+<tbody>
+
+
+<tr><th class="line-num" id="L1"><a href="#L1">1</a></th><td class="line-code"><pre><span class="ke">it</span>:
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L2"><a href="#L2">2</a></th><td class="line-code"><pre>  <span class="ke">label_checkout</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Checkout</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L3"><a href="#L3">3</a></th><td class="line-code"><pre>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L4"><a href="#L4">4</a></th><td class="line-code"><pre>  <span class="ke">setting_checkout_display_checkout_info</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Visualizza le informazioni sul checkout</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L5"><a href="#L5">5</a></th><td class="line-code"><pre>  <span class="ke">setting_checkout_fixed_url</span>: <span class="s"><span class="dl">&quot;</span><span class="k">URL di checkout</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L6"><a href="#L6">6</a></th><td class="line-code"><pre>  <span class="ke">setting_checkout_url_regex</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Espressione regolare</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L7"><a href="#L7">7</a></th><td class="line-code"><pre>  <span class="ke">setting_checkout_url_regex_replacement</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Testo sostituito</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L8"><a href="#L8">8</a></th><td class="line-code"><pre>  <span class="ke">setting_checkout_display_login</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Login visualizzato</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L9"><a href="#L9">9</a></th><td class="line-code"><pre>  <span class="ke">setting_checkout_command</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Comando per il checkout</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L10"><a href="#L10">10</a></th><td class="line-code"><pre>  <span class="ke">setting_checkout_use_zero_clipboard</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Visualizza l'utility per la copia negli appunti</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L11"><a href="#L11">11</a></th><td class="line-code"><pre>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L12"><a href="#L12">12</a></th><td class="line-code"><pre>  <span class="ke">setting_checkout_overwrite_description</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Sovrascrivi la descrizione predefinita</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L13"><a href="#L13">13</a></th><td class="line-code"><pre>  <span class="ke">field_checkout_overwrite</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Sovrascrivi le impostazioni di checkout predefinite</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L14"><a href="#L14">14</a></th><td class="line-code"><pre>  <span class="ke">field_checkout_display_command</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Visualizza il comando per il checkout</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L15"><a href="#L15">15</a></th><td class="line-code"><pre>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L16"><a href="#L16">16</a></th><td class="line-code"><pre>  <span class="ke">label_protocol_plural</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Protocolli</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L17"><a href="#L17">17</a></th><td class="line-code"><pre>  <span class="ke">button_add_protocol</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Aggiungi Protocollo</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L18"><a href="#L18">18</a></th><td class="line-code"><pre>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L19"><a href="#L19">19</a></th><td class="line-code"><pre>  <span class="ke">label_access_type</span>: <span class="s">'Questo URL ha accesso &lt;span id=&quot;checkout_access&quot;&gt;{{type}}&lt;/span&gt;.'</span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L20"><a href="#L20">20</a></th><td class="line-code"><pre>  <span class="ke">label_access_read_only</span>: <span class="s">'Sola-Lettura'</span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L21"><a href="#L21">21</a></th><td class="line-code"><pre>  <span class="ke">label_access_read_write</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Lettura+Scrittura</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L22"><a href="#L22">22</a></th><td class="line-code"><pre>  <span class="ke">label_access_permission</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Dipende dai permessi dell'utente</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L23"><a href="#L23">23</a></th><td class="line-code"><pre>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L24"><a href="#L24">24</a></th><td class="line-code"><pre>  <span class="ke">label_append_path</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Aggiungi percorso</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L25"><a href="#L25">25</a></th><td class="line-code"><pre>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L26"><a href="#L26">26</a></th><td class="line-code"><pre>  <span class="ke">label_display_login_none</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Non mostrare il login e password</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L27"><a href="#L27">27</a></th><td class="line-code"><pre>  <span class="ke">label_display_login_username</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Mostra il login senza password</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L28"><a href="#L28">28</a></th><td class="line-code"><pre>  <span class="ke">label_display_login_password</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Mostra il login e la password</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L29"><a href="#L29">29</a></th><td class="line-code"><pre>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L30"><a href="#L30">30</a></th><td class="line-code"><pre>  <span class="ke">label_copy_to_clipboard</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Copia negli appunti</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L31"><a href="#L31">31</a></th><td class="line-code"><pre>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L32"><a href="#L32">32</a></th><td class="line-code"><pre>  <span class="ke">help_checkout_protocols</span>: <span class="s"><span class="dl">|</span><span class="k">
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L33"><a href="#L33">33</a></th><td class="line-code"><pre>    Gli URL dei protocolli sono generati applicando le espressioni regolari
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L34"><a href="#L34">34</a></th><td class="line-code"><pre>    ed effettuando la sostituzione dell'URL originale con il testo specificato.
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L35"><a href="#L35">35</a></th><td class="line-code"><pre>    Il testo per la sostituzione può contenere riferimenti a più match usando
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L36"><a href="#L36">36</a></th><td class="line-code"><pre>    la notazione \1 \2...</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L37"><a href="#L37">37</a></th><td class="line-code"><pre>  <span class="ke">help_repository_checkout_protocols</span>: <span class="s"><span class="dl">|</span><span class="k">
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L38"><a href="#L38">38</a></th><td class="line-code"><pre>    Lascia il campo URL di checkout bianco per usare l'URL definito nel repository.</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L39"><a href="#L39">39</a></th><td class="line-code"><pre>  <span class="ke">help_moved_settings</span>: <span class="s"><span class="dl">&quot;</span><span class="k">La pagina delle impostazioni è stata spostata in {{link}}.</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+<tr><th class="line-num" id="L40"><a href="#L40">40</a></th><td class="line-code"><pre>  <span class="ke">label_settings_location</span>: <span class="s"><span class="dl">&quot;</span><span class="k">Amministrazione -&gt; Impostazioni -&gt; Checkout</span><span class="dl">&quot;</span></span>
+</pre></td></tr>
+
+
+</tbody>
+</table>
+</div>
+
+
+
+
+
+        
+				<div style="clear:both;"></div>
+    </div>
+</div>
+
+<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+	
+<div id="footer">
+  <div class="bgl"><div class="bgr">
+    Powered by <a href="http://www.redmine.org/">Redmine</a> &copy; 2006-2010 Jean-Philippe Lang
+  </div></div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
