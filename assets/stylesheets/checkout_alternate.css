@@ -1,0 +1,2 @@
+table.checkout_protocol_table td { padding-right: 10px !important; /* Double the border with of text input boxes */ }
+table.checkout_protocol_table td.protocol_access { padding-right: 2px !important; }

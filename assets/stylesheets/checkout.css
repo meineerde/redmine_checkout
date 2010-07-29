@@ -1,3 +1,6 @@
+/* Uncomment the following line for nicer tables if you use the alternate theme (or derived). */
+/* @import url(checkout_alternate.css); */
+
 table.checkout_protocol_table td { padding-right: 6px; vertical-align: middle; /* Double the border with of text input boxes */ }
 table.checkout_protocol_table td.protocol_access { padding-right: 0; }
 table.checkout_protocol_table td input[type=text], .checkout_protocol_table td select { width: 100%; }
