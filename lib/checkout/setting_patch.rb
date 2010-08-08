@@ -30,7 +30,7 @@ module Checkout
             end
 
             def self.checkout_#{name}?
-              self.plugin_redmine_checkout[:#{name}].to_i > 0
+              self.checkout_#{name}.to_i > 0
             end
 
             def self.checkout_#{name}=(value)

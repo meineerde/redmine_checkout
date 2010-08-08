@@ -37,7 +37,7 @@
       <th class="protocol_delete"           ></th>
     </tr></thead>
     <tbody id="settings_checkout_protocols_<%= scm %>">
-      <% Setting.send("checkout_protocols_#{scm}").sort{|(ak, av), (bk, bv)| ak <=> bk }.each_with_index do |(id, protocol), index| %>
+      <% Setting.send("checkout_protocols_#{scm}").each_with_index do |protocol, index| %>
         <%= render :partial => 'checkout_protocol', :locals => {:protocol => Checkout::Protocol.new(protocol), :scm => scm, :index => index, :classes => cycle('odd', 'even')} %>
       <% end %>
     </tbody>

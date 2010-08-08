@@ -69,17 +69,19 @@ module Checkout
           else
             protocols = []
           end
-
-          protocols.sort{|(ak,av),(bk,bv)|ak<=>bk}.collect do |k,p|
+          
+          protocols.collect do |p|
             Checkout::Protocol.new p.merge({:repository => self})
           end
         end
       end
     
       def checkout_protocols=(value)
-        # delete invalid hash ids. This is needed to force setting the
-        # protocols list from views.
-        value.delete_if {|id, protocol| id.to_i < 0 }
+        # value is an Array or a Hash
+        if value.is_a? Hash
+          value = value.dup.delete_if {|id, protocol| id.to_i < 0 }
+          value = value.sort{|(ak,av),(bk,bv)|ak<=>bk}.collect{|id,protocol| protocol}
+        end
         
         checkout_settings['checkout_protocols'] = value
       end

@@ -48,22 +48,20 @@ EOF
     settings_defaults["overwrite_description_#{scm}"] = '0'
     settings_defaults["display_command_#{scm}"] = '0'
     
-    settings_defaults["protocols_#{scm}"] = HashWithIndifferentAccess.new({
-      # access can be one of
-      #   read+write => this protocol always allows read/write access
-      #   read-only => this protocol always allows read access only
-      #   permission => Access depends on redmine permissions
-      "0" => HashWithIndifferentAccess.new({
-              :protocol => scm,
-              :command => klazz.checkout_default_command,
-              :regex => '',
-              :regex_replacement => '',
-              :fixed_url => '',
-              :access => 'permission',
-              :append_path => (klazz.allow_subtree_checkout? ? '1' : '0'),
-              :is_default => '1'
-             })
-    })
+    # access can be one of
+    #   read+write => this protocol always allows read/write access
+    #   read-only => this protocol always allows read access only
+    #   permission => Access depends on redmine permissions
+    settings_defaults["protocols_#{scm}"] = [HashWithIndifferentAccess.new({
+      :protocol => scm,
+      :command => klazz.checkout_default_command,
+      :regex => '',
+      :regex_replacement => '',
+      :fixed_url => '',
+      :access => 'permission',
+      :append_path => (klazz.allow_subtree_checkout? ? '1' : '0'),
+      :is_default => '1'
+    })]
   end
   
   settings :default => settings_defaults, :partial => 'settings/redmine_checkout'
