@@ -71,7 +71,7 @@ Please select the desired protocol below to get the URL.
 EOF
     })
 
-    CheckoutHelper.supported_scm.each do |scm|
+    default_commands.keys.each do |scm|
       settings["description_#{scm}"] = ''
       settings["overwrite_description_#{scm}"] = '0'
       
