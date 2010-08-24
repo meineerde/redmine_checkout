@@ -1,0 +1,39 @@
+pl:
+  label_checkout: "Pobieranie repozytorium"
+
+  setting_checkout_display_checkout_info: "Pokaż informację o możliwości pobrania repozytorium"
+  setting_checkout_fixed_url: "Adres URL pobierania repozytorium"
+  setting_checkout_url_regex: "Wyrażenie regularne"
+  setting_checkout_url_regex_replacement: "Wynikowy adres URL"
+  setting_checkout_display_login: "Pokaż dane logowania"
+  setting_checkout_command: "Komenda pobrania repozytorium"
+  setting_checkout_use_zero_clipboard: "Pokaż pomocnika schowka"
+
+  setting_checkout_overwrite_description: "Nadpisz domyślny opis"
+  field_checkout_overwrite: "Nadpisz domyślne ustawienia dla protokołów"
+  field_checkout_display_command: "Pokaż komendę pobrania repozytorium"
+
+  label_protocol_plural: "Protokoły"
+  button_add_protocol: "Dodaj protokół"
+
+  label_access_type: 'Ten adres URL ma dostęp <span id="checkout_access">{{type}}</span>.'
+  label_access_read_only: 'Tylko do odczytu'
+  label_access_read_write: "Odczyt+Zapis"
+  label_access_permission: "Zależne od uprawnień użytkownika"
+
+  label_append_path: "Dołącz ścieżkę"
+
+  label_display_login_none: "Nie pokazuj loginu ani hasła"
+  label_display_login_username: "Pokaż tylko login"
+  label_display_login_password: "Pokaż login i hasło"
+
+  label_copy_to_clipboard: "Kopiuj do schowka"
+
+  help_checkout_protocols: |
+    Wynikowe adresy URL w protokołach są generowane przez zamianę oryginalnego
+    adresu URL repozytorium na podstawie wyrażenia regularnego. Wynikowy adres
+    URL wspiera referencje do grup (tzw. back-references) używając notacji \1.
+  help_repository_checkout_protocols: |
+    Pozostaw adres URL pobierania repozytorium pusty aby uzyć adresu zdefiniowanego w ustawieniach projektu.
+  help_moved_settings: "Ustawienia zostały przeniesione do {{link}}."
+  label_settings_location: "Administracja -> Ustawienia -> Pobieranie repozytorium"
