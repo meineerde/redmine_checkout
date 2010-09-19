@@ -5,7 +5,7 @@ class AddCheckoutUrlInfo < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :repository, :checkout_url_type
-    remove_column :repository, :checkout_url
+    remove_column :repositories, :checkout_url_type
+    remove_column :repositories, :checkout_url
   end
 end
