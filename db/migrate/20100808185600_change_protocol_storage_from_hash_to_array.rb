@@ -48,10 +48,5 @@ class ChangeProtocolStorageFromHashToArray < ActiveRecord::Migration
       end
     end
     Setting.plugin_redmine_checkout = settings
-    
-    
-    
-    
-    raise ActiveRecord::IrreversibleMigration.new "Sorry, there is no down migration yet. If you really need one, please create an issue on http://dev.holgerjust.de/projects/redmine-checkout"
   end
 end
