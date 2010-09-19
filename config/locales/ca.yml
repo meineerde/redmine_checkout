@@ -1,0 +1,39 @@
+ca:
+  label_checkout: "Checkout"
+
+  setting_checkout_display_checkout_info: "Mostra la informació d'accés al dipòsit"
+  setting_checkout_fixed_url: "Adreça del dipòsit"
+  setting_checkout_url_regex: "Expressió regular"
+  setting_checkout_url_regex_replacement: "Text de substitució"
+  setting_checkout_display_login: "Mostra el nom d'usuari"
+  setting_checkout_command: "Ordre d'obtenció"
+  setting_checkout_use_zero_clipboard: 'Mostra el botó "Copia al porta-retalls"'
+
+  setting_checkout_overwrite_description: "Sobreescriu la descripció per defecte"
+  field_checkout_overwrite: "Sobreescriu els paràmetres per defecte pels protocols d'obtenció"
+  field_checkout_display_command: "Mostra l'ordre d'obtenció"
+
+  label_protocol_plural: "Protocols"
+  button_add_protocol: "Afegir un protocol"
+
+  label_access_type: "L'accés a aquesta adreça <span id='checkout_access'>{{type}}</span>."
+  label_access_read_only: "és només de lectura"
+  label_access_read_write: "és de lectura i escriptura"
+  label_access_permission: "depèn dels permisos d'usuaris"
+
+  label_append_path: "Afegir una ruta"
+
+  label_display_login_none: "No mostris el nom d'usuari o la contrasenya"
+  label_display_login_username: "Mostra el nom d'usuari però no la contrasenya"
+  label_display_login_password: "Mostra el nom d'usuari i la contrasenya"
+
+  label_copy_to_clipboard: "Copia al porta-retalls"
+
+  help_checkout_protocols: |
+    The URLs in protocols are generated from applying the regular expression
+    and the replacement text to the original URL. The replacement text
+    supports back-references to braced expressions using the \1 notation.
+  help_repository_checkout_protocols: |
+    Deixa el camp "Adreça del dipòsit" en blanc per fer servir l'adreça del dipòsit definida.
+  help_moved_settings: "S'ha desplaçat la pàgina de configuració cap a {{link}}."
+  label_settings_location: "Administració -> Paràmetres -> Checkout"
