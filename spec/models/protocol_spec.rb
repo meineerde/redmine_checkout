@@ -14,7 +14,7 @@ describe Checkout::Protocol do
   
   it "should use regexes for generated URL" do
     protocol = @repo.checkout_protocols.find{|r| r.protocol == "SVN+SSH"}
-    protocol.url.should eql "svn+ssh://testrepo@svn.foo.bar/svn"
+    protocol.url.should eql "svn+ssh://svn.foo.bar/svn/testrepo"
   end
   
   it "should resolve access properties" do
@@ -33,4 +33,21 @@ describe Checkout::Protocol do
     subversion.command.should eql "svn checkout"
     svn_ssh.command.should eql "svn co"
   end
+  
+  it "should respect display login settings" do
+    protocols = @repo.checkout_protocols
+    
+    @repo.login = "der_baer"
+    @repo.checkout_overwrite = "1"
+    @repo.checkout_protocols = protocols
+
+    protocol = @repo.checkout_protocols.find{|r| r.protocol == "Root"}
+    
+    @repo.checkout_display_login = ""
+    protocol.url.should eql "http://example.com/svn/testrepo"
+
+    @repo.checkout_display_login = "username"
+    protocol.url.should eql "http://der_baer@example.com/svn/testrepo"
+  end
+  
 end

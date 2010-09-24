@@ -20,7 +20,7 @@ describe RepositoriesController do
     
     response.should have_tag('ul#checkout_protocols') do
       with_tag('a[id=?][href=?]', 'checkout_protocol_subversion', "file:///#{RAILS_ROOT.gsub(%r{config\/\.\.}, '')}/tmp/test/subversion_repository")
-      with_tag('a[id=?][href=?]', 'checkout_protocol_svn+ssh', 'svn+ssh://subversion_repository@svn.foo.bar/svn')
+      with_tag('a[id=?][href=?]', 'checkout_protocol_svn+ssh', 'svn+ssh://svn.foo.bar/svn/subversion_repository')
     end
   end
   

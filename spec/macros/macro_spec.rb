@@ -26,7 +26,7 @@ describe "Macros" do
   it "should display forced checkout url" do
     text = "{{repository(svn+ssh)}}"
     
-    url = 'svn+ssh://subversion_repository@svn.foo.bar/svn'
+    url = 'svn+ssh://svn.foo.bar/svn/subversion_repository'
     textilizable(text).should eql "<p><a href=\"#{url}\">#{url}</a></p>"
   end
 
@@ -41,7 +41,7 @@ describe "Macros" do
     @project = nil
     text = "{{repository(ecookbook:svn+ssh)}}"
     
-    url = 'svn+ssh://subversion_repository@svn.foo.bar/svn'
+    url = 'svn+ssh://svn.foo.bar/svn/subversion_repository'
     textilizable(text).should eql "<p><a href=\"#{url}\">#{url}</a></p>"
   end
   
@@ -49,7 +49,7 @@ describe "Macros" do
     Setting.checkout_display_command_Subversion = '1'
     
     text = "{{repository(svn+ssh)}}"
-    url = 'svn+ssh://subversion_repository@svn.foo.bar/svn'
+    url = 'svn+ssh://svn.foo.bar/svn/subversion_repository'
     textilizable(text).should eql "<p>svn co <a href=\"#{url}\">#{url}</a></p>"
   end
 end

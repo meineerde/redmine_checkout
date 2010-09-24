@@ -104,7 +104,7 @@
           is_default: "0"
           protocol: SVN+SSH
           access: read-only
-          regex_replacement: svn+ssh://\1@svn.foo.bar/svn
+          regex_replacement: svn+ssh://svn.foo.bar/svn/\1
         "2": !map:HashWithIndifferentAccess 
           command: "svn checkout"
           append_path: "0"

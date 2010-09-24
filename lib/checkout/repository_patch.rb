@@ -70,7 +70,7 @@ module Checkout
             protocols = []
           end
           
-          protocols.collect do |p|
+          protocols.collect do |id, p|
             Checkout::Protocol.new p.merge({:repository => self})
           end
         end
@@ -87,16 +87,16 @@ module Checkout
       end
 
       def checkout_display_login
-        if checkout_overwrite? && self.scm_name == "Subversion"
+        return "" unless self.scm_name == "Subversion"
+        if checkout_overwrite?
           result = checkout_settings['checkout_display_login']
         else
           result = Setting.checkout_display_login
         end
-        (result.to_i > 0) ? '1' : '0'
       end
     
       def checkout_display_login?
-        checkout_display_login.to_i > 0
+        !checkout_display_login.blank?
       end
     
       def checkout_display_login=(value)

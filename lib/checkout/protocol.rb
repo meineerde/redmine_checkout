@@ -102,9 +102,13 @@ module Checkout
       if repository.checkout_display_login?
         begin
           uri = URI.parse url
-          (uri.user = repository.login) if repository.login
-          (uri.password = repository.password) if (repository.checkout_display_login == 'password' && repository.login && repository.password)
-          url = uri.to_s
+          unless uri.scheme == 'file'
+            # file URIs can't possibly contain any username / password info
+            # And URI.parse does not properly reconstruct the URL...
+            (uri.user = repository.login) if repository.login
+            (uri.password = repository.password) if (repository.checkout_display_login == 'password' && repository.login && repository.password)
+            url = uri.to_s
+          end
         rescue URI::InvalidURIError
         end
       end
