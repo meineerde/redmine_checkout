@@ -70,7 +70,7 @@ module Checkout
             protocols = []
           end
           
-          protocols.collect do |id, p|
+          protocols.collect do |p|
             Checkout::Protocol.new p.merge({:repository => self})
           end
         end
