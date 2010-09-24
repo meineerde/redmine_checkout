@@ -9,8 +9,6 @@ describe Repository do
     end
 
     it "should properly set default values" do
-      pp @repo.checkout_display_login
-      
       @repo.checkout_overwrite?.should be_false
       @repo.checkout_description.should match /Please select the desired protocol below to get the URL/
       @repo.checkout_display_login?.should be_false # no subversion repo

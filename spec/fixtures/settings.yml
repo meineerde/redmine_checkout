@@ -16,100 +16,100 @@
       description_Bazaar: ""
       display_command_Bazaar: '1'
       protocols_Bazaar: 
-        "0": !map:HashWithIndifferentAccess 
-          command: "bzr checkout"
-          regex: ""
-          regex_replacement: ""
-          read_write: readwrite
-          append_path: "0"
-          is_default: "1"
-          protocol: Bazaar
+      - !map:HashWithIndifferentAccess 
+        command: "bzr checkout"
+        regex: ""
+        regex_replacement: ""
+        read_write: readwrite
+        append_path: "0"
+        is_default: "1"
+        protocol: Bazaar
       overwrite_description_Cvs: "0"
       description_Cvs: ""
       display_command_Cvs: '1'
       protocols_Cvs: 
-        "0": !map:HashWithIndifferentAccess 
-          command: "cvs checkout"
-          regex: ""
-          regex_replacement: ""
-          read_write: readwrite
-          append_path: "0"
-          is_default: "1"
-          protocol: Cvs
+      - !map:HashWithIndifferentAccess 
+        command: "cvs checkout"
+        regex: ""
+        regex_replacement: ""
+        read_write: readwrite
+        append_path: "0"
+        is_default: "1"
+        protocol: Cvs
       overwrite_description_Darcs: "0"
       description_Darcs: ""
       display_command_Darcs: '1'
       protocols_Darcs: 
-        "0": !map:HashWithIndifferentAccess 
-          command: "darcs get"
-          regex: ""
-          regex_replacement: ""
-          read_write: readwrite
-          append_path: "0"
-          is_default: "1"
-          protocol: Darcs
+      - !map:HashWithIndifferentAccess 
+        command: "darcs get"
+        regex: ""
+        regex_replacement: ""
+        read_write: readwrite
+        append_path: "0"
+        is_default: "1"
+        protocol: Darcs
       overwrite_description_Filesystem: "0"
       description_Filesystem: ""
       display_command_Filesystem: '1'
-      protocols_Filesystem: !map:HashWithIndifferentAccess 
-        "0": !map:HashWithIndifferentAccess 
-          command: ""
-          regex: ""
-          append_path: "0"
-          is_default: "1"
-          protocol: Filesystem
-          access: read+write
-          regex_replacement: ""
+      protocols_Filesystem:
+      - !map:HashWithIndifferentAccess 
+        command: ""
+        regex: ""
+        append_path: "0"
+        is_default: "1"
+        protocol: Filesystem
+        access: read+write
+        regex_replacement: ""
       overwrite_description_Git: "0"
       description_Git: ""
       display_command_Git: '1'
-      protocols_Git: !map:HashWithIndifferentAccess 
-        "0": !map:HashWithIndifferentAccess 
-          command: "git clone"
-          regex: ""
-          append_path: "0"
-          is_default: "1"
-          protocol: Git
-          access: read+write
-          regex_replacement: ""
+      protocols_Git:
+      - !map:HashWithIndifferentAccess 
+        command: "git clone"
+        regex: ""
+        append_path: "0"
+        is_default: "1"
+        protocol: Git
+        access: read+write
+        regex_replacement: ""
       overwrite_description_Mercurial: "0"
       description_Mercurial: ""
       display_command_Mercurial: '1'
-      protocols_Mercurial: !map:HashWithIndifferentAccess 
-        "0": !map:HashWithIndifferentAccess 
-          command: "hg clone"
-          regex: ""
-          append_path: "0"
-          is_default: "1"
-          protocol: Mercurial
-          access: read+write
-          regex_replacement: ""
+      protocols_Mercurial:
+      - !map:HashWithIndifferentAccess 
+        command: "hg clone"
+        regex: ""
+        append_path: "0"
+        is_default: "1"
+        protocol: Mercurial
+        access: read+write
+        regex_replacement: ""
       display_login: username
       overwrite_description_Subversion: "0"
       description_Subversion: ""
       display_command_Subversion: '1'
-      protocols_Subversion: !map:HashWithIndifferentAccess 
-        "0": !map:HashWithIndifferentAccess 
-          command: "svn checkout"
-          regex: foo
-          append_path: "1"
-          is_default: "1"
-          protocol: Subversion
-          access: permission
-          regex_replacement: bar
-        "1": !map:HashWithIndifferentAccess 
-          command: "svn co"
-          regex: "^.*?([^/]+)/?$"
-          append_path: "1"
-          is_default: "0"
-          protocol: SVN+SSH
-          access: read-only
-          regex_replacement: svn+ssh://svn.foo.bar/svn/\1
-        "2": !map:HashWithIndifferentAccess 
-          command: "svn checkout"
-          append_path: "0"
-          is_default: "0"
-          regex: ""
-          protocol: Root
-          access: read+write
-          regex_replacement: ""
+      protocols_Subversion:
+      - !map:HashWithIndifferentAccess 
+        command: "svn checkout"
+        regex: foo
+        append_path: "1"
+        is_default: "1"
+        protocol: Subversion
+        access: permission
+        regex_replacement: bar
+      - !map:HashWithIndifferentAccess 
+        command: "svn co"
+        regex: "^.*?([^/]+)/?$"
+        append_path: "1"
+        is_default: "0"
+        protocol: SVN+SSH
+        access: read-only
+        regex_replacement: svn+ssh://svn.foo.bar/svn/\1
+      - !map:HashWithIndifferentAccess 
+        command: "svn checkout"
+        append_path: "0"
+        is_default: "0"
+        regex: ""
+        protocol: Root
+        access: read+write
+        regex_replacement: ""
