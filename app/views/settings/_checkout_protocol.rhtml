@@ -18,12 +18,3 @@
   <td class="protocol_is_default"><%= check_box_tag "settings[checkout_protocols_#{scm}][#{index}][is_default]", 1, protocol.default? %></td>
   <td class="protocol_delete"><%= image_to_function 'delete.png', "var e=$('checkout_protocols_#{scm}_#{index}');var parent=e.up(\"tbody\");e.remove();recalculate_even_odd(parent);return false" %></td>
 </tr>
-^
-
-<% if scm == 'Subversion' %>
-<p><%= setting_select "checkout_display_login",[
-          [l(:label_display_login_username), 'username'],
-          [l(:label_display_login_password), 'password']
-        ],
-        :blank => :label_display_login_none %></p>
-<% end %>
