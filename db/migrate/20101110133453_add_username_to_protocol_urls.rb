@@ -16,15 +16,14 @@ class AddUsernameToProtocolUrls < ActiveRecord::Migration
     ## First migrate the individual repositories
     Repository.all.each do |r|
       if r.scm_name == "Subversion"
-        display_login = checkout_settings.delete 'checkout_display_login'
+        display_login = r.checkout_settings.delete 'checkout_display_login'
         display_login = display_login.present? ? '1' : '0'
       else
         display_login = '0'
       end
       
-      r.checkout_settings['checkout_protocols'].each do |p|
-        p["display_login"] = display_login
-      end
+      protocols = r.checkout_settings['checkout_protocols']
+      protocols.each {|p| p["display_login"] = display_login} if protocols
       r.save!
     end
     
