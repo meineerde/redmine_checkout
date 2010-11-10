@@ -14,6 +14,16 @@
     [l(:label_access_read_only), 'read-only'],
     [l(:label_access_permission), 'permission']], protocol.access) %></td>
   <td class="protocol_append_path"><%= check_box_tag "settings[checkout_protocols_#{scm}][#{index}][append_path]", 1, protocol.append_path? %></td>
+  <td class="protocol_display_login"    ><%= check_box_tag "settings[checkout_protocols_#{scm}][#{index}][display_login]", 1, protocol.display_login? %></td>
   <td class="protocol_is_default"><%= check_box_tag "settings[checkout_protocols_#{scm}][#{index}][is_default]", 1, protocol.default? %></td>
   <td class="protocol_delete"><%= image_to_function 'delete.png', "var e=$('checkout_protocols_#{scm}_#{index}');var parent=e.up(\"tbody\");e.remove();recalculate_even_odd(parent);return false" %></td>
 </tr>
+^
+
+<% if scm == 'Subversion' %>
+<p><%= setting_select "checkout_display_login",[
+          [l(:label_display_login_username), 'username'],
+          [l(:label_display_login_password), 'password']
+        ],
+        :blank => :label_display_login_none %></p>
+<% end %>

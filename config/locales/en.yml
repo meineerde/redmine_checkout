@@ -5,7 +5,6 @@ en:
   setting_checkout_fixed_url: "Checkout URL"
   setting_checkout_url_regex: "Regular expression"
   setting_checkout_url_regex_replacement: "Replacement text"
-  setting_checkout_display_login: "Display Login"
   setting_checkout_command: "Checkout command"
   setting_checkout_use_zero_clipboard: "Display clipboard helper"
 
@@ -23,6 +22,7 @@ en:
 
   label_append_path: "Append path"
 
+  label_display_login: "Display Login"
   label_display_login_none: "Do not show login or password"
   label_display_login_username: "Show login but no password"
   label_display_login_password: "Show login and password"

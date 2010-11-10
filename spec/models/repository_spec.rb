@@ -11,7 +11,6 @@ describe Repository do
     it "should properly set default values" do
       @repo.checkout_overwrite?.should be_false
       @repo.checkout_description.should match /Please select the desired protocol below to get the URL/
-      @repo.checkout_display_login?.should be_false # no subversion repo
       @repo.allow_subtree_checkout?.should be_false
       @repo.checkout_protocols.should eql []
     end

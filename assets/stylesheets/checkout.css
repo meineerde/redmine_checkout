@@ -5,7 +5,12 @@ table.checkout_protocol_table td { padding-right: 6px; vertical-align: middle; /
 table.checkout_protocol_table td.protocol_access { padding-right: 0; }
 table.checkout_protocol_table td input[type=text], .checkout_protocol_table td select { width: 100%; }
 table.checkout_protocol_table td.protocol_delete { width: 16px; }
-table.checkout_protocol_table td.protocol_append_path, table.checkout_protocol_table td.protocol_is_default { text-align: center; }
+
+table.checkout_protocol_table td.protocol_append_path,
+table.checkout_protocol_table td.protocol_is_default,
+table.checkout_protocol_table td.protocol_display_login {
+  text-align: center;
+}
 
 .icon-changeset { background-image: url(../../../images/changeset.png);}
 

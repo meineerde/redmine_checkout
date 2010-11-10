@@ -5,7 +5,6 @@ de:
   setting_checkout_fixed_url: "Checkout-URL"
   setting_checkout_url_regex: "Regulärer Ausdruck"
   setting_checkout_url_regex_replacement: "Ersatztext"
-  setting_checkout_display_login: "Mitgliedsnamen anzeigen"
   setting_checkout_command: "Checkout-Befehl"
   setting_checkout_use_zero_clipboard: "Zwischenablagen-Helfer anzeigen"
 
@@ -23,6 +22,7 @@ de:
 
   label_append_path: "Pfad anhängen"
 
+  label_display_login: "Mitgliedsnamen anzeigen"
   label_display_login_none: "Mitgliedsnamen nicht anzeigen"
   label_display_login_username: "Mitgliedsnamen anzeigen, aber kein Kennwort"
   label_display_login_password: "Mitgliedsnamen und Kennwort anzeigen"

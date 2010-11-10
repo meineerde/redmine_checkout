@@ -5,7 +5,6 @@ es:
   setting_checkout_fixed_url: "URL de checkout"
   setting_checkout_url_regex: "Expresion regular"
   setting_checkout_url_regex_replacement: "Texto de remplazo"
-  setting_checkout_display_login: "Mostrar usuario"
   setting_checkout_command: "Comando de checkout"
   setting_checkout_use_zero_clipboard: "Display clipboard helper"
 
@@ -23,6 +22,7 @@ es:
 
   label_append_path: "Append path"
 
+  label_display_login: "Mostrar usuario"
   label_display_login_none: "No mostrar usuario o contraseña"
   label_display_login_username: "Mostrar usuario pero no contraseña"
   label_display_login_password: "Mostrar usuario y contraseña"

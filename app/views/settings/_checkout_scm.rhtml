@@ -9,14 +9,6 @@
     <%= wikitoolbar_for "settings_checkout_description_#{scm}" %>
   </div>
   
-  <% if scm == 'Subversion' %>
-  <p><%= setting_select "checkout_display_login",[
-            [l(:label_display_login_username), 'username'],
-            [l(:label_display_login_password), 'password']
-          ],
-          :blank => :label_display_login_none %></p>
-  <% end %>
-  
   <p><%= setting_check_box "checkout_display_command_#{scm}", :label => :field_checkout_display_command %></p>
 
   <% javascript_tag do %>
@@ -33,6 +25,7 @@
       <th class="protocol_regex_replacement"><%= l(:setting_checkout_url_regex_replacement) %></th>
       <th class="protocol_access"           ><%= l(:label_permissions) %></th>
       <th class="protocol_append_path"      ><%= l(:label_append_path) %></th>
+      <th class="protocol_display_login"    ><%= l(:label_display_login) %></th>
       <th class="protocol_is_default"       ><%= l(:label_default) %></th>
       <th class="protocol_delete"           ></th>
     </tr></thead>

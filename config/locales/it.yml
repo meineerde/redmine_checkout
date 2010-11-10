@@ -5,7 +5,6 @@ it:
   setting_checkout_fixed_url: "URL di checkout"
   setting_checkout_url_regex: "Espressione regolare"
   setting_checkout_url_regex_replacement: "Testo sostituito"
-  setting_checkout_display_login: "Login visualizzato"
   setting_checkout_command: "Comando per il checkout"
   setting_checkout_use_zero_clipboard: "Visualizza l'utility per la copia negli appunti"
 
@@ -23,6 +22,7 @@ it:
 
   label_append_path: "Aggiungi percorso"
 
+  label_display_login: "Login visualizzato"
   label_display_login_none: "Non mostrare il login e password"
   label_display_login_username: "Mostra il login senza password"
   label_display_login_password: "Mostra il login e la password"

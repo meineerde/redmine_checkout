@@ -5,7 +5,6 @@ nl:
   setting_checkout_fixed_url: "Checkout-URL"
   setting_checkout_url_regex: "Reguliere expressie"
   setting_checkout_url_regex_replacement: "Vervangingstekst"
-  setting_checkout_display_login: "Geef login weer"
   setting_checkout_command: "Checkout-opdracht"
   setting_checkout_use_zero_clipboard: "Klembord-hulp tonen"
 
@@ -23,6 +22,7 @@ nl:
 
   label_append_path: "Pad toevoegen"
 
+  label_display_login: "Geef login weer"
   label_display_login_none: "Geen logingegevens tonen"
   label_display_login_username: "Toon login zonder wachtwoord"
   label_display_login_password: "Toon login en wachtwoord"

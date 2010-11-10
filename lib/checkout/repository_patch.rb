@@ -86,24 +86,6 @@ module Checkout
         checkout_settings['checkout_protocols'] = value
       end
 
-      def checkout_display_login
-        return "" unless self.scm_name == "Subversion"
-        if checkout_overwrite?
-          result = checkout_settings['checkout_display_login']
-        else
-          result = Setting.checkout_display_login
-        end
-      end
-    
-      def checkout_display_login?
-        !checkout_display_login.blank?
-      end
-    
-      def checkout_display_login=(value)
-        value = nil unless self.scm_name == "Subversion"
-        checkout_settings['checkout_display_login'] = value
-      end
-      
       def checkout_display_command?
         checkout_display_command.to_i > 0
       end

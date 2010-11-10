@@ -5,7 +5,6 @@ ca:
   setting_checkout_fixed_url: "Adreça del dipòsit"
   setting_checkout_url_regex: "Expressió regular"
   setting_checkout_url_regex_replacement: "Text de substitució"
-  setting_checkout_display_login: "Mostra el nom d'usuari"
   setting_checkout_command: "Ordre d'obtenció"
   setting_checkout_use_zero_clipboard: 'Mostra el botó "Copia al porta-retalls"'
 
@@ -23,6 +22,7 @@ ca:
 
   label_append_path: "Afegir una ruta"
 
+  label_display_login: "Mostra el nom d'usuari"
   label_display_login_none: "No mostris el nom d'usuari o la contrasenya"
   label_display_login_username: "Mostra el nom d'usuari però no la contrasenya"
   label_display_login_password: "Mostra el nom d'usuari i la contrasenya"

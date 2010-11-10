@@ -5,7 +5,6 @@ ro:
   setting_checkout_fixed_url: "URL-ul pentru checkout"
   setting_checkout_url_regex: "Expresie regulata (regexp)"
   setting_checkout_url_regex_replacement: "Text inlocuitor (regexp)"
-  setting_checkout_display_login: "Arata datele pentru autentificare"
   setting_checkout_command: "Comanda de checkout"
   setting_checkout_use_zero_clipboard: "Display clipboard helper"
 
@@ -23,6 +22,7 @@ ro:
 
   label_append_path: "Append path"
 
+  label_display_login: "Arata datele pentru autentificare"
   label_display_login_none: "Nu afisa username sau parola"
   label_display_login_username: "Afiseaza username-ul, dar nu si parola"
   label_display_login_password: "Afiseaza atat username-ul, cat si parola"

@@ -5,7 +5,6 @@ pl:
   setting_checkout_fixed_url: "Adres URL pobierania repozytorium"
   setting_checkout_url_regex: "Wyrażenie regularne"
   setting_checkout_url_regex_replacement: "Wynikowy adres URL"
-  setting_checkout_display_login: "Pokaż dane logowania"
   setting_checkout_command: "Komenda pobrania repozytorium"
   setting_checkout_use_zero_clipboard: "Pokaż pomocnika schowka"
 
@@ -23,6 +22,7 @@ pl:
 
   label_append_path: "Dołącz ścieżkę"
 
+  label_display_login: "Pokaż dane logowania"
   label_display_login_none: "Nie pokazuj loginu ani hasła"
   label_display_login_username: "Pokaż tylko login"
   label_display_login_password: "Pokaż login i hasło"

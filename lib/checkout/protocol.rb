@@ -7,8 +7,16 @@ module Checkout
   end
   
   class Protocol
-    attr_accessor :protocol, :regex, :regex_replacement, :access, :repository
+    attr_accessor :protocol, :regex, :regex_replacement, :access, :display_login, :repository
     attr_writer :default, :command, :fixed_url, :append_path
+    %w(default append_path display_login).each do |bool|
+      src = <<-END_SRC
+        def #{bool}?
+          @#{bool}.to_i > 0
+        end
+      END_SRC
+      class_eval src, __FILE__, __LINE__
+    end
     
     
     def initialize(args={})
@@ -19,15 +27,18 @@ module Checkout
       
       # either a fixed url
       @fixed_url = args.delete :fixed_url
-
       # or a regex
       @regex = args.delete :regex
       @regex_replacement = args.delete :regex_replacement
       
       @access = args.delete :access
-      @append_path = args.delete :append_path
-      @default = args.delete :is_default
       
+      # boolean values
+      @default = args.delete :is_default
+      @append_path = args.delete :append_path
+      @display_login = args.delete :display_login
+      
+      # some reference
       @repository = args.delete :repository
     end
     
@@ -39,16 +50,8 @@ module Checkout
       cmd + URI.escape(self.url(path))
     end
     
-    def default?
-      @default.to_i > 0
-    end
-    
     def command
       @command || self.repository && self.repository.checkout_default_command || ""
-    end
-    
-    def append_path?
-      @append_path.to_i > 0
     end
     
     def access_rw(user)
@@ -99,14 +102,13 @@ module Checkout
         url = "#{url}/#{path}"
       end
       
-      if repository.checkout_display_login?
+      if display_login?
         begin
           uri = URI.parse url
           unless uri.scheme == 'file'
             # file URIs can't possibly contain any username / password info
             # And URI.parse does not properly reconstruct the URL...
-            (uri.user = repository.login) if repository.login
-            (uri.password = repository.password) if (repository.checkout_display_login == 'password' && repository.login && repository.password)
+            uri.user = User.current.login
             url = uri.to_s
           end
         rescue URI::InvalidURIError

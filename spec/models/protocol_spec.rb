@@ -12,6 +12,10 @@ describe Checkout::Protocol do
     @repo.url = "http://example.com/svn/testrepo"
   end
   
+  after(:each) do
+    User.current = User.anonymous
+  end
+  
   it "should use regexes for generated URL" do
     protocol = @repo.checkout_protocols.find{|r| r.protocol == "SVN+SSH"}
     protocol.url.should eql "svn+ssh://svn.foo.bar/svn/testrepo"
@@ -37,16 +41,16 @@ describe Checkout::Protocol do
   it "should respect display login settings" do
     protocols = @repo.checkout_protocols
     
-    @repo.login = "der_baer"
+    User.current.login = "der_baer"
     @repo.checkout_overwrite = "1"
     @repo.checkout_protocols = protocols
 
     protocol = @repo.checkout_protocols.find{|r| r.protocol == "Root"}
     
-    @repo.checkout_display_login = ""
+    protocol.display_login = '0'
     protocol.url.should eql "http://example.com/svn/testrepo"
 
-    @repo.checkout_display_login = "username"
+    protocol.display_login = '1'
     protocol.url.should eql "http://der_baer@example.com/svn/testrepo"
   end
   

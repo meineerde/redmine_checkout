@@ -5,7 +5,6 @@ ko:
   setting_checkout_fixed_url: "체크 아웃 URL"
   setting_checkout_url_regex: "정규식"
   setting_checkout_url_regex_replacement: "대체 문자열"
-  setting_checkout_display_login: "로그인 표시"
   setting_checkout_command: "Checkout command"
   setting_checkout_use_zero_clipboard: "Display clipboard helper"
   
@@ -23,6 +22,7 @@ ko:
 
   label_append_path: "Append path"
 
+  label_display_login: "로그인 표시"
   label_display_login_none: "로그인과 비밀번호를 보여주지 않습니다."
   label_display_login_username: "로그인은 보여주지만 비밀번호는 보여주지 않습니다."
   label_display_login_password: "로그인과 비밀번호를 보여줍니다."

@@ -23,6 +23,7 @@
         read_write: readwrite
         append_path: "0"
         is_default: "1"
+        display_login: "0"
         protocol: Bazaar
       overwrite_description_Cvs: "0"
       description_Cvs: ""
@@ -35,6 +36,7 @@
         read_write: readwrite
         append_path: "0"
         is_default: "1"
+        display_login: "0"
         protocol: Cvs
       overwrite_description_Darcs: "0"
       description_Darcs: ""
@@ -47,6 +49,7 @@
         read_write: readwrite
         append_path: "0"
         is_default: "1"
+        display_login: "0"
         protocol: Darcs
       overwrite_description_Filesystem: "0"
       description_Filesystem: ""
@@ -57,6 +60,7 @@
         regex: ""
         append_path: "0"
         is_default: "1"
+        display_login: "0"
         protocol: Filesystem
         access: read+write
         regex_replacement: ""
@@ -69,6 +73,7 @@
         regex: ""
         append_path: "0"
         is_default: "1"
+        display_login: "0"
         protocol: Git
         access: read+write
         regex_replacement: ""
@@ -81,10 +86,10 @@
         regex: ""
         append_path: "0"
         is_default: "1"
+        display_login: "0"
         protocol: Mercurial
         access: read+write
         regex_replacement: ""
-      display_login: username
       overwrite_description_Subversion: "0"
       description_Subversion: ""
       display_command_Subversion: '1'
@@ -94,6 +99,7 @@
         regex: foo
         append_path: "1"
         is_default: "1"
+        display_login: "1"
         protocol: Subversion
         access: permission
         regex_replacement: bar
@@ -102,6 +108,7 @@
         regex: "^.*?([^/]+)/?$"
         append_path: "1"
         is_default: "0"
+        display_login: "1"
         protocol: SVN+SSH
         access: read-only
         regex_replacement: svn+ssh://svn.foo.bar/svn/\1
@@ -109,6 +116,7 @@
         command: "svn checkout"
         append_path: "0"
         is_default: "0"
+        display_login: "1"
         regex: ""
         protocol: Root
         access: read+write

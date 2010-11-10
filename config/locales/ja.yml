@@ -5,7 +5,6 @@ ja:
   setting_checkout_fixed_url: "チェックアウト URL"
   setting_checkout_url_regex: "Regular expression"
   setting_checkout_url_regex_replacement: "Replacement text"
-  setting_checkout_display_login: "ログインの表示"
   setting_checkout_command: "Checkout command"
   setting_checkout_use_zero_clipboard: "Display clipboard helper"
 
@@ -23,6 +22,7 @@ ja:
 
   label_append_path: "Append path"
 
+  label_display_login: "ログインの表示"
   label_display_login_none: "ログインとパスワードを非表示"
   label_display_login_username: "ログインのみ表示"
   label_display_login_password: "ログインとパスワードを表示"

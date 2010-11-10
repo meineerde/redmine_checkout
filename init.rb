@@ -26,7 +26,6 @@ Redmine::Plugin.register :redmine_checkout do
   requires_redmine :version_or_higher => '0.9'
   
   settings_defaults = HashWithIndifferentAccess.new({
-    'display_login' => nil,
     'use_zero_clipboard' => '1',
     
     'display_checkout_info' =>  '1',
@@ -60,7 +59,8 @@ EOF
       :fixed_url => '',
       :access => 'permission',
       :append_path => (klazz.allow_subtree_checkout? ? '1' : '0'),
-      :is_default => '1'
+      :is_default => '1',
+      :display_login => '0'
     })]
   end
   

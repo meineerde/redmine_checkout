@@ -5,7 +5,6 @@ fr:
   setting_checkout_fixed_url: "URL du dépôt"
   setting_checkout_url_regex: "Expression Régulière"
   setting_checkout_url_regex_replacement: "Texte de substitution"
-  setting_checkout_display_login: "Affiche le login"
   setting_checkout_command: "Checkout command"
   setting_checkout_use_zero_clipboard: "Display clipboard helper"
 
@@ -23,6 +22,7 @@ fr:
 
   label_append_path: "Append path"
 
+  label_display_login: "Affiche le login"
   label_display_login_none: "Ne pas afficher le login ni le mot de passe"
   label_display_login_username: "Afficher le login, pas le mot de passe"
   label_display_login_password: "Afficher le login et le mot de passe"
