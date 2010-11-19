@@ -13,11 +13,6 @@ module Checkout
         end
         
         path = context[:controller].instance_variable_get("@path")
-        if path && context[:controller].instance_variable_get("@entry")
-          # a single file is showing, so we return only the directory
-          path = File.dirname(path)
-        end
-        
         default = protocols.find(&:default?) || protocols.first
         
         context.merge!({
