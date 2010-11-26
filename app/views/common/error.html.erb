@@ -1,0 +1,9 @@
+<h2><%=h @status %></h2>
+
+<p id="errorExplanation"><%=h @message %></p>
+<% if params[:controller] == "repositories" && @status == 500 %>
+<%= call_hook(:view_repositories_show_contextual, { :repository => @project.repository, :project => @project }) %>
+<% end %>
+<p><a href="javascript:history.back()">Back</a></p>
+
+<% html_title @status %>
