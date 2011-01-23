@@ -5,10 +5,6 @@ class ChangeProtocolStorageFromHashToArray < ActiveRecord::Migration
       nil
     end
     
-    def scm_name
-      self.type || 'Abstract'
-    end
-    
     serialize :checkout_settings, Hash
   end
   

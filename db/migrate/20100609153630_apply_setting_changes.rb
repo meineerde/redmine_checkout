@@ -5,10 +5,6 @@ class ApplySettingChanges < ActiveRecord::Migration
       nil
     end
     
-    def scm_name
-      self.type || 'Abstract'
-    end
-    
     serialize :checkout_settings, Hash
   end
   
@@ -25,15 +21,15 @@ class ApplySettingChanges < ActiveRecord::Migration
     ## First migrate the individual repositories
     
     Repository.all.each do |r|
-      allow_subtree_checkout = ['Cvs', 'Subversion'].include? r.scm_name
+      allow_subtree_checkout = ['Cvs', 'Subversion'].include? r.type
       
       protocol = case r.checkout_settings['checkout_url_type']
       when 'none', 'generated'
         nil
       when 'original', 'overwritten'
         HashWithIndifferentAccess.new({ "0" => HashWithIndifferentAccess.new({
-          :protocol => r.scm_name,
-          :command => Setting.plugin_redmine_checkout["checkout_cmd_#{r.scm_name}"] || default_commands[r.scm_name],
+          :protocol => r.type,
+          :command => Setting.plugin_redmine_checkout["checkout_cmd_#{r.type}"] || default_commands[r.type],
           :regex => "",
           :regex_replacement => "",
           :fixed_url => (r.checkout_settings['checkout_url_type'] == 'original' ? (r.url || "") : r.checkout_settings["checkout_url"]),

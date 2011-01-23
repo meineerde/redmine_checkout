@@ -16,7 +16,7 @@ module Checkout
         tags = repository_field_tags_without_checkout(form, repository) || ""
         return tags if repository.class.name == "Repository"
       
-        tags + @controller.send(:render_to_string, :partial => 'projects/settings/repository_checkout', :locals => {:form => form, :repository => repository, :scm => repository.scm_name})
+        tags + @controller.send(:render_to_string, :partial => 'projects/settings/repository_checkout', :locals => {:form => form, :repository => repository, :scm => repository.type})
       end
       
       def scm_select_tag_with_javascript(*args)

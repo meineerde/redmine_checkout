@@ -5,17 +5,13 @@ class AddUsernameToProtocolUrls < ActiveRecord::Migration
       nil
     end
     
-    def scm_name
-      self.type || 'Abstract'
-    end
-    
     serialize :checkout_settings, Hash
   end
   
   def self.up
     ## First migrate the individual repositories
     Repository.all.each do |r|
-      if r.scm_name == "Subversion"
+      if r.type == "Subversion"
         display_login = r.checkout_settings.delete 'checkout_display_login'
         display_login = display_login.present? ? '1' : '0'
       else
