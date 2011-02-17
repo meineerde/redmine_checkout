@@ -15,7 +15,7 @@ nl:
   label_protocol_plural: "Protocollen"
   button_add_protocol: "Protocol toevoegen"
 
-  label_access_type: 'Deze URL heeft <span id="checkout_access">{{type}}</span> toegang.'
+  label_access_type: 'Deze URL heeft {{type}} toegang.'
   label_access_read_only: 'Alleen lezen'
   label_access_read_write: "Lezen en schrijven"
   label_access_permission: "Afhankelijk van gebruikersrechten"

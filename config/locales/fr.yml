@@ -15,7 +15,7 @@ fr:
   label_protocol_plural: "Protocoles"
   button_add_protocol: "Créer un protocole"
 
-  label_access_type: 'Cette URL a un accès <span id="checkout_access">{{type}}</span>.'
+  label_access_type: 'Cette URL a un accès {{type}}.'
   label_access_read_only: 'Lecture Seule'
   label_access_read_write: "Lecture/Écriture"
   label_access_permission: "Dépend des permissions de l'utilisateur"

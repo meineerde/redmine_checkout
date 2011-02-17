@@ -15,7 +15,7 @@ pl:
   label_protocol_plural: "Protokoły"
   button_add_protocol: "Dodaj protokół"
 
-  label_access_type: 'Ten adres URL ma dostęp <span id="checkout_access">{{type}}</span>.'
+  label_access_type: 'Ten adres URL ma dostęp {{type}}.'
   label_access_read_only: 'Tylko do odczytu'
   label_access_read_write: "Odczyt+Zapis"
   label_access_permission: "Zależne od uprawnień użytkownika"
