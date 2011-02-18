@@ -29,7 +29,7 @@ Redmine::Plugin.register :redmine_checkout do
   settings_defaults = HashWithIndifferentAccess.new({
     'use_zero_clipboard' => '1',
     
-    'display_checkout_info' =>  '1',
+    'display_checkout_info' =>  'everywhere',
     'description_Abstract' => <<-EOF
 The data contained in this repository can be downloaded to your computer using one of several clients.
 Please see the documentation of your version control software client for more information.

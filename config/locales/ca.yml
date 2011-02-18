@@ -2,6 +2,10 @@ ca:
   label_checkout: "Checkout"
 
   setting_checkout_display_checkout_info: "Mostra la informació d'accés al dipòsit"
+  label_display_everywhere: "On all repository pages"
+  label_display_browse: "Only on directory browsing views"
+  label_display_none: "Not at all (effectivly disables the plugin)"
+
   setting_checkout_fixed_url: "Adreça del dipòsit"
   setting_checkout_url_regex: "Expressió regular"
   setting_checkout_url_regex_replacement: "Text de substitució"

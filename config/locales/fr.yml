@@ -2,6 +2,10 @@ fr:
   label_checkout: "Dépôt"
 
   setting_checkout_display_checkout_info: "Affichage des informations pour obtenir copie locale du dépôt"
+  label_display_everywhere: "On all repository pages"
+  label_display_browse: "Only on directory browsing views"
+  label_display_none: "Not at all (effectivly disables the plugin)"
+
   setting_checkout_fixed_url: "URL du dépôt"
   setting_checkout_url_regex: "Expression Régulière"
   setting_checkout_url_regex_replacement: "Texte de substitution"
