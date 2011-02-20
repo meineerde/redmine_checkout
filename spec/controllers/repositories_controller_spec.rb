@@ -57,7 +57,7 @@ describe RepositoriesController do
 
       get :entry, :id => 1, :path => %w(subversion_test folder helloworld.rb)
       response.should be_success
-      response.should render_template('show')
+      response.should render_template('entry')
       response.should_not have_tag('div.repository-info')
     end
     
@@ -71,7 +71,7 @@ describe RepositoriesController do
       
       get :entry, :id => 1, :path => %w(subversion_test folder helloworld.rb)
       response.should be_success
-      response.should render_template('show')
+      response.should render_template('entry')
       response.should_not have_tag('div.repository-info')
     end
     
@@ -85,7 +85,7 @@ describe RepositoriesController do
       
       get :entry, :id => 1, :path => %w(subversion_test folder helloworld.rb)
       response.should be_success
-      response.should render_template('show')
+      response.should render_template('entry')
       response.should have_tag('div.repository-info')
     end
   end
