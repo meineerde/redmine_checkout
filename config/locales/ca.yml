@@ -19,7 +19,7 @@ ca:
   label_protocol_plural: "Protocols"
   button_add_protocol: "Afegir un protocol"
 
-  label_access_type: "L'accés a aquesta adreça {{type}}."
+  label_access_type: "L'accés a aquesta adreça %{type}."
   label_access_read_only: "és només de lectura"
   label_access_read_write: "és de lectura i escriptura"
   label_access_permission: "depèn dels permisos d'usuaris"
@@ -39,5 +39,5 @@ ca:
     supports back-references to braced expressions using the \1 notation.
   help_repository_checkout_protocols: |
     Deixa el camp "Adreça del dipòsit" en blanc per fer servir l'adreça del dipòsit definida.
-  help_moved_settings: "S'ha desplaçat la pàgina de configuració cap a {{link}}."
+  help_moved_settings: "S'ha desplaçat la pàgina de configuració cap a %{link}."
   label_settings_location: "Administració -> Paràmetres -> Checkout"

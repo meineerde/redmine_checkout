@@ -19,7 +19,7 @@ nl:
   label_protocol_plural: "Protocollen"
   button_add_protocol: "Protocol toevoegen"
 
-  label_access_type: 'Deze URL heeft {{type}} toegang.'
+  label_access_type: 'Deze URL heeft %{type} toegang.'
   label_access_read_only: 'Alleen lezen'
   label_access_read_write: "Lezen en schrijven"
   label_access_permission: "Afhankelijk van gebruikersrechten"
@@ -40,5 +40,5 @@ nl:
     door middel van de \1 notatie.
   help_repository_checkout_protocols: |
     Laat het veld Checkout-URL leeg om de projectrepository te gebruiken.
-  help_moved_settings: "De instellingspagina is verplaatst naar {{link}}."
+  help_moved_settings: "De instellingspagina is verplaatst naar %{link}."
   label_settings_location: "Administratie -> Instellingen -> Checkout"

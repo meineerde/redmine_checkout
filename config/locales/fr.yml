@@ -19,7 +19,7 @@ fr:
   label_protocol_plural: "Protocoles"
   button_add_protocol: "Créer un protocole"
 
-  label_access_type: 'Cette URL a un accès {{type}}.'
+  label_access_type: 'Cette URL a un accès %{type}.'
   label_access_read_only: 'Lecture Seule'
   label_access_read_write: "Lecture/Écriture"
   label_access_permission: "Dépend des permissions de l'utilisateur"
@@ -40,5 +40,5 @@ fr:
     entre accolades en utilisant la notation \1.
   help_repository_checkout_protocols: |
     Laissez le champs URL du dépôt vide pour utiliser l'adresse définie.
-  help_moved_settings: "La page paramètres a été déplacée vers {{link}}."
+  help_moved_settings: "La page paramètres a été déplacée vers %{link}."
   label_settings_location: "Administration -> Configuration -> Dépôt"

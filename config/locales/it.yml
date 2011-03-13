@@ -19,7 +19,7 @@ it:
   label_protocol_plural: "Protocolli"
   button_add_protocol: "Aggiungi Protocollo"
 
-  label_access_type: 'Questo URL ha accesso {{type}}.'
+  label_access_type: 'Questo URL ha accesso %{type}.'
   label_access_read_only: 'Sola-Lettura'
   label_access_read_write: "Lettura+Scrittura"
   label_access_permission: "Dipende dai permessi dell'utente"
@@ -40,5 +40,5 @@ it:
     la notazione \1 \2...
   help_repository_checkout_protocols: |
     Lascia il campo URL di checkout bianco per usare l'URL definito nel repository.
-  help_moved_settings: "La pagina delle impostazioni è stata spostata in {{link}}."
+  help_moved_settings: "La pagina delle impostazioni è stata spostata in %{link}."
   label_settings_location: "Amministrazione -> Impostazioni -> Checkout"

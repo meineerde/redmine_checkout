@@ -19,7 +19,7 @@ de:
   label_protocol_plural: "Protokolle"
   button_add_protocol: "Protokoll hinzufügen"
 
-  label_access_type: 'Diese URL erlaubt Zugriff zum {{type}}.'
+  label_access_type: 'Diese URL erlaubt Zugriff zum %{type}.'
   label_access_read_only: 'Nur-Lesen'
   label_access_read_write: "Lesen+Schreiben"
   label_access_permission: "Abhängig von Benutzer-Rechten"
@@ -39,5 +39,5 @@ de:
     erlaubt Rückwärtsreferenzen zu geklammerten Audrücken mit der \1 Notation.
   help_repository_checkout_protocols: |
     Lassen Sie das Checkout-URL-Feld leer um die URL des Projektarchivs zu verwenden.
-  help_moved_settings: "Die Konfigurationsseite wurde nach {{link}} verschoben."
+  help_moved_settings: "Die Konfigurationsseite wurde nach %{link} verschoben."
   label_settings_location: "Administration -> Konfiguration -> Checkout"
