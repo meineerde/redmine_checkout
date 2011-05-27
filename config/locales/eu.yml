@@ -1,0 +1,43 @@
+eu:
+  label_checkout: "Deskargatu"
+
+  setting_checkout_display_checkout_info: "Erakutsi deskargarako informazioa"
+  label_display_everywhere: "Biltegiko orri guztietan"
+  label_display_browse: "Direktorio nabigazio ikuspegietan bakarrik"
+  label_display_none: "Ez (plugina ezgaitzearen parekoa)"
+  
+  setting_checkout_fixed_url: "Deskargatzeko URL-a"
+  setting_checkout_url_regex: "Adierazpen erregularra"
+  setting_checkout_url_regex_replacement: "Ordezkapen testua"
+  setting_checkout_command: "Deskargatzeko komandoa"
+  setting_checkout_use_zero_clipboard: "Arbel laguntzailea erakutsi"
+
+  setting_checkout_overwrite_description: "Lehenetsitako deskribapena gainidatzi"
+  field_checkout_overwrite: "Deskargarako protokoloen lehenetsitako ezarpenak gainidatzi"
+  field_checkout_display_command: "Erakutsi deskargatzeko komandoa"
+
+  label_protocol_plural: "Protokoloak"
+  button_add_protocol: "Protokoloa gehitu"
+
+  label_access_type: 'URL honen atzipena %{type} da.'
+  label_access_read_only: 'irakurtzeko bakarrik'
+  label_access_read_write: "irakurri eta idazteko"
+  label_access_permission: "erabiltzailearen baimenen araberakoa"
+
+  label_append_path: "Append path"
+
+  label_display_login: "Saio hasierako datuak erakutsi"
+  label_display_login_none: "Ez erakutsi erabiltzaile edo pasahitzik"
+  label_display_login_username: "Erabiltzailea erakutsi baina pasahitza ez"
+  label_display_login_password: "Erabiltzailea eta pasahitza erakutsi"
+
+  label_copy_to_clipboard: "Arbelera kopiatu"
+
+  help_checkout_protocols: |
+    Protokoloen URLak sortzeko jatorrizko URLari adierazpen erregularra eta
+    ordezkapen testua aplikatzen da. Ordezkapen testuak parentesi arteko
+    adierazpenetara atze-erreferentziak onartzen ditu \1 notazioa erabiliz.
+  help_repository_checkout_protocols: |
+    Deskarga URLaren eremua betegabe utzi adierazitako biltegi URLa erabiltzeko.
+  help_moved_settings: "Ezarpenen orria {%link}ra mugitu da."
+  label_settings_location: "Kudeaketa -> Ezarpenak -> Deskarga"
