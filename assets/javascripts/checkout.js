@@ -10,8 +10,8 @@ document.observe("dom:loaded", function() {
       
       var checkout_access = $('checkout_access');
       if (checkout_access) {
-        var value = checkout_access.get(this.id);
-        checkout_acces.innerHTML = value;
+        var value = window.checkout_access.get(this.id);
+        checkout_access.innerHTML = value;
       }
       
       event.stop();
