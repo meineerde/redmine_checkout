@@ -8,10 +8,10 @@ document.observe("dom:loaded", function() {
       });
       this.addClassName("selected")
       
-      var checkout_access = $('checkout_access');
-      if (checkout_access) {
-        var value = checkout_access.get(this.id);
-        checkout_acces.innerHTML = value;
+      var access = $('checkout_access');
+      if (access) {
+        var value = window.checkout_access.get(this.id);
+        access.innerHTML = value;
       }
       
       event.stop();
