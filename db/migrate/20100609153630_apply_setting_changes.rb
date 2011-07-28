@@ -4,10 +4,10 @@ class ApplySettingChanges < ActiveRecord::Migration
       # disable single table inheritance
       nil
     end
-    
+
     serialize :checkout_settings, Hash
   end
-  
+
   def self.up
     default_commands = {
       'Bazaar' => 'bzr checkout',
@@ -17,19 +17,19 @@ class ApplySettingChanges < ActiveRecord::Migration
       'Mercurial' => 'hg clone',
       'Subversion' => 'svn checkout'
     }
-    
+
     ## First migrate the individual repositories
-    
+
     Repository.all.each do |r|
-      allow_subtree_checkout = ['Cvs', 'Subversion'].include? r.type
-      
+      allow_subtree_checkout = ['Cvs', 'Subversion'].include? r.type.demodulize
+
       protocol = case r.checkout_settings['checkout_url_type']
       when 'none', 'generated'
         nil
       when 'original', 'overwritten'
         HashWithIndifferentAccess.new({ "0" => HashWithIndifferentAccess.new({
-          :protocol => r.type,
-          :command => Setting.plugin_redmine_checkout["checkout_cmd_#{r.type}"] || default_commands[r.type],
+          :protocol => r.type.demodulize,
+          :command => Setting.plugin_redmine_checkout["checkout_cmd_#{r.type.demodulize}"] || default_commands[r.type.demodulize],
           :regex => "",
           :regex_replacement => "",
           :fixed_url => (r.checkout_settings['checkout_url_type'] == 'original' ? (r.url || "") : r.checkout_settings["checkout_url"]),
@@ -38,7 +38,7 @@ class ApplySettingChanges < ActiveRecord::Migration
           :is_default => '1'})
         })
       end
-      
+
       r.checkout_settings = Hash.new({
         'checkout_protocols' => protocol,
         'checkout_description' => "The data contained in this repository can be downloaded to your computer using one of several clients.
@@ -51,9 +51,9 @@ Please select the desired protocol below to get the URL.",
       })
       r.save!
     end
-    
+
     ## Then the global settings
-    
+
     settings = HashWithIndifferentAccess.new({
       'display_login' => Setting.plugin_redmine_checkout['display_login'],
       'use_zero_clipboard' => '1',
@@ -70,10 +70,10 @@ EOF
     default_commands.keys.each do |scm|
       settings["description_#{scm}"] = ''
       settings["overwrite_description_#{scm}"] = '0'
-      
+
       display_command = (Setting.plugin_redmine_checkout["render_type"].to_s == 'cmd') ? '1' : '0'
       settings["display_command_#{scm}"] = display_command
-      
+
       case Setting.plugin_redmine_checkout['checkout_url_type']
       when 'generated', 'none':
         regex = Setting.plugin_redmine_checkout["checkout_url_regex_#{scm}"]
@@ -82,7 +82,7 @@ EOF
         regex = ''
         replacement = ''
       end
-      
+
       settings["protocols_#{scm}"] = HashWithIndifferentAccess.new({
         # access can be one of
         #   read+write => this protocol always allows read/write access
@@ -102,7 +102,7 @@ EOF
     end
     Setting.plugin_redmine_checkout = settings
   end
-  
+
   def self.down
     raise ActiveRecord::IrreversibleMigration.new "Sorry, there is no down migration yet. If you really need one, please create an issue on http://dev.holgerjust.de/projects/redmine-checkout"
   end

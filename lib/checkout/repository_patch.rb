@@ -50,8 +50,8 @@ module Checkout
         if checkout_overwrite?
           checkout_settings['checkout_description']
         else
-          if CheckoutHelper.supported_scm.include?(type.demodulize) && Setting.send("checkout_overwrite_description_#{type}?")
-            Setting.send("checkout_description_#{type}")
+          if type.present? && CheckoutHelper.supported_scm.include?(type.demodulize) && Setting.send("checkout_overwrite_description_#{type.demodulize}?")
+            Setting.send("checkout_description_#{type.demodulize}")
           else
             Setting.send("checkout_description_Abstract")
           end
@@ -60,11 +60,11 @@ module Checkout
 
       def checkout_protocols
         @checkout_protocols ||= begin
-          if CheckoutHelper.supported_scm.include?(type.demodulize)
+          if type.present? && CheckoutHelper.supported_scm.include?(type.demodulize)
             if checkout_overwrite?
               protocols = checkout_settings['checkout_protocols'] || []
             else
-              protocols = Setting.send("checkout_protocols_#{type}") || []
+              protocols = Setting.send("checkout_protocols_#{type.demodulize}") || []
             end
           else
             protocols = []
@@ -98,7 +98,7 @@ module Checkout
         if checkout_overwrite?
           checkout_settings['checkout_display_command']
         else
-          Setting.send("checkout_display_command_#{type}")
+          Setting.send("checkout_display_command_#{type.demodulize}")
         end
       end
 
