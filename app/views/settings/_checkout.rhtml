@@ -8,7 +8,7 @@ document.observe("dom:loaded", function() {
     e.down('div').hide();
   });
   <%
-    CheckoutHelper.supported_scm.select{|scm| Setting.enabled_scm.include?(scm)}.each do |scm| 
+    CheckoutHelper.supported_scm.select{|scm| Setting.enabled_scm.include?(scm)}.each do |scm|
       next if Setting.send("checkout_overwrite_description_#{scm}?")
   -%>
   $('settings_checkout_description_<%= scm %>').up('div').up('div').hide();
@@ -30,7 +30,7 @@ document.observe("dom:loaded", function() {
 
 <% CheckoutHelper.supported_scm.select{|scm| Setting.enabled_scm.include?(scm)}.each do |scm| -%>
 <fieldset class="collapsible collapsed">
-  <legend onclick="toggleFieldset(this);"><%= "Repository::#{scm}".constantize.scm_name %></legend>
+  <legend onclick="toggleFieldset(this);"><%= Repository.const_get(scm).scm_name %></legend>
   <div><%= render :partial => 'checkout_scm', :locals => {:scm => scm} %></div>
 </fieldset>
 <%- end %>
