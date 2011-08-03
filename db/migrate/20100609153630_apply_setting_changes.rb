@@ -75,10 +75,10 @@ EOF
       settings["display_command_#{scm}"] = display_command
 
       case Setting.plugin_redmine_checkout['checkout_url_type']
-      when 'generated', 'none':
+      when 'generated', 'none'
         regex = Setting.plugin_redmine_checkout["checkout_url_regex_#{scm}"]
         replacement = Setting.plugin_redmine_checkout["checkout_url_regex_replacement_#{scm}"]
-      when 'original':
+      when 'original'
         regex = ''
         replacement = ''
       end
