@@ -1,11 +1,11 @@
 class AddUsernameToProtocolUrls < ActiveRecord::Migration
   class Repository < ActiveRecord::Base
-    def self.inheritance_column
-      # disable single table inheritance
-      nil
-    end
-
     serialize :checkout_settings, Hash
+
+    # disable single table inheritance
+    def self.inheritance_column() nil end
+    # to fix some strange error where the type did return the class...
+    def type() attributes["type"] end
   end
 
   def self.up
