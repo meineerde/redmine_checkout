@@ -13,6 +13,19 @@ describe RepositoriesController do
     get :show, :id => 1
   end
   
+  it 'should render 403 on unauthorized access' do
+    @controller.stub(:user_setup)
+    User.current = User.new
+
+    non_member = Role.find_by_name('Non member')
+    non_member.permissions -= [:view_changesets, :browse_repository]
+    non_member.save!
+
+    get_repo
+    response.code.should == '403'
+    response.should render_template('common/error')
+  end
+
   it "should display the protocol selector" do
     get_repo
     response.should be_success
