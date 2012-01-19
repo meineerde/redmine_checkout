@@ -3,7 +3,6 @@ require 'redmine'
 require 'dispatcher'
 Dispatcher.to_prepare do
   # Patches
-  require_dependency 'checkout/application_controller_patch'
   require_dependency 'checkout/settings_controller_patch'
 
   require_dependency 'checkout/repositories_helper_patch'
