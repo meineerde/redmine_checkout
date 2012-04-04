@@ -26,7 +26,7 @@ module Checkout
     end
 
     module InstanceMethods
-      def checkout_settings
+      def after_initialize
         self.checkout_settings ||= {}
       end
 
