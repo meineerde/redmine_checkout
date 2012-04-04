@@ -26,8 +26,8 @@ module Checkout
     end
 
     module InstanceMethods
-      def after_initialize
-        self.checkout_settings ||= {}
+      def checkout_settings
+        @var ||= {}
       end
 
       def checkout_overwrite=(value)
