@@ -1,0 +1,43 @@
+hu:
+  label_checkout: "Kijelentkezés"
+
+  setting_checkout_display_checkout_info: "Kijelentkezési információk megjelenítése"
+  label_display_everywhere: "A gyûjtemény összes oldalán"
+  label_display_browse: "Csak a böngészõ oldalakon"
+  label_display_none: "Egyáltalán nem (gyakorlatilag letiltja a plugint)"
+
+  setting_checkout_fixed_url: "Kijelentkezõ URL"
+  setting_checkout_url_regex: "Regular expression"
+  setting_checkout_url_regex_replacement: "Csere szöveg"
+  setting_checkout_command: "Kijelentkezõ parancs"
+  setting_checkout_use_zero_clipboard: "A vágólap súgó megjelenítése"
+
+  setting_checkout_overwrite_description: "Alapértelmezett leírás felülírása"
+  field_checkout_overwrite: "A kilépõ protokoll alapértelmezett beállításainak felülírása"
+  field_checkout_display_command: "Kijelentkezõ parancs megjelenítése"
+
+  label_protocol_plural: "Protokollok"
+  button_add_protocol: "Protokoll hozzáadása"
+
+  label_access_type: 'Az URL elérési módja: %{type}.'
+  label_access_read_only: 'Read-Only'
+  label_access_read_write: "Read+Write"
+  label_access_permission: "A felhasználói jogosultságtól függ"
+
+  label_append_path: "Elérési út hozzáfûzése"
+
+  label_display_login: "Bejelentkezés megjelenítésa"
+  label_display_login_none: "Ne mutassa a bejelentkezést vagy a jelszót"
+  label_display_login_username: "Bejelentkezés mutatása de a jelszó elrejtése"
+  label_display_login_password: "Bejelentkezés és jelszó mutatása"
+
+  label_copy_to_clipboard: "Vágólapra másolás"
+
+  help_checkout_protocols: |
+    The URLs in protocols are generated from applying the regular expression
+    and the replacement text to the original URL. The replacement text
+    supports back-references to braced expressions using the \1 notation.
+  help_repository_checkout_protocols: |
+    Leave the Checkout URL field empty to use the defined repository URL.
+  help_moved_settings: "The settings page has been moved to %{link}."
+  label_settings_location: "Administration -> Settings -> Checkout"
