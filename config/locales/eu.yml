@@ -9,7 +9,7 @@ eu:
   setting_checkout_fixed_url: "Deskargatzeko URL-a"
   setting_checkout_url_regex: "Adierazpen erregularra"
   setting_checkout_url_regex_replacement: "Ordezkapen testua"
-  setting_checkout_command: "Deskargatzeko komandoa"
+  setting_checkout_command: "Deskarga komandoa"
   setting_checkout_use_zero_clipboard: "Arbel laguntzailea erakutsi"
 
   setting_checkout_overwrite_description: "Lehenetsitako deskribapena gainidatzi"
@@ -24,9 +24,9 @@ eu:
   label_access_read_write: "irakurri eta idazteko"
   label_access_permission: "erabiltzailearen baimenen araberakoa"
 
-  label_append_path: "Append path"
+  label_append_path: "bidea erantsi"
 
-  label_display_login: "Saio hasierako datuak erakutsi"
+  label_display_login: "Saio hasierako datuak"
   label_display_login_none: "Ez erakutsi erabiltzaile edo pasahitzik"
   label_display_login_username: "Erabiltzailea erakutsi baina pasahitza ez"
   label_display_login_password: "Erabiltzailea eta pasahitza erakutsi"
@@ -39,5 +39,5 @@ eu:
     adierazpenetara atze-erreferentziak onartzen ditu \1 notazioa erabiliz.
   help_repository_checkout_protocols: |
     Deskarga URLaren eremua betegabe utzi adierazitako biltegi URLa erabiltzeko.
-  help_moved_settings: "Ezarpenen orria {%link}ra mugitu da."
+  help_moved_settings: "Ezarpenen orria %{link}ra mugitu da."
   label_settings_location: "Kudeaketa -> Ezarpenak -> Deskarga"
