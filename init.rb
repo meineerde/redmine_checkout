@@ -21,7 +21,7 @@ Redmine::Plugin.register :redmine_checkout do
   author 'Holger Just'
   author_url 'http://meine-er.de'
   description 'Add links to the actual repository to the repository view.'
-  version '0.5'
+  version '1.0.0'
 
   # required because of the new i18n requirement and changed syntax
   requires_redmine :version_or_higher => '1.0.5'
