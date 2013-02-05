@@ -45,4 +45,15 @@ describe Repository do
       protocols[2].protocol.should eql "Root"
     end
   end
+
+  describe "to_xml" do
+    let(:repo) { Repository::Subversion.new }
+
+    it "should not have a yaml typed attribute checkout-settings" do
+      # using something like nokogiri would be cleaner
+      # but I don't want to introduce the dependency
+
+      repo.to_xml.match(/<checkout-settings[^>]*?type=['"]yaml['"].*?>/).should be_nil
+    end
+  end
 end
