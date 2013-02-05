@@ -109,6 +109,14 @@ module Checkout
       def checkout_default_command
         self.class.checkout_default_command
       end
+
+      def to_xml(options = {}, &block)
+        options[:except] = options[:except] ?
+                            options[:except] << :checkout_settings :
+                            [:checkout_settings]
+
+        super
+      end
     end
   end
 end
