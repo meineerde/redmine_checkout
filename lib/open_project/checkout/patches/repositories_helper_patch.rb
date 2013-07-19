@@ -1,6 +1,6 @@
 require_dependency 'repositories_helper'
 
-module Checkout
+module OpenProject::Checkout
   module RepositoriesHelperPatch
     def self.included(base) # :nodoc:
       base.send(:include, InstanceMethods)
@@ -30,5 +30,5 @@ module Checkout
   end
 end
 
-RepositoriesHelper.send(:include, Checkout::RepositoriesHelperPatch)
+RepositoriesHelper.send(:include, OpenProject::Checkout::RepositoriesHelperPatch)
 

@@ -1,5 +1,5 @@
-module Checkout
-  class <<self
+module OpenProject::Checkout
+  class << self
     def awesome?
       # Yes, this plugin is awesome!
       true

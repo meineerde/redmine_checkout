@@ -1,7 +1,7 @@
 require_dependency 'repository'
 require_dependency 'checkout_helper'
 
-module Checkout
+module OpenProject::Checkout
   module RepositoryPatch
     def self.included(base) # :nodoc:
       base.extend(ClassMethods)
@@ -121,7 +121,7 @@ module Checkout
   end
 end
 
-Repository.send(:include, Checkout::RepositoryPatch)
+Repository.send(:include, OpenProject::Checkout::RepositoryPatch)
 
 subtree_checkout_repos = ["Subversion", "Cvs"]
 commands = {

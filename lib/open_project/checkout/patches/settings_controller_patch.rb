@@ -1,17 +1,17 @@
 require_dependency 'settings_controller'
 
-module Checkout
+module OpenProject::Checkout
   module SettingsControllerPatch
     def self.included(base) # :nodoc:
       base.send(:include, InstanceMethods)
 
       base.class_eval do
         unloadable
-      
+
         alias_method_chain :edit, :checkout
       end
     end
-    
+
     module InstanceMethods
       def edit_with_checkout
         if request.post? && params['tab'] == 'checkout'
@@ -30,7 +30,7 @@ module Checkout
                 settings[name.to_sym] = value
               end
             end
-                        
+
             Setting.plugin_redmine_checkout = settings
             params[:settings] = {}
           end
@@ -41,4 +41,4 @@ module Checkout
   end
 end
 
-SettingsController.send(:include, Checkout::SettingsControllerPatch)
+SettingsController.send(:include, OpenProject::Checkout::SettingsControllerPatch)
