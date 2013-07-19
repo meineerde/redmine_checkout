@@ -14,7 +14,7 @@ rescue LoadError => error
 
     You need to install rspec in your Redmine project.
     Please execute the following code:
-    
+
       gem install rspec-rails
       script/generate rspec
 
