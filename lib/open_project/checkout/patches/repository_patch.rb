@@ -1,5 +1,5 @@
 require_dependency 'repository'
-require_dependency 'checkout_helper'
+require_dependency 'open_project/checkout/checkout_helper'
 
 module OpenProject::Checkout
   module RepositoryPatch
@@ -50,7 +50,7 @@ module OpenProject::Checkout
         if checkout_overwrite?
           checkout_settings['checkout_description']
         else
-          if type.present? && CheckoutHelper.supported_scm.include?(type.demodulize) && Setting.send("checkout_overwrite_description_#{type.demodulize}?")
+          if type.present? && OpenProject::CheckoutHelper.supported_scm.include?(type.demodulize) && Setting.send("checkout_overwrite_description_#{type.demodulize}?")
             Setting.send("checkout_description_#{type.demodulize}")
           else
             Setting.send("checkout_description_Abstract")
@@ -60,7 +60,7 @@ module OpenProject::Checkout
 
       def checkout_protocols
         @checkout_protocols ||= begin
-          if type.present? && CheckoutHelper.supported_scm.include?(type.demodulize)
+          if type.present? && OpenProject::CheckoutHelper.supported_scm.include?(type.demodulize)
             if checkout_overwrite?
               protocols = checkout_settings['checkout_protocols'] || []
             else
@@ -71,7 +71,7 @@ module OpenProject::Checkout
           end
 
           protocols.collect do |p|
-            Checkout::Protocol.new p.merge({:repository => self})
+            OpenProject::Checkout::Protocol.new p.merge({:repository => self})
           end
         end
       end
@@ -133,7 +133,7 @@ commands = {
   'Subversion' => 'svn checkout'
 }
 
-CheckoutHelper.supported_scm.each do |scm|
+OpenProject::CheckoutHelper.supported_scm.each do |scm|
   require_dependency "repository/#{scm.underscore}"
   cls = Repository.const_get(scm)
 

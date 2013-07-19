@@ -11,7 +11,7 @@ module OpenProject::Checkout
         # Defines getter and setter for each setting
         # Then setting values can be read using: Setting.some_setting_name
         # or set using Setting.some_setting_name = "some value"
-        Redmine::Plugin.find(:redmine_checkout).settings[:default].keys.each do |name|
+        Redmine::Plugin.find(:openproject_checkout).settings[:default].keys.each do |name|
           if name.start_with?('protocols_')
             default = "[]"
           else

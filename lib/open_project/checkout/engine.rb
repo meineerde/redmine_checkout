@@ -42,10 +42,9 @@ module OpenProject::Checkout
       require_dependency 'open_project/checkout/patches/repositories_helper_patch'
       require_dependency 'open_project/checkout/patches/repository_patch'
       require_dependency 'open_project/checkout/patches/settings_helper_patch'
-      require_dependency 'open_project/checkout/patches/setting_patch'
 
       unless Redmine::Plugin.registered_plugins.include?(:openproject_checkout)
-        Redmine::Plugin.register :redmine_checkout do
+        Redmine::Plugin.register :openproject_checkout do
           name 'OpenProject Checkout plugin'
           url 'http://dev.holgerjust.de/projects/redmine-checkout'
           author 'Finn GmbH'
@@ -53,7 +52,7 @@ module OpenProject::Checkout
           description 'Add links to the actual repository to the repository view.'
           version '1.0.1'
 
-          requires_openproject :version_or_higher >= '1.0.5'
+          requires_openproject ">= 3.0.0beta1"
 
           settings_defaults = HashWithIndifferentAccess.new({
             'use_zero_clipboard' => '1',
@@ -67,10 +66,9 @@ Please select the desired protocol below to get the URL.
             EOF
           })
 
-          # this is needed for setting the defaults
-          require 'open_project/checkout/patches/repository_patch'
+          require_dependency 'open_project/checkout/patches/repository_patch'
 
-          CheckoutHelper.supported_scm.each do |scm|
+          OpenProject::CheckoutHelper.supported_scm.each do |scm|
             klazz = Repository.const_get(scm)
 
             settings_defaults["description_#{scm}"] = ''
@@ -96,7 +94,7 @@ Please select the desired protocol below to get the URL.
 
           settings :default => settings_defaults, :partial => 'settings/openproject_checkout'
 
-          OpenProject::WikiFormatting::Macros.register do
+          Redmine::WikiFormatting::Macros.register do
             desc <<-EOF
 Creates a checkout link to the actual repository. Example:
 
@@ -130,6 +128,9 @@ Creates a checkout link to the actual repository. Example:
             end
           end
         end
+
+        require_dependency 'open_project/checkout/patches/setting_patch'
+
       end
     end
   end
