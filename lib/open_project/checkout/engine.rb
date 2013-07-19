@@ -10,6 +10,10 @@ module OpenProject::Checkout
 
     config.autoload_paths += Dir["#{config.root}/lib/"]
 
+    initializer 'costs.precompile_assets' do
+      Rails.application.config.assets.precompile += %w(checkout.css checkout.js)
+    end
+
     initializer "checkout.register_hooks" do
       # don't use require_dependency to not reload hooks in
       # development mode

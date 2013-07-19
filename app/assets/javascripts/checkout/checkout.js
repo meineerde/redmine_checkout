@@ -1,3 +1,6 @@
+//= require checkout/subform.js
+//= require checkout/Zeroclipboard.js
+
 document.observe("dom:loaded", function() {
   /* update the checkout URL if clicked on a protocol */
   $('checkout_protocols').select('a').each(function(e) {
@@ -7,13 +10,13 @@ document.observe("dom:loaded", function() {
         e.removeClassName("selected");
       });
       this.addClassName("selected")
-      
+
       var access = $('checkout_access');
       if (access) {
         var value = window.checkout_access.get(this.id);
         access.innerHTML = value;
       }
-      
+
       event.stop();
     });
   });
