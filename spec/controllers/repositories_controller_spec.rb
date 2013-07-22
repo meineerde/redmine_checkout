@@ -1,10 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RepositoriesController do
-  fixtures :settings, :repositories, :projects, :roles, :users, :enabled_modules
   render_views
 
+  let(:project) { FactoryGirl.create(:project) }
+
   before(:each) do
+    project.enabled_module_names = project.enabled_module_names << "repository"
     Setting.default_language = 'en'
     User.current = nil
   end
@@ -17,7 +19,7 @@ describe RepositoriesController do
     @controller.stub(:user_setup)
     User.current = User.new
 
-    non_member = Role.find_by_name('Non member')
+    non_member = FactoryGirl.create(:non_member)
     non_member.permissions -= [:view_changesets, :browse_repository]
     non_member.save!
 

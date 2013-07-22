@@ -1,10 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Setting do
-  fixtures :settings
-
   before(:each) do
     Setting.default_language = 'en'
+    Setting.checkout_display_checkout_info = 'everywhere'
   end
 
   it "should recognize checkout methods" do

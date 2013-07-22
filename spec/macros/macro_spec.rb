@@ -1,18 +1,18 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe "Macros" do
-  fixtures :settings, :repositories, :projects, :enabled_modules
-
   include ERB::Util
   include ApplicationHelper
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::UrlHelper
 
-  before(:each) do
-    Setting.checkout_display_command_Subversion = '0'
+  let(:project) { FactoryGirl.create(:project) }
 
-    @project = projects :projects_001
+  before(:each) do
+    project.enabled_module_names = project.enabled_module_names << "repository"
+    setup_subversion_protocols
+    Setting.checkout_display_command_Subversion = '0'
   end
 
 
@@ -31,15 +31,15 @@ describe "Macros" do
   end
 
   it "should fail without set project" do
-    @project = nil
+    project = nil
 
     text = "{{repository(svn+ssh)}}"
     textilizable(text).should eql "<p><div class=\"flash error\">Error executing the <strong>repository</strong> macro (Checkout protocol svn+ssh not found)</div></p>"
   end
 
   it "should display checkout url from stated project" do
-    @project = nil
-    text = "{{repository(ecookbook:svn+ssh)}}"
+    project = nil
+    text = "{{repository(#{project.name}:svn+ssh)}}"
 
     url = 'svn+ssh://svn.foo.bar/svn/subversion_repository'
     textilizable(text).should eql "<p><a href=\"#{url}\">#{url}</a></p>"

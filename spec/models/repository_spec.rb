@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Repository do
-  fixtures :settings, :repositories
 
   describe "initialize" do
     before(:each) do
@@ -36,6 +35,7 @@ describe Repository do
   describe "extensions" do
     before(:each) do
       @repo = Repository::Subversion.new
+      setup_subversion_protocols
     end
 
     it "should provide protocols" do
