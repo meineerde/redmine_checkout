@@ -42,6 +42,7 @@ module OpenProject::Checkout
       require_dependency 'open_project/checkout/patches/repositories_helper_patch'
       require_dependency 'open_project/checkout/patches/repository_patch'
       require_dependency 'open_project/checkout/patches/settings_helper_patch'
+      require_dependency 'open_project/checkout/patches/repository_patch'
 
       unless Redmine::Plugin.registered_plugins.include?(:openproject_checkout)
         Redmine::Plugin.register :openproject_checkout do
@@ -66,7 +67,6 @@ Please select the desired protocol below to get the URL.
             EOF
           })
 
-          require_dependency 'open_project/checkout/patches/repository_patch'
 
           OpenProject::CheckoutHelper.supported_scm.each do |scm|
             klazz = Repository.const_get(scm)
@@ -128,10 +128,9 @@ Creates a checkout link to the actual repository. Example:
             end
           end
         end
-
-        require_dependency 'open_project/checkout/patches/setting_patch'
-
       end
+      # must be loaded after plugin registration
+      require_dependency 'open_project/checkout/patches/setting_patch'
     end
   end
 end
