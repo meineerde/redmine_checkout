@@ -3,7 +3,6 @@ class RenameRenderLinkToRenderType < ActiveRecord::Migration
     render_link = Setting.plugin_openproject_checkout.delete 'render_link'
     unless  render_link.nil?
       Setting.plugin_openproject_checkout['render_type'] = (render_link == 'true' ? 'link' : 'url')
-      Setting.plugin_openproject_checkout = Setting.plugin_openproject_checkout
     end
 
     add_column :repositories, :render_type, :string, :default => 'url', :null => false
@@ -18,7 +17,6 @@ class RenameRenderLinkToRenderType < ActiveRecord::Migration
     render_type = Setting.plugin_openproject_checkout.delete 'render_type'
     unless  render_type.nil?
       Setting.plugin_openproject_checkout['render_link'] = (render_type == 'link' ? 'true' : 'false')
-      Setting.plugin_openproject_checkout = Setting.plugin_openproject_checkout
     end
 
     add_column :repositories, :render_link, :boolean, :null => true
