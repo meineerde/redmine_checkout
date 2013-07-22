@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Checkout::Protocol do
+describe OpenProject::Checkout::Protocol do
   fixtures :settings, :repositories, :projects, :enabled_modules
 
   before(:each) do
