@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RepositoriesController do
   fixtures :settings, :repositories, :projects, :roles, :users, :enabled_modules
-  integrate_views
+  render_views
 
   before(:each) do
     Setting.default_language = 'en'
