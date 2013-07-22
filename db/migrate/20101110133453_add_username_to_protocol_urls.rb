@@ -24,7 +24,7 @@ class AddUsernameToProtocolUrls < ActiveRecord::Migration
     end
 
     ## Then the global settings
-    settings = Setting.plugin_redmine_checkout
+    settings = Setting.plugin_openproject_checkout
     settings.keys.grep(/^protocols_/).each do |protocols|
       if protocols == "protocols_Subversion"
         display_login = settings["display_login"].present? ? '1' : '0'
@@ -37,7 +37,7 @@ class AddUsernameToProtocolUrls < ActiveRecord::Migration
       end
     end
     settings.delete "display_login"
-    Setting.plugin_redmine_checkout = settings
+    Setting.plugin_openproject_checkout = settings
   end
 
   def self.down

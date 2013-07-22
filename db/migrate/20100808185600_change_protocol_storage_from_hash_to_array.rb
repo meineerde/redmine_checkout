@@ -17,12 +17,12 @@ class ChangeProtocolStorageFromHashToArray < ActiveRecord::Migration
     end
 
     ## Then the global settings
-    settings = Setting.plugin_redmine_checkout
+    settings = Setting.plugin_openproject_checkout
     settings.keys.grep(/^protocols_/).each do |protocols|
       next unless settings[protocols].is_a? Hash
       settings[protocols] = settings[protocols].sort{|(ak,_),(bk,_)|ak<=>bk}.collect{|id,protocol| protocol}
     end
-    Setting.plugin_redmine_checkout = settings
+    Setting.plugin_openproject_checkout = settings
   end
 
   def self.down
@@ -36,13 +36,13 @@ class ChangeProtocolStorageFromHashToArray < ActiveRecord::Migration
     end
 
     ## Then the global settings
-    settings = Setting.plugin_redmine_checkout
+    settings = Setting.plugin_openproject_checkout
     settings.keys.grep(/^protocols_/).each do |protocols|
       next unless r.checkout_settings['checkout_protocols'].is_a? Hash
       settings[protocols] = settings[protocols].inject(HashWithIndifferentAccess.new) do |result, p|
         result[result.length.to_s] = p
       end
     end
-    Setting.plugin_redmine_checkout = settings
+    Setting.plugin_openproject_checkout = settings
   end
 end

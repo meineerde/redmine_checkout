@@ -31,7 +31,7 @@ module OpenProject::Checkout
               end
             end
 
-            Setting.plugin_redmine_checkout = settings
+            Setting.plugin_openproject_checkout = settings
             params[:settings] = {}
           end
         end

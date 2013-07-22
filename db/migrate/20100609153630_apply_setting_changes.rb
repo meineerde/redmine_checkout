@@ -28,7 +28,7 @@ class ApplySettingChanges < ActiveRecord::Migration
       when 'original', 'overwritten'
         HashWithIndifferentAccess.new({ "0" => HashWithIndifferentAccess.new({
           :protocol => r.type.demodulize,
-          :command => Setting.plugin_redmine_checkout["checkout_cmd_#{r.type.demodulize}"] || default_commands[r.type.demodulize],
+          :command => Setting.plugin_openproject_checkout["checkout_cmd_#{r.type.demodulize}"] || default_commands[r.type.demodulize],
           :regex => "",
           :regex_replacement => "",
           :fixed_url => (r.checkout_settings['checkout_url_type'] == 'original' ? (r.url || "") : r.checkout_settings["checkout_url"]),
@@ -54,10 +54,10 @@ Please select the desired protocol below to get the URL.",
     ## Then the global settings
 
     settings = HashWithIndifferentAccess.new({
-      'display_login' => Setting.plugin_redmine_checkout['display_login'],
+      'display_login' => Setting.plugin_openproject_checkout['display_login'],
       'use_zero_clipboard' => '1',
 
-      'display_checkout_info' => (Setting.plugin_redmine_checkout['checkout_url_type'] == 'none' ? '0' : '1'),
+      'display_checkout_info' => (Setting.plugin_openproject_checkout['checkout_url_type'] == 'none' ? '0' : '1'),
       'description_Abstract' => <<-EOF
 The data contained in this repository can be downloaded to your computer using one of several clients.
 Please see the documentation of your version control software client for more information.
@@ -70,13 +70,13 @@ EOF
       settings["description_#{scm}"] = ''
       settings["overwrite_description_#{scm}"] = '0'
 
-      display_command = (Setting.plugin_redmine_checkout["render_type"].to_s == 'cmd') ? '1' : '0'
+      display_command = (Setting.plugin_openproject_checkout["render_type"].to_s == 'cmd') ? '1' : '0'
       settings["display_command_#{scm}"] = display_command
 
-      case Setting.plugin_redmine_checkout['checkout_url_type']
+      case Setting.plugin_openproject_checkout['checkout_url_type']
       when 'generated', 'none'
-        regex = Setting.plugin_redmine_checkout["checkout_url_regex_#{scm}"]
-        replacement = Setting.plugin_redmine_checkout["checkout_url_regex_replacement_#{scm}"]
+        regex = Setting.plugin_openproject_checkout["checkout_url_regex_#{scm}"]
+        replacement = Setting.plugin_openproject_checkout["checkout_url_regex_replacement_#{scm}"]
       when 'original'
         regex = ''
         replacement = ''
@@ -89,7 +89,7 @@ EOF
         #   permission => Access depends on redmine permissions
         '0' => HashWithIndifferentAccess.new({
                 :protocol => scm,
-                :command => Setting.plugin_redmine_checkout["checkout_cmd_#{scm}"] || default_commands[scm],
+                :command => Setting.plugin_openproject_checkout["checkout_cmd_#{scm}"] || default_commands[scm],
                 :regex => regex,
                 :regex_replacement => replacement,
                 :fixed_url => '',
@@ -99,7 +99,7 @@ EOF
                })
       })
     end
-    Setting.plugin_redmine_checkout = settings
+    Setting.plugin_openproject_checkout = settings
   end
 
   def self.down

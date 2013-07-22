@@ -1,6 +1,6 @@
 class MoreDisplayOptions < ActiveRecord::Migration
   def self.up
-    settings = Setting.plugin_redmine_checkout
+    settings = Setting.plugin_openproject_checkout
 
     if settings[:display_checkout_info].to_i > 0
       settings[:display_checkout_info] = 'everywhere'
@@ -8,11 +8,11 @@ class MoreDisplayOptions < ActiveRecord::Migration
       settings[:display_checkout_info] = 'none'
     end
 
-    Setting.plugin_redmine_checkout = settings
+    Setting.plugin_openproject_checkout = settings
   end
 
   def self.down
-    settings = Setting.plugin_redmine_checkout
+    settings = Setting.plugin_openproject_checkout
 
     if settings[:display_checkout_info] == 'none'
       settings[:display_checkout_info] = '0'
@@ -20,6 +20,6 @@ class MoreDisplayOptions < ActiveRecord::Migration
       settings[:display_checkout_info] = '1'
     end
 
-    Setting.plugin_redmine_checkout = settings
+    Setting.plugin_openproject_checkout = settings
   end
 end
