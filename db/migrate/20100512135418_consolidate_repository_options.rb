@@ -4,13 +4,13 @@ class ConsolidateRepositoryOptions < ActiveRecord::Migration
       # disable single table inheritance
       nil
     end
-    
+
     serialize :checkout_settings, Hash
   end
 
   def self.up
     add_column :repositories, :checkout_settings, :text
-    
+
     Repository.all.each do |r|
       r.checkout_settings = {
         "checkout_url_type" => r.checkout_url_type,
@@ -27,14 +27,14 @@ class ConsolidateRepositoryOptions < ActiveRecord::Migration
     remove_column :repositories, :render_type
     remove_column :repositories, :checkout_url_overwrite
   end
-  
+
   def self.down
     add_column :repositories, :checkout_url_type, :string, :default => nil, :null => true
     add_column :repositories, :checkout_url, :string, :default => nil, :null => true
     add_column :repositories, :display_login, :string, :default => nil, :null => true
     add_column :repositories, :render_type, :string, :default => 'url', :null => false
     add_column :repositories, :checkout_url_overwrite, :boolean, :default => false, :null => false
-    
+
     Repository.all.each do |r|
       r.checkout_url_type = r.checkout_settings["checkout_url_type"]
       r.checkout_url = r.checkout_settings["checkout_url"]
@@ -43,7 +43,7 @@ class ConsolidateRepositoryOptions < ActiveRecord::Migration
       r.checkout_url_overwrite = r.checkout_settings["checkout_url_overwrite"]
       r.save!
     end
-    
+
     remove_column :repositories, :checkout_settings
   end
 end
