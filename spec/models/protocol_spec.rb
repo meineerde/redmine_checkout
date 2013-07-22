@@ -3,7 +3,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe OpenProject::Checkout::Protocol do
 
   let(:project) { FactoryGirl.create(:project, is_public: true) }
-  let(:user) { FactoryGirl.create(:user, member_in_project: project) }
+  let(:role) { FactoryGirl.create(:role, permissions: [:browse_repository]) }
+  let(:user) { FactoryGirl.create(:user) }
+  let!(:member) { FactoryGirl.create(:member, user: user, project: project, roles: [role]) }
   let(:admin) { FactoryGirl.create(:admin) }
   let!(:repo) { FactoryGirl.create(:svn_repository, project: project, url: 'http://example.com/svn/testrepo') }
 
@@ -14,6 +16,8 @@ describe OpenProject::Checkout::Protocol do
 
   after(:all) do
     User.current = User.anonymous
+    user.destroy!
+    admin.destroy!
   end
 
   it "should use regexes for generated URL" do
