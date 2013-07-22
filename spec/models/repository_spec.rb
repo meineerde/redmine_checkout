@@ -4,7 +4,7 @@ describe Repository do
 
   describe "initialize" do
     before(:each) do
-      @repo = Repository.new()
+      @repo = Repository.new
     end
 
     it "should properly set default values" do
