@@ -18,7 +18,7 @@
     </div>
     <% end -%>
     <% if default_protocol -%>
-      <p><%=l :label_access_type, :type => "<span id=\"checkout_access\">#{l(default_protocol.access_label(User.current))}</span>" %></p>
+      <p><%=l(:label_access_type, :type => "<span id=\"checkout_access\">#{l(default_protocol.access_label(User.current))}</span>").html_safe %></p>
     <%- end -%>
 
     <% javascript_tag do -%>
