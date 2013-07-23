@@ -2,15 +2,9 @@ module OpenProject::Checkout
   class Engine < ::Rails::Engine
     engine_name :openproject_checkout
 
-    config.before_configuration do |app|
-      # This is required for the routes to be loaded first
-      # as the routes should be prepended so they take precedence over the core.
-      app.config.paths['config/routes'].unshift File.join(File.dirname(__FILE__), "..", "..", "..", "config", "routes.rb")
-    end
-
     config.autoload_paths += Dir["#{config.root}/lib/"]
 
-    initializer 'costs.precompile_assets' do
+    initializer 'checkout.precompile_assets' do
       Rails.application.config.assets.precompile += %w(checkout.css checkout.js)
     end
 
@@ -18,14 +12,6 @@ module OpenProject::Checkout
       # don't use require_dependency to not reload hooks in
       # development mode
       require 'open_project/checkout/hooks'
-    end
-
-    initializer "checkout.remove_duplicate_routes", :after => "add_routing_paths" do |app|
-      # removes duplicate entry from app.routes_reloader
-      # As we prepend the plugin's routes to the load_path up front and rails
-      # adds all engines' config/routes.rb later, we have double loaded the routes
-      # This is not harmful as such but leads to duplicate routes which decreases performance
-      app.routes_reloader.paths.uniq!
     end
 
     initializer 'checkout.register_test_paths' do |app|

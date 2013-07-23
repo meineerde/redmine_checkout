@@ -12,10 +12,8 @@ Gem::Specification.new do |s|
   s.homepage = "http://www.finn.de"
   s.summary     = "Add links to the actual repository to the repository view."
   s.description = "Add links to the actual repository to the repository view."
-  # FIXME
-  # s.files = Dir["{app,config,db,lib}/**/*", "Rakefile", "README.rdoc"]
-  # FIXME
-  # s.test_files = Dir["spec/**/*"]
+  s.files = Dir["{app,config,db,lib}/**/*", "README.rdoc"]
+  s.test_files = Dir["spec/**/*"]
 
 
   s.add_development_dependency "factory_girl_rails", "~> 4.0"
