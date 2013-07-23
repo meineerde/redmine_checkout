@@ -1,7 +1,7 @@
 <%
   index ||= "--INDEX--"
   classes ||= ""
-  
+
   protocol = Checkout::Protocol.new(protocol) unless protocol.is_a? Checkout::Protocol
 %>
 <tr id="<%= "checkout_protocols_#{index}" %>" class="<%= classes %>" <%= 'style="display:none"' if index == '--INDEX--' %>>

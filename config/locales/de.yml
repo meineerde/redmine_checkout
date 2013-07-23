@@ -2,6 +2,7 @@ de:
   label_checkout: "Checkout"
 
   setting_checkout_display_checkout_info: "Checkout-Informationen anzeigen"
+  setting_checkout_description: "Beschreibung"
   label_display_everywhere: "Auf allen Projektarchivseiten"
   label_display_browse: "Nur auf Seiten mit Verzeichnisbäumen"
   label_display_none: "Niemals (deaktiviert das Plugin)"
