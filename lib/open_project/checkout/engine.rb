@@ -68,7 +68,7 @@ Please select the desired protocol below to get the URL.
           })
 
 
-          OpenProject::CheckoutHelper.supported_scm.each do |scm|
+          OpenProject::Checkout::CheckoutHelper.supported_scm.each do |scm|
             klazz = Repository.const_get(scm)
 
             settings_defaults["description_#{scm}"] = ''

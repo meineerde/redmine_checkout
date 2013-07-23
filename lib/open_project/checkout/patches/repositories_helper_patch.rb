@@ -21,8 +21,8 @@ module OpenProject::Checkout
 
       def scm_select_tag_with_javascript(*args)
         content_for :header_tags do
-          javascript_include_tag('subform', :plugin => 'redmine_checkout') +
-          stylesheet_link_tag('checkout', :plugin => 'redmine_checkout')
+          javascript_include_tag('subform', :plugin => 'openproject_checkout') +
+          stylesheet_link_tag('checkout', :plugin => 'openproject_checkout')
         end
         scm_select_tag_without_javascript(*args)
       end
