@@ -1,7 +1,7 @@
 //= require checkout/subform
-//= require checkout/ZeroClipboard
+//= require zeroclipboard
 
-document.observe("dom:loaded", function() {
+$(document).ready(function() {
   /* update the checkout URL if clicked on a protocol */
   $('checkout_protocols').select('a').each(function(e) {
     e.observe('click', function(event) {

@@ -22,9 +22,9 @@
     <%- end -%>
 
     <% javascript_tag do -%>
-      var checkout_access   = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ') %>});
-      var checkout_commands = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{escape_javascript(p.full_command(checkout_path))}'"}.join(', ') %>});
-      <%- if Setting.checkout_use_zero_clipboard? %>ZeroClipboard.setMoviePath( '<%= image_path('ZeroClipboard.swf', :plugin => 'redmine_checkout') %>' );<% end %>
+      var checkout_access   = $H({<%= protocols.inject([]){|r, p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ') %>});
+      var checkout_commands = $H({<%= protocols.inject([]){|r, p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{escape_javascript(p.full_command(checkout_path))}'"}.join(', ') %>});
+      <%- if Setting.checkout_use_zero_clipboard? %>ZeroClipboard.setMoviePath('<%= asset_path 'ZeroClipboard.swf' %>');<% end %>
     <% end %>
   </div>
   <% end%>
@@ -34,5 +34,4 @@
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag 'checkout', :plugin => 'openproject_checkout' %>
   <%= javascript_include_tag 'checkout', :plugin => 'openproject_checkout' %>
-  <%= (javascript_include_tag 'ZeroClipboard', :plugin => 'openproject_checkout') if Setting.checkout_use_zero_clipboard? %>
 <% end %>
