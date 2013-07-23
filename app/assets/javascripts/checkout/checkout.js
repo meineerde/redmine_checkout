@@ -1,5 +1,5 @@
-//= require checkout/subform.js
-//= require checkout/Zeroclipboard.js
+//= require checkout/subform
+//= require checkout/ZeroClipboard
 
 document.observe("dom:loaded", function() {
   /* update the checkout URL if clicked on a protocol */
