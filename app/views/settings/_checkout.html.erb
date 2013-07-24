@@ -25,12 +25,16 @@ document.observe("dom:loaded", function() {
 <p><%= setting_text_area :checkout_description_Abstract, :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :setting_checkout_description %></p>
 <%= wikitoolbar_for 'settings_checkout_description_Abstract' %>
 
+<div id="protocol_table">
 <% OpenProject::Checkout::CheckoutHelper.supported_scm.select{|scm| Setting.enabled_scm.include?(scm)}.each do |scm| -%>
-<fieldset class="collapsible collapsed">
-  <legend onclick="toggleFieldset(this);"><%= Repository.const_get(scm).scm_name %></legend>
+<fieldset class="header_collapsible collapsible collapsed">
+  <legend title="<%= Repository.const_get(scm).scm_name %>" onclick="toggleFieldset(this);">
+    <a href="javascript:"><%= Repository.const_get(scm).scm_name %></a>
+  </legend>
   <div><%= render :partial => 'checkout_scm', :locals => {:scm => scm} %></div>
 </fieldset>
 <%- end %>
+</div>
 
 </div>
 
