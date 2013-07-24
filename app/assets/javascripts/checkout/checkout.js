@@ -1,6 +1,7 @@
 //= require checkout/subform
 
-$(document).ready(function() {
+document.observe("dom:loaded", function() {
+  console.log("executing checkout.js handler");
   /* update the checkout URL if clicked on a protocol */
   $('checkout_protocols').select('a').each(function(e) {
     e.observe('click', function(event) {
@@ -21,7 +22,7 @@ $(document).ready(function() {
   });
   /* select the text field contents if activated */
   Event.observe('checkout_url', 'click', function(event) {
-   this.activate();
+    this.activate();
   });
 });
 

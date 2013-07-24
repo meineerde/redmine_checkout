@@ -1,10 +1,9 @@
 <%
   index ||= "--INDEX--"
   classes ||= ""
-
   protocol = OpenProject::Checkout::Protocol.new(protocol) unless protocol.is_a? OpenProject::Checkout::Protocol
 %>
-<tr id="<%= "checkout_protocols_#{index}" %>" class="<%= classes %>" <%= 'style="display:none"' if index == '--INDEX--' %>>
+<tr id="<%= "checkout_protocols_#{index}" %>" class="<%= classes %>" <%= 'style="display:none"'.html_safe if index == '--INDEX--' %>>
   <td class="protocol_protocol"><%= text_field_tag "repository[checkout_protocols][#{index}][protocol]", protocol.protocol, :size => 10 %></td>
   <td class="protocol_command"><%= text_field_tag "repository[checkout_protocols][#{index}][command]", protocol.command, :size => 15 %></td>
   <td class="protocol_fixed_url"><%= text_field_tag "repository[checkout_protocols][#{index}][fixed_url]", protocol.fixed_url, :size => 60 %></td>
