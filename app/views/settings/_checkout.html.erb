@@ -1,8 +1,7 @@
 <%= render partial: 'shared/checkout_header' %>
 <%= form_tag :action => 'edit', :tab => 'checkout' do %>
-<% javascript_tag do %>
-protocolForms = $H();
-
+<%= javascript_tag do %>
+var protocolForms = $H();
 document.observe("dom:loaded", function() {
   $('tab-content-checkout').select('fieldset.collapsed').each(function(e){
     e.down('div').hide();
