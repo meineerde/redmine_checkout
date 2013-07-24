@@ -55,8 +55,6 @@ Please select the desired protocol below to get the URL.",
 
     settings = HashWithIndifferentAccess.new({
       'display_login' => Setting.plugin_openproject_checkout['display_login'],
-      'use_zero_clipboard' => '1',
-
       'display_checkout_info' => (Setting.plugin_openproject_checkout['checkout_url_type'] == 'none' ? '0' : '1'),
       'description_Abstract' => <<-EOF
 The data contained in this repository can be downloaded to your computer using one of several clients.

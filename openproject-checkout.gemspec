@@ -15,7 +15,5 @@ Gem::Specification.new do |s|
   s.files       = Dir["{app,config,db,lib}/**/*", "README.rdoc"]
   s.test_files  = Dir["spec/**/*"]
 
-  s.add_dependency "zeroclipboard-rails", "~> 0.0.4"
-
   s.add_development_dependency "factory_girl_rails", "~> 4.0"
 end

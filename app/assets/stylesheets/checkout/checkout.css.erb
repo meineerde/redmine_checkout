@@ -60,8 +60,7 @@ table.checkout_protocol_table td.protocol_display_login {
   /* IE <= 9 not supported */
 }
 
-#checkout_protocols li a,
-#clipboard_button {
+#checkout_protocols li a {
   background-color: #eee;
   background:  url(<%= asset_path 'button.svg' %>) 0 0 no-repeat; /* Opera  needs an "image" :( - using svg for this so it will scale properly without looking too ugly */
   background: -khtml-gradient(linear, left top, left bottom, from(#f8f8f8), to(#ddd)); /* Konquerer */
@@ -102,8 +101,7 @@ table.checkout_protocol_table td.protocol_display_login {
   border-bottom-color: #507AAA;
 }
 
-#checkout_protocols li a.selected,
-#clipboard_button.active {
+#checkout_protocols li a.selected {
   background-color: #bbb;
   background:  url(<%= asset_path  'button_selected.svg' %>) 0 0 no-repeat; /* Opera  needs an "image" :( - using svg for this so it will scale properly without looking too ugly */
   background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));  /* Konquerer */
@@ -142,26 +140,3 @@ span#checkout_access {
   font-weight: bold;
 }
 
-#clipboard_container {
-  position: relative;
-  float: left;
-  margin-right: 5px;
-}
-
-#clipboard_button {
-  height: 21px;
-  width: 23px;
-  padding: 0;
-  border-width: 1px;
-  text-align: center;
-
-  border-radius: 5px; /* Standard, Opera 10, IE 9 */
-  -khtml-border-radius: 3px; /* Konquerer */
-  -moz-border-radius: 3px ; /* Gecko (Firefox, ...) */
-  -webkit-border-radius: 3px; /* Webkit (Chrome, Safari, ...) */
-  /* IE <= 9 not supported */
-}
-
-#clipboard_button img {
-  padding-top: 2px;
-}

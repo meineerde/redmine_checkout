@@ -1,5 +1,4 @@
 //= require checkout/subform
-//= require zeroclipboard
 
 $(document).ready(function() {
   /* update the checkout URL if clicked on a protocol */
@@ -24,16 +23,5 @@ $(document).ready(function() {
   Event.observe('checkout_url', 'click', function(event) {
    this.activate();
   });
-
-  if (typeof('ZeroClipboard') != 'undefined') {
-    $('clipboard_container').show();
-    clipboard = new ZeroClipboard.Client();
-    clipboard.setHandCursor( true );
-    clipboard.glue('clipboard_button', 'clipboard_container');
-
-    clipboard.addEventListener('mouseOver', function (client) {
-      clipboard.setText( $('checkout_url').value );
-    });
-  }
 });
 
