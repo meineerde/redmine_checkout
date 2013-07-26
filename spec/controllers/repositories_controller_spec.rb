@@ -1,31 +1,39 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe RepositoriesController do
-  render_views
 
   let(:project) { FactoryGirl.create(:project) }
+  let(:svn_repository) { FactoryGirl.create(:svn_repository, project: project) }
+  let(:admin) { FactoryGirl.create(:admin) }
+
+  render_views
 
   before(:each) do
-    project.enabled_module_names = project.enabled_module_names << "repository"
     Setting.default_language = 'en'
+    setup_subversion_protocols
+    project.enabled_module_names = project.enabled_module_names << "repository"
+    project.repository = svn_repository
+    project.save!
+    User.current = admin
+  end
+
+  after(:each) do
     User.current = nil
   end
 
   def get_repo
-    get :show, :id => 1
+    get :show, :id => project.id
   end
 
   it 'should render 403 on unauthorized access' do
     @controller.stub(:user_setup)
     User.current = User.new
 
-    non_member = FactoryGirl.create(:non_member)
-    non_member.permissions -= [:view_changesets, :browse_repository]
-    non_member.save!
-
     get_repo
     response.code.should == '403'
     response.should render_template('common/error')
+
+    User.current = nil
   end
 
   it "should display the protocol selector" do

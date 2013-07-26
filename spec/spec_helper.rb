@@ -19,7 +19,7 @@ def setup_subversion_protocols
       append_path: '1',
       is_default: '0',
       display_login: '1',
-      protocol: 'svn+ssh',
+      protocol: 'SVN+SSH',
       access: 'read-only',
       regex_replacement: 'svn+ssh://svn.foo.bar/svn/\1'
     }),

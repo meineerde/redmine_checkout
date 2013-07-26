@@ -14,10 +14,8 @@ describe OpenProject::Checkout::Protocol do
     setup_subversion_protocols
   end
 
-  after(:all) do
-    User.current = User.anonymous
-    user.destroy!
-    admin.destroy!
+  after(:each) do
+    User.current = nil
   end
 
   it "should use regexes for generated URL" do
