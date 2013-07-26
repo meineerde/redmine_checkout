@@ -36,3 +36,15 @@ def setup_subversion_protocols
   ]
   }
 end
+
+# Returns the path to the test +vendor+ repository
+def repository_path(vendor)
+  File.join(Rails.root.to_s.gsub(%r{config\/\.\.}, ''), "/tmp/test/#{vendor.downcase}_repository")
+end
+
+# Returns the url of the subversion test repository
+def subversion_repository_url
+  path = repository_path('subversion')
+  path = '/' + path unless path.starts_with?('/')
+  "file://#{path}"
+end

@@ -1,20 +1,32 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
+# This spec requires the test svn repository to be set up:
+# rake test:scm:setup:subversion
 describe RepositoriesController do
 
-  let(:project) { FactoryGirl.create(:project) }
-  let(:svn_repository) { FactoryGirl.create(:svn_repository, project: project) }
-  let(:admin) { FactoryGirl.create(:admin) }
+  let(:project) { FactoryGirl.create(:project, is_public: true) }
+  let(:user) { FactoryGirl.create(:user, login: "repouser", mail: "repouser@test.com") }
+  let(:role) { FactoryGirl.create(:role, permissions: [:browse_repository]) }
+  let!(:member) { FactoryGirl.create(:member, user: user, project: project, roles: [role]) }
 
   render_views
 
   before(:each) do
     Setting.default_language = 'en'
+    Setting.autofetch_changesets = false
+
+    @repository = Repository::Subversion.create(:project => project,
+             :url => subversion_repository_url)
+    @controller.stub(:user_setup)
+
     setup_subversion_protocols
-    project.enabled_module_names = project.enabled_module_names << "repository"
-    project.repository = svn_repository
-    project.save!
-    User.current = admin
+
+    @project = project
+    @project.enabled_module_names << "repository"
+    @project.repository = @repository
+    @project.save!
+
+    User.current = user
   end
 
   after(:each) do
@@ -26,14 +38,11 @@ describe RepositoriesController do
   end
 
   it 'should render 403 on unauthorized access' do
-    @controller.stub(:user_setup)
     User.current = User.new
 
     get_repo
     response.code.should == '403'
     response.should render_template('common/error')
-
-    User.current = nil
   end
 
   it "should display the protocol selector" do
@@ -41,9 +50,9 @@ describe RepositoriesController do
     response.should be_success
     response.should render_template('show')
 
-    response.should have_tag('ul#checkout_protocols') do
-      with_tag('a[id=?][href=?]', 'checkout_protocol_subversion', "file:///#{RAILS_ROOT.gsub(%r{config\/\.\.}, '')}/tmp/test/subversion_repository")
-      with_tag('a[id=?][href=?]', 'checkout_protocol_svn+ssh', 'svn+ssh://svn.foo.bar/svn/subversion_repository')
+    response.body.should have_selector('ul#checkout_protocols') do
+      with_tag('a[id=?][href=?]', 'checkout_protocol_subversion', "file:///#{Rails.root.to_s.gsub(%r{config\/\.\.}, '')}/tmp/test/subversion_repository")
+      with_tag('a[id=?][href=?]', 'checkout_protocol_svn+ssh', 'svn+ssh://repouser@svn.foo.bar/svn/subversion_repository')
     end
   end
 
@@ -52,7 +61,7 @@ describe RepositoriesController do
     response.should be_success
     response.should render_template('show')
 
-    response.should have_tag('div.repository-info', /Please select the desired protocol below to get the URL/)
+    response.body.should have_selector('div.repository-info', /Please select the desired protocol below to get the URL/)
   end
 
   describe 'display_checkout_info' do
@@ -62,12 +71,12 @@ describe RepositoriesController do
       get_repo
       response.should be_success
       response.should render_template('show')
-      response.should_not have_tag('div.repository-info')
+      response.body.should_not have_selector('div.repository-info')
 
-      get :entry, :id => 1, :path => %w(subversion_test folder helloworld.rb)
+      get :entry, :id => @project.id, :path => %w(subversion_test folder helloworld.rb)
       response.should be_success
       response.should render_template('entry')
-      response.should_not have_tag('div.repository-info')
+      response.body.should_not have_selector('div.repository-info')
     end
 
     it 'should display on directory views only when "browse" is selected' do
@@ -76,12 +85,12 @@ describe RepositoriesController do
       get_repo
       response.should be_success
       response.should render_template('show')
-      response.should have_tag('div.repository-info', /Please select the desired protocol below to get the URL/)
+      response.body.should have_selector('div.repository-info', /Please select the desired protocol below to get the URL/)
 
-      get :entry, :id => 1, :path => %w(subversion_test folder helloworld.rb)
+      get :entry, :id => @project.id, :path => %w(subversion_test folder helloworld.rb)
       response.should be_success
       response.should render_template('entry')
-      response.should_not have_tag('div.repository-info')
+      response.body.should_not have_selector('div.repository-info')
     end
 
     it 'should display on all pages when "everywhere" is selected' do
@@ -90,12 +99,12 @@ describe RepositoriesController do
       get_repo
       response.should be_success
       response.should render_template('show')
-      response.should have_tag('div.repository-info', /Please select the desired protocol below to get the URL/)
+      response.body.should have_selector('div.repository-info', /Please select the desired protocol below to get the URL/)
 
-      get :entry, :id => 1, :path => %w(subversion_test folder helloworld.rb)
+      get :entry, :id => @project.id, :path => %w(subversion_test folder helloworld.rb)
       response.should be_success
       response.should render_template('entry')
-      response.should have_tag('div.repository-info')
+      response.body.should have_selector('div.repository-info')
     end
   end
 end
