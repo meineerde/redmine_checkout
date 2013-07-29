@@ -1,7 +1,6 @@
 //= require checkout/subform
 
 document.observe("dom:loaded", function() {
-  console.log("executing checkout.js handler");
   /* update the checkout URL if clicked on a protocol */
   $('checkout_protocols').select('a').each(function(e) {
     e.observe('click', function(event) {
