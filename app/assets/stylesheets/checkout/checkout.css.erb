@@ -1,6 +1,3 @@
-/* Uncomment the following line for nicer tables if you use the alternate theme (or derived). */
-/* @import url(checkout_alternate.css); */
-
 table.checkout_protocol_table td { padding-right: 6px; vertical-align: middle; /* Double the border with of text input boxes */ }
 table.checkout_protocol_table td.protocol_access { padding-right: 0; }
 table.checkout_protocol_table td input[type=text], .checkout_protocol_table td select { width: 100%; }
@@ -12,7 +9,7 @@ table.checkout_protocol_table td.protocol_display_login {
   text-align: center;
 }
 
-.icon-changeset { background-image: url(../../../images/changeset.png);}
+.icon-changeset { background-image: url(<%= asset_path 'checkout/changeset.png' %>);}
 
 .repository-info {
   background-color: #eee;
@@ -45,7 +42,7 @@ table.checkout_protocol_table td.protocol_display_login {
 
 #checkout_protocols li:first-child a {
   border-left-width: 1px;
-  
+
   /* Standard, Opera 10, IE 9 */
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -60,20 +57,19 @@ table.checkout_protocol_table td.protocol_display_login {
   /* IE <= 9 not supported */
 }
 
-#checkout_protocols li a,
-#clipboard_button {
+#checkout_protocols li a {
   background-color: #eee;
-  background:  url(../images/button.svg) 0 0 no-repeat; /* Opera  needs an "image" :( - using svg for this so it will scale properly without looking too ugly */
+  background:  url(<%= asset_path 'checkout/button.svg' %>) 0 0 no-repeat; /* Opera  needs an "image" :( - using svg for this so it will scale properly without looking too ugly */
   background: -khtml-gradient(linear, left top, left bottom, from(#f8f8f8), to(#ddd)); /* Konquerer */
   background: -moz-linear-gradient(top,  #f8f8f8,  #ddd); /* Gecko (Firefox, ...) */
   background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#ddd));   /* Webkit (Chrome, Safari, ...) */
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8f8f8', endColorstr='#dddddd'); /* IE 5.5 - 7 */
   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8f8f8', endColorstr='#dddddd'); /* IE 8 */
-  
+
   border-color: #bbb;
   border-style: solid;
   border-width: 1px 1px 1px 0;
-  
+
   color: #333;
   display: block;
   font-size: 11px;
@@ -89,29 +85,28 @@ table.checkout_protocol_table td.protocol_display_login {
 #checkout_protocols li a:hover,
 #checkout_protocols li a:focus {
   background-color: #507AAA;
-  background:  url(../images/button_focus.svg) 0 0 no-repeat; /* Opera  needs an "image" :( - using svg for this so it will scale properly without looking too ugly */
+  background:  url(<%= asset_path 'checkout/button_focus.svg' %>) 0 0 no-repeat; /* Opera  needs an "image" :( - using svg for this so it will scale properly without looking too ugly */
   background: -khtml-gradient(linear, left top, left bottom, from(#759fcf), to(#507AAA)); /* Konquerer */
   background: -moz-linear-gradient(top,  #759fcf,  #507AAA); /* Gecko (Firefox, ...) */
   background: -webkit-gradient(linear, left top, left bottom, from(#759fcf), to(#507AAA)); /* Webkit (Chrome, Safari, ...) */
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#759fcf', endColorstr='#507AAA'); /* IE 5.5 - IE 7 */
   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#759fcf', endColorstr='#507AAA'); /* IE 8 */
-  
+
   color: #fff;
   text-shadow: -1px -1px 0 rgba(0,0,0,0.4);
   border-top-color: #759fcf;
   border-bottom-color: #507AAA;
 }
 
-#checkout_protocols li a.selected,
-#clipboard_button.active {
+#checkout_protocols li a.selected {
   background-color: #bbb;
-  background:  url(../images/button_selected.svg) 0 0 no-repeat; /* Opera  needs an "image" :( - using svg for this so it will scale properly without looking too ugly */
+  background:  url(<%= asset_path  'checkout/button_selected.svg' %>) 0 0 no-repeat; /* Opera  needs an "image" :( - using svg for this so it will scale properly without looking too ugly */
   background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));  /* Konquerer */
   background: -moz-linear-gradient(top,  #ccc,  #aaa); /* Gecko (Firefox, ...) */
   background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#aaa));  /* Webkit (Chrome, Safari, ...) */
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#cccccc', endColorstr='#aaaaaa'); /* IE 5.5 - IE 7 */
   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cccccc', endColorstr='#aaaaaa'); /* IE 8 */
-  
+
   color: #000;
   text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
   border-color: #bbb;
@@ -142,26 +137,7 @@ span#checkout_access {
   font-weight: bold;
 }
 
-#clipboard_container {
-  position: relative;
-  float: left;
-  margin-right: 5px;
+#content fieldset.collapsible.header_collapsible {
+  padding-top: 10px;
 }
 
-#clipboard_button {
-  height: 21px;
-  width: 23px;
-  padding: 0;
-  border-width: 1px;
-  text-align: center;
-  
-  border-radius: 5px; /* Standard, Opera 10, IE 9 */
-  -khtml-border-radius: 3px; /* Konquerer */
-  -moz-border-radius: 3px ; /* Gecko (Firefox, ...) */
-  -webkit-border-radius: 3px; /* Webkit (Chrome, Safari, ...) */
-  /* IE <= 9 not supported */
-}
-
-#clipboard_button img {
-  padding-top: 2px;
-}

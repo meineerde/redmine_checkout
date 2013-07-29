@@ -1,51 +1,53 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Checkout::Protocol do
-  fixtures :settings, :repositories, :projects, :enabled_modules
+describe OpenProject::Checkout::Protocol do
+
+  let(:project) { FactoryGirl.create(:project, is_public: true) }
+  let(:role) { FactoryGirl.create(:role, permissions: [:browse_repository]) }
+  let(:user) { FactoryGirl.create(:user) }
+  let!(:member) { FactoryGirl.create(:member, user: user, project: project, roles: [role]) }
+  let(:admin) { FactoryGirl.create(:admin) }
+  let!(:repo) { FactoryGirl.create(:svn_repository, project: project, url: 'http://example.com/svn/testrepo') }
 
   before(:each) do
-    @admin = User.new
-    @admin.admin = true
-    @user = User.new
-
-    @repo = repositories :svn
-    @repo.url = "http://example.com/svn/testrepo"
+    project.enabled_module_names = project.enabled_module_names << "repository"
+    setup_subversion_protocols
   end
 
   after(:each) do
-    User.current = User.anonymous
+    User.current = nil
   end
 
   it "should use regexes for generated URL" do
-    protocol = @repo.checkout_protocols.find{|r| r.protocol == "SVN+SSH"}
+    protocol = repo.checkout_protocols.find{|r| r.protocol == "SVN+SSH"}
     protocol.url.should eql "svn+ssh://svn.foo.bar/svn/testrepo"
   end
 
   it "should resolve access properties" do
-    protocol = @repo.checkout_protocols.find{|r| r.protocol == "Subversion"}
+    protocol = repo.checkout_protocols.find{|r| r.protocol == "Subversion"}
     protocol.access.should eql "permission"
-    protocol.access_rw(@admin).should eql "read+write"
+    protocol.access_rw(admin).should eql "read+write"
 
-    User.current = @user
-    protocol.access_rw(@user).should eql "read-only"
+    User.current = user
+    protocol.access_rw(user).should eql "read-only"
   end
 
   it "should display the checkout command" do
-    subversion = @repo.checkout_protocols.find{|r| r.protocol == "Subversion"}
-    svn_ssh = @repo.checkout_protocols.find{|r| r.protocol == "SVN+SSH"}
+    subversion = repo.checkout_protocols.find{|r| r.protocol == "Subversion"}
+    svn_ssh = repo.checkout_protocols.find{|r| r.protocol == "SVN+SSH"}
 
     subversion.command.should eql "svn checkout"
     svn_ssh.command.should eql "svn co"
   end
 
   it "should respect display login settings" do
-    protocols = @repo.checkout_protocols
+    protocols = repo.checkout_protocols
 
     User.current.login = "der_baer"
-    @repo.checkout_overwrite = "1"
-    @repo.checkout_protocols = protocols
+    repo.checkout_overwrite = "1"
+    repo.checkout_protocols = protocols
 
-    protocol = @repo.checkout_protocols.find{|r| r.protocol == "Root"}
+    protocol = repo.checkout_protocols.find{|r| r.protocol == "Root"}
 
     protocol.display_login = '0'
     protocol.url.should eql "http://example.com/svn/testrepo"

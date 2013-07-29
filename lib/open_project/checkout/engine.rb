@@ -2,15 +2,9 @@ module OpenProject::Checkout
   class Engine < ::Rails::Engine
     engine_name :openproject_checkout
 
-    config.before_configuration do |app|
-      # This is required for the routes to be loaded first
-      # as the routes should be prepended so they take precedence over the core.
-      app.config.paths['config/routes'].unshift File.join(File.dirname(__FILE__), "..", "..", "..", "config", "routes.rb")
-    end
-
     config.autoload_paths += Dir["#{config.root}/lib/"]
 
-    initializer 'costs.precompile_assets' do
+    initializer 'checkout.precompile_assets' do
       Rails.application.config.assets.precompile += %w(checkout.css checkout.js)
     end
 
@@ -18,14 +12,6 @@ module OpenProject::Checkout
       # don't use require_dependency to not reload hooks in
       # development mode
       require 'open_project/checkout/hooks'
-    end
-
-    initializer "checkout.remove_duplicate_routes", :after => "add_routing_paths" do |app|
-      # removes duplicate entry from app.routes_reloader
-      # As we prepend the plugin's routes to the load_path up front and rails
-      # adds all engines' config/routes.rb later, we have double loaded the routes
-      # This is not harmful as such but leads to duplicate routes which decreases performance
-      app.routes_reloader.paths.uniq!
     end
 
     initializer 'checkout.register_test_paths' do |app|
@@ -42,6 +28,7 @@ module OpenProject::Checkout
       require_dependency 'open_project/checkout/patches/repositories_helper_patch'
       require_dependency 'open_project/checkout/patches/repository_patch'
       require_dependency 'open_project/checkout/patches/settings_helper_patch'
+      require_dependency 'open_project/checkout/patches/repository_patch'
 
       unless Redmine::Plugin.registered_plugins.include?(:openproject_checkout)
         Redmine::Plugin.register :openproject_checkout do
@@ -55,8 +42,6 @@ module OpenProject::Checkout
           requires_openproject ">= 3.0.0beta1"
 
           settings_defaults = HashWithIndifferentAccess.new({
-            'use_zero_clipboard' => '1',
-
             'display_checkout_info' =>  'everywhere',
             'description_Abstract' => <<-EOF
 The data contained in this repository can be downloaded to your computer using one of several clients.
@@ -66,9 +51,8 @@ Please select the desired protocol below to get the URL.
             EOF
           })
 
-          require_dependency 'open_project/checkout/patches/repository_patch'
 
-          OpenProject::CheckoutHelper.supported_scm.each do |scm|
+          OpenProject::Checkout::CheckoutHelper.supported_scm.each do |scm|
             klazz = Repository.const_get(scm)
 
             settings_defaults["description_#{scm}"] = ''
@@ -124,14 +108,14 @@ Creates a checkout link to the actual repository. Example:
               raise "Checkout protocol #{proto} not found" unless proto_obj
 
               cmd = (project.repository.checkout_display_command? && proto_obj.command.present?) ? proto_obj.command.strip + " " : ""
+              cmd.html_safe
               cmd + link_to(proto_obj.url, proto_obj.url)
             end
           end
         end
-
-        require_dependency 'open_project/checkout/patches/setting_patch'
-
       end
+      # must be loaded after plugin registration
+      require_dependency 'open_project/checkout/patches/setting_patch'
     end
   end
 end

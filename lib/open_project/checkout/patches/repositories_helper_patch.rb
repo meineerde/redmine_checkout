@@ -15,14 +15,13 @@ module OpenProject::Checkout
       def repository_field_tags_with_checkout(form, repository)
         tags = repository_field_tags_without_checkout(form, repository) || ""
         return tags if repository.class.name == "Repository"
-
-        tags + @controller.send(:render_to_string, :partial => 'projects/settings/repository_checkout', :locals => {:form => form, :repository => repository, :scm => repository.type.demodulize})
+        tags + render(:partial => 'projects/settings/repository_checkout', :locals => {:form => form, :repository => repository, :scm => repository.type.demodulize})
       end
 
       def scm_select_tag_with_javascript(*args)
         content_for :header_tags do
-          javascript_include_tag('subform', :plugin => 'redmine_checkout') +
-          stylesheet_link_tag('checkout', :plugin => 'redmine_checkout')
+          javascript_include_tag('checkout/subform.js') +
+          stylesheet_link_tag('checkout/checkout.css')
         end
         scm_select_tag_without_javascript(*args)
       end
@@ -31,4 +30,3 @@ module OpenProject::Checkout
 end
 
 RepositoriesHelper.send(:include, OpenProject::Checkout::RepositoriesHelperPatch)
-

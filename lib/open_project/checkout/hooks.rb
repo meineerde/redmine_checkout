@@ -27,7 +27,7 @@ module OpenProject::Checkout
         :checkout_path => path
       })
 
-      options = {:partial => "redmine_checkout_hooks/view_repositories_show_contextual"}
+      options = {:partial => "openproject_checkout_hooks/view_repositories_show_contextual"}
       context[:controller].send(:render_to_string, {:locals => context}.merge(options))
     end
   end

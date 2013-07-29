@@ -3,17 +3,17 @@
     Effect.toggle($('settings_checkout_description_#{scm}').up("div").up("div"), 'slide', {duration:0.2});
   EOF
   %></p>
-  
+
   <div>
-    <p><%= setting_text_area "checkout_description_#{scm}", :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :field_description %></p>
+    <p><%= setting_text_area "checkout_description_#{scm}", :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :setting_checkout_description %></p>
     <%= wikitoolbar_for "settings_checkout_description_#{scm}" %>
   </div>
-  
+
   <p><%= setting_check_box "checkout_display_command_#{scm}", :label => :field_checkout_display_command %></p>
 
-  <% javascript_tag do %>
+  <%= javascript_tag do %>
     <% repo = "Repository::#{scm}".constantize %>
-    var subform = new Subform('<%= escape_javascript(render(:partial => "checkout_protocol", :locals => {:protocol => Checkout::Protocol.new({:protocol => scm, :append_path => (repo.allow_subtree_checkout? ? '1' : '0'), :command => repo.checkout_default_command}), :scm => scm})) %>',<%= Setting.send("checkout_protocols_#{scm}").length %>,'settings_checkout_protocols_<%= scm %>');
+    var subform = new Subform('<%= escape_javascript(render(:partial => "checkout_protocol", :locals => {:protocol => OpenProject::Checkout::Protocol.new({:protocol => scm, :append_path => (repo.allow_subtree_checkout? ? '1' : '0'), :command => repo.checkout_default_command}), :scm => scm})) %>',<%= Setting.send("checkout_protocols_#{scm}").length %>,'settings_checkout_protocols_<%= scm %>');
     protocolForms.set('<%= scm %>', subform);
   <% end %>
   <p><label><%=l :label_protocol_plural %></label><%=l :help_checkout_protocols %></p>
@@ -31,7 +31,7 @@
     </tr></thead>
     <tbody id="settings_checkout_protocols_<%= scm %>">
       <% Setting.send("checkout_protocols_#{scm}").each_with_index do |protocol, index| %>
-        <%= render :partial => 'checkout_protocol', :locals => {:protocol => Checkout::Protocol.new(protocol), :scm => scm, :index => index, :classes => cycle('odd', 'even')} %>
+        <%= render :partial => 'checkout_protocol', :locals => {:protocol => OpenProject::Checkout::Protocol.new(protocol), :scm => scm, :index => index, :classes => cycle('odd', 'even')} %>
       <% end %>
     </tbody>
   </table>

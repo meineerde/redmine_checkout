@@ -1,25 +1,29 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe "Macros" do
-  fixtures :settings, :repositories, :projects, :enabled_modules
-
   include ERB::Util
   include ApplicationHelper
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::UrlHelper
 
-  before(:each) do
-    Setting.checkout_display_command_Subversion = '0'
+  let(:project) { FactoryGirl.create(:project) }
+  let(:svn_repository) { FactoryGirl.create(:svn_repository, project: project) }
 
-    @project = projects :projects_001
+  before(:each) do
+    project.enabled_module_names = project.enabled_module_names << "repository"
+    Setting.checkout_display_command_Subversion = '0'
+    setup_subversion_protocols
+    @project = project
+    @project.repository = svn_repository
+    @project.save!
   end
 
 
   it "should display default checkout url" do
     text = "{{repository}}"
 
-    url = "file:///#{RAILS_ROOT.gsub(%r{config\/\.\.}, '')}/tmp/test/subversion_repository"
+    url = "file:///#{Rails.root.to_s.gsub(%r{config\/\.\.}, '')}/tmp/test/subversion_repository"
     textilizable(text).should eql "<p><a href=\"#{url}\">#{url}</a></p>"
   end
 
@@ -39,7 +43,7 @@ describe "Macros" do
 
   it "should display checkout url from stated project" do
     @project = nil
-    text = "{{repository(ecookbook:svn+ssh)}}"
+    text = "{{repository(#{project.name}:svn+ssh)}}"
 
     url = 'svn+ssh://svn.foo.bar/svn/subversion_repository'
     textilizable(text).should eql "<p><a href=\"#{url}\">#{url}</a></p>"

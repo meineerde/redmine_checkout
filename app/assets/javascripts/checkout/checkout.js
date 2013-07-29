@@ -1,5 +1,4 @@
-//= require checkout/subform.js
-//= require checkout/Zeroclipboard.js
+//= require checkout/subform
 
 document.observe("dom:loaded", function() {
   /* update the checkout URL if clicked on a protocol */
@@ -22,18 +21,7 @@ document.observe("dom:loaded", function() {
   });
   /* select the text field contents if activated */
   Event.observe('checkout_url', 'click', function(event) {
-   this.activate();
+    this.activate();
   });
-
-  if (typeof('ZeroClipboard') != 'undefined') {
-    $('clipboard_container').show();
-    clipboard = new ZeroClipboard.Client();
-    clipboard.setHandCursor( true );
-    clipboard.glue('clipboard_button', 'clipboard_container');
-
-    clipboard.addEventListener('mouseOver', function (client) {
-      clipboard.setText( $('checkout_url').value );
-    });
-  }
 });
 

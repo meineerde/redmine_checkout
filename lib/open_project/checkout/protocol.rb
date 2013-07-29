@@ -1,11 +1,4 @@
 module OpenProject::Checkout
-  class << self
-    def awesome?
-      # Yes, this plugin is awesome!
-      true
-    end
-  end
-
   class Protocol
     attr_accessor :protocol, :regex, :regex_replacement, :access, :display_login, :repository
     attr_writer :default, :command, :fixed_url, :append_path
@@ -17,7 +10,6 @@ module OpenProject::Checkout
       END_SRC
       class_eval src, __FILE__, __LINE__
     end
-
 
     def initialize(args={})
       args = args.dup

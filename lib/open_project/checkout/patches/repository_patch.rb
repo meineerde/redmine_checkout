@@ -50,7 +50,7 @@ module OpenProject::Checkout
         if checkout_overwrite?
           checkout_settings['checkout_description']
         else
-          if type.present? && OpenProject::CheckoutHelper.supported_scm.include?(type.demodulize) && Setting.send("checkout_overwrite_description_#{type.demodulize}?")
+          if type.present? && OpenProject::Checkout::CheckoutHelper.supported_scm.include?(type.demodulize) && Setting.send("checkout_overwrite_description_#{type.demodulize}?")
             Setting.send("checkout_description_#{type.demodulize}")
           else
             Setting.send("checkout_description_Abstract")
@@ -60,7 +60,7 @@ module OpenProject::Checkout
 
       def checkout_protocols
         @checkout_protocols ||= begin
-          if type.present? && OpenProject::CheckoutHelper.supported_scm.include?(type.demodulize)
+          if type.present? && OpenProject::Checkout::CheckoutHelper.supported_scm.include?(type.demodulize)
             if checkout_overwrite?
               protocols = checkout_settings['checkout_protocols'] || []
             else
@@ -80,7 +80,7 @@ module OpenProject::Checkout
         # value is an Array or a Hash
         if value.is_a? Hash
           value = value.dup.delete_if {|id, protocol| id.to_i < 0 }
-          value = value.sort{|(ak,av),(bk,bv)|ak<=>bk}.collect{|id,protocol| protocol}
+          value = value.sort{|(ak,_),(bk,_)|ak<=>bk}.collect{|id,protocol| protocol}
         end
 
         checkout_settings['checkout_protocols'] = value
@@ -133,7 +133,7 @@ commands = {
   'Subversion' => 'svn checkout'
 }
 
-OpenProject::CheckoutHelper.supported_scm.each do |scm|
+OpenProject::Checkout::CheckoutHelper.supported_scm.each do |scm|
   require_dependency "repository/#{scm.underscore}"
   cls = Repository.const_get(scm)
 

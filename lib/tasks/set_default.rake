@@ -11,9 +11,9 @@ namespace :redmine do
 
       desc "Reset the plugin's settings. Use this if something isn't working anymore."
       task :reset => :environment do
-        global = Setting.find_by_name 'plugin_redmine_checkout'
+        global = Setting.find_by_name 'plugin_openproject_checkout'
         global.destroy if global
-        Rails.cache.delete "chiliproject/setting/plugin_redmine_checkout"
+        Rails.cache.delete "chiliproject/setting/plugin_openproject_checkout"
         Repository.all.each do |r|
           r.checkout_settings = {}
           r.save!
