@@ -1,2 +1,0 @@
-module OpenProject::Checkout
-end

@@ -16,7 +16,7 @@
       <p><%=l(:label_access_type, :type => "<span id=\"checkout_access\">#{l(default_protocol.access_label(User.current))}</span>").html_safe %></p>
     <%- end -%>
 
-    <% javascript_tag do -%>
+    <%= javascript_tag do -%>
       var checkout_access   = $H({<%= protocols.inject([]){|r, p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ') %>});
       var checkout_commands = $H({<%= protocols.inject([]){|r, p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{escape_javascript(p.full_command(checkout_path))}'"}.join(', ') %>});
     <% end %>
