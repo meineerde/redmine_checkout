@@ -7,7 +7,7 @@ require "open_project/checkout/version"
 Gem::Specification.new do |s|
   s.name        = "openproject-checkout"
   s.version     = OpenProject::Checkout::VERSION
-  s.authors     = "Finn GmbH"
+  s.authors     = "Finn GmbH, Holger Just"
   s.email       = "info@finn.de"
   s.homepage    = "http://www.finn.de"
   s.summary     = "Add links to the actual repository to the repository view."
