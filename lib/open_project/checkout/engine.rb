@@ -72,7 +72,7 @@ Please select the desired protocol below to get the URL.
         description spec.description
         version spec.version
 
-        requires_openproject ">= 3.0.0beta1"
+        requires_openproject ">= 3.0.0pre5"
 
         settings :default => Engine.settings, :partial => 'settings/openproject_checkout'
 
@@ -113,6 +113,7 @@ Creates a checkout link to the actual repository. Example:
       end
 
       config.to_prepare do
+        require_dependency 'open_project/checkout/patches/repository_patch'
         require_dependency 'open_project/checkout/patches/settings_controller_patch'
         require_dependency 'open_project/checkout/patches/repositories_helper_patch'
         require_dependency 'open_project/checkout/patches/settings_helper_patch'
