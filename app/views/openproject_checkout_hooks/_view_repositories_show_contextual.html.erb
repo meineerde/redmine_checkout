@@ -1,3 +1,4 @@
+<%= render partial: 'shared/checkout_header' %>
 <div class="repository-info">
   <% if repository.checkout_description.present? %>
   <div class="wiki<%= ' bottomline' if protocols.present? %>"><%= textilizable repository.checkout_description %></div>
