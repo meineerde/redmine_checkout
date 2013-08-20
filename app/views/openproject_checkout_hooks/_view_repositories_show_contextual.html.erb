@@ -17,11 +17,10 @@
     <%- end -%>
 
     <%= javascript_tag do -%>
-      var checkout_access   = $H({<%= protocols.inject([]){|r, p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ') %>});
-      var checkout_commands = $H({<%= protocols.inject([]){|r, p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{escape_javascript(p.full_command(checkout_path))}'"}.join(', ') %>});
+      var checkout_access   = $H({<%= protocols.inject([]){|r, p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ').html_safe %>});
+      var checkout_commands = $H({<%= protocols.inject([]){|r, p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{escape_javascript(p.full_command(checkout_path))}'"}.join(', ').html_safe %>});
     <% end %>
   </div>
   <% end%>
 </div>
 <div style="clear: left"></div>
-
