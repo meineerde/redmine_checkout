@@ -7,7 +7,7 @@
     Effect.toggle($('checkout_settings'), 'slide', {duration:0.2});
   EOF
   )%></p>
-
+<%= javascript_include_tag 'checkout/protocols.js' %>
 <div id="checkout_settings" <%= 'style="display:none;"'.html_safe unless form.object.checkout_overwrite? %>><fieldset>
   <legend><%=l :label_checkout %></legend>
 
