@@ -41,7 +41,7 @@ Please select the desired protocol below to get the URL.
      settings_defaults
     end
 
-    initializer 'checkout.precompile_assets' do
+    initializer 'checkout.precompile_ssets' do
       Rails.application.config.assets.precompile += %w(checkout.css checkout.js)
     end
 
