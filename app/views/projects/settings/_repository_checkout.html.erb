@@ -1,3 +1,4 @@
+<%= render partial: 'shared/checkout_header' %>
 <p><%= form.select(:checkout_overwrite, [
     [l(:general_text_Yes), "1"],
     [l(:general_text_No), "0"]
@@ -7,7 +8,6 @@
     Effect.toggle($('checkout_settings'), 'slide', {duration:0.2});
   EOF
   )%></p>
-<%= javascript_include_tag 'checkout/protocols.js' %>
 <div id="checkout_settings" <%= 'style="display:none;"'.html_safe unless form.object.checkout_overwrite? %>><fieldset>
   <legend><%=l :label_checkout %></legend>
 
