@@ -2,7 +2,11 @@
 
 document.observe("dom:loaded", function() {
   /* update the checkout URL if clicked on a protocol */
-  $('checkout_protocols').select('a').each(function(e) {
+  var protocols = $('checkout_protocols')
+  if (!protocols) {
+    return;
+  }
+  protocols.select('a').each(function(e) {
     e.observe('click', function(event) {
       $('checkout_url').value = checkout_commands.get(this.id);
       $('checkout_protocols').select('a').each(function(e) {
