@@ -9,7 +9,6 @@
   )%></p>
 
 <div id="checkout_settings" <%= 'style="display:none;"'.html_safe unless form.object.checkout_overwrite? %>><fieldset>
-    <p><%= form.object.checkout_overwrite? %></p>
   <legend><%=l :label_checkout %></legend>
 
   <p><%= form.text_area :checkout_description, :cols => 60, :rows => 5, :class => 'wiki-edit', :label => :setting_checkout_description %></p>

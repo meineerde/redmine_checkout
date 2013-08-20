@@ -4,7 +4,7 @@
 
   protocol = OpenProject::Checkout::Protocol.new(protocol) unless protocol.is_a? OpenProject::Checkout::Protocol
 %>
-<tr id="<%= "checkout_protocols_#{scm}_#{index}" %>" class="<%= classes %>" <%= 'style="display:none"' if index == '--INDEX--' %>>
+<tr id="<%= "checkout_protocols_#{scm}_#{index}" %>" class="<%= classes %>" <%= 'style="display:none"'.html_safe if index == '--INDEX--' %>>
   <td class="protocol_protocol"         ><%= text_field_tag "settings[checkout_protocols_#{scm}][#{index}][protocol]", protocol.protocol, :size => 10 %></td>
   <td class="protocol_command"          ><%= text_field_tag "settings[checkout_protocols_#{scm}][#{index}][command]", protocol.command, :size => 15 %></td>
   <td class="protocol_regex"            ><%= text_field_tag "settings[checkout_protocols_#{scm}][#{index}][regex]", protocol.regex, :size => 30 %></td>
