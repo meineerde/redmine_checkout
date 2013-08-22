@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.0.pre2
+
+* `#1682` With multiple protocols, everyone that is not default doesn not do anything.
+* `#1681` Multiple defaults possible in admin settings/checkout
+* `#1680` Borked admin settings/checkout.
+* `#1679` "True" serialized in checkout overwrite form
+
 ## 2.0.0.pre1
 
 * First Rails3 version of this plugin
