@@ -73,7 +73,7 @@ describe RepositoriesController do
       response.should render_template('show')
       response.body.should_not have_selector('div.repository-info')
 
-      get :entry, :id => @project.id, :path => %w(subversion_test folder helloworld.rb)
+      get :entry, :id => @project.id, :path => "subversion_test/folder/helloworld.rb"
       response.should be_success
       response.should render_template('entry')
       response.body.should_not have_selector('div.repository-info')
@@ -87,7 +87,7 @@ describe RepositoriesController do
       response.should render_template('show')
       response.body.should have_selector('div.repository-info', /Please select the desired protocol below to get the URL/)
 
-      get :entry, :id => @project.id, :path => %w(subversion_test folder helloworld.rb)
+      get :entry, :id => @project.id, :path => "subversion_test/folder/helloworld.rb"
       response.should be_success
       response.should render_template('entry')
       response.body.should_not have_selector('div.repository-info')
@@ -101,7 +101,7 @@ describe RepositoriesController do
       response.should render_template('show')
       response.body.should have_selector('div.repository-info', /Please select the desired protocol below to get the URL/)
 
-      get :entry, :id => @project.id, :path => %w(subversion_test folder helloworld.rb)
+      get :entry, :id => @project.id, :path => "subversion_test/folder/helloworld.rb"
       response.should be_success
       response.should render_template('entry')
       response.body.should have_selector('div.repository-info')
