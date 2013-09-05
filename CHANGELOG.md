@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0.pre3
+
+* spec fixes
+
 ## 2.0.0.pre2
 
 * `#1682` With multiple protocols, everyone that is not default doesn not do anything.
