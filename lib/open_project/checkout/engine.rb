@@ -66,9 +66,9 @@ Please select the desired protocol below to get the URL.
 
       Redmine::Plugin.register :openproject_checkout do
         name 'OpenProject Checkout plugin'
-        url 'http://dev.holgerjust.de/projects/redmine-checkout'
+        url spec.homepage
         author ((spec.authors.kind_of? Array) ? spec.authors[0] : spec.authors)
-        author_url spec.homepage
+        author_url 'http://www.finn.de'
         description spec.description
         version spec.version
 

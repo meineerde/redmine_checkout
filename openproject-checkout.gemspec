@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = OpenProject::Checkout::VERSION
   s.authors     = "Finn GmbH, Holger Just"
   s.email       = "info@finn.de"
-  s.homepage    = "http://www.finn.de"
+  s.homepage    = "https://www.openproject.org/projects/checkout"
   s.summary     = "Add links to the actual repository to the repository view."
   s.description = "Add links to the actual repository to the repository view."
   s.files       = Dir["{app,config,db,lib}/**/*", "README.rdoc", "CHANGELOG.md"]
