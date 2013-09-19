@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0.pre4
+
+* updated plugin url and authors
+
 ## 2.0.0.pre3
 
 * spec fixes
