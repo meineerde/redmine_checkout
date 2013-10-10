@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0.pre5
+
+* New core version dependency.
+
 ## 2.0.0.pre4
 
 * updated plugin url and authors
