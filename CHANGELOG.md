@@ -1,5 +1,7 @@
 # Changelog
 
+* `#2446` Squash old migrations
+
 ## 2.0.0.pre5
 
 * New core version dependency.
