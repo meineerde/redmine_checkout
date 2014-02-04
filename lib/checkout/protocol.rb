@@ -105,9 +105,10 @@ module Checkout
       if display_login?
         begin
           uri = URI.parse url
-          unless uri.scheme == 'file'
+          unless uri.scheme == 'file' || User.current.login.include?('@')
             # file URIs can't possibly contain any username / password info
-            # And URI.parse does not properly reconstruct the URL...
+            # And URI.parse does not properly reconstruct the URL. Errors
+            # also occur if the login name contains any '@' characters.
             uri.user = User.current.login
             url = uri.to_s
           end
